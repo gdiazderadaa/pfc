@@ -55,6 +55,20 @@ AppAsset::register($this);
                             ['label' => 'Consultar', 'url' => ['/informe/index']],
                         ],
                     ],
+					  [
+                       'label' => 'Edificios',
+                       'items' => [
+                            ['label' => 'Crear', 'url' => ['/edificio/create']],
+                            ['label' => 'Consultar', 'url' => ['/edificio/index']],
+                        ],
+                    ],
+					  [
+                       'label' => 'Espacios',
+                       'items' => [
+                            ['label' => 'Crear', 'url' => ['/espacio/create']],
+                            ['label' => 'Consultar', 'url' => ['/espacio/index']],
+                        ],
+                    ],
                 ];
             if (Yii::$app->user->isGuest) {
                 array_push($navItems,['label' => 'Iniciar sesión', 'url' => ['/user/login']]);

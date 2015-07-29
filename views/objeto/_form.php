@@ -13,10 +13,12 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'codigo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'espacio_id')->textInput() ?>
+    <?= $form->field($model, 'espacio_id')->dropDownList($model->getEspacioList(),['prompt'=>'- Selecciona el espacio donde está ubicado el activo -']) ?>
 
-    <?= $form->field($model, 'tipo_id')->textInput() ?>
+     <?= $form->field($model, 'tipo_id')->dropDownList($model->getTipoObjetoList(),['prompt'=>'- Selecciona el tipo de activo -']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

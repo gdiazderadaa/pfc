@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "objeto".
@@ -31,9 +32,9 @@ class Objeto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'espacio_id', 'tipo_id'], 'required'],
+            [['nombre','codigo', 'espacio_id', 'tipo_id'], 'required'],
             [['espacio_id', 'tipo_id'], 'integer'],
-            [['nombre'], 'string', 'max' => 128]
+            [['nombre','codigo'], 'string', 'max' => 128]
         ];
     }
 
@@ -44,9 +45,10 @@ class Objeto extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'codigo' => 'Código',
             'nombre' => 'Nombre',
-            'espacio_id' => 'Espacio ID',
-            'tipo_id' => 'Tipo ID',
+            'espacio_id' => 'Espacio',
+            'tipo_id' => 'Tipo',
         ];
     }
 
@@ -58,11 +60,23 @@ class Objeto extends \yii\db\ActiveRecord
         return $this->hasOne(Espacio::className(), ['id' => 'espacio_id']);
     }
 
+    public function getEspacioList() 
+	{	 
+        $models = Espacio::find()->asArray()->all();
+        return ArrayHelper::map($models,'id', 'numeracion','nombre');
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getTipo()
     {
         return $this->hasOne(TipoObjeto::className(), ['id' => 'tipo_id']);
+    }
+    
+        public function getTipoObjetoList() 
+	{	 
+        $models = TipoObjeto::find()->asArray()->all();
+        return ArrayHelper::map($models,'id', 'nombre');
     }
 }

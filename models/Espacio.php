@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "espacio".
@@ -31,10 +32,10 @@ class Espacio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'nombre', 'numeracion', 'edificio_id'], 'required'],
-            [['id', 'edificio_id'], 'integer'],
+            [['nombre', 'numeracion', 'edificio_id'], 'required'],
+            [['edificio_id'], 'integer'],
             [['nombre'], 'string', 'max' => 128],
-            [['numeracion'], 'string', 'max' => 16]
+            [['numeracion'], 'string', 'max' => 24]
         ];
     }
 
@@ -47,7 +48,7 @@ class Espacio extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nombre' => 'Nombre',
             'numeracion' => 'Numeracion',
-            'edificio_id' => 'Edificio ID',
+            'edificio_id' => 'Edificio',
         ];
     }
 
@@ -57,6 +58,12 @@ class Espacio extends \yii\db\ActiveRecord
     public function getEdificio()
     {
         return $this->hasOne(Edificio::className(), ['id' => 'edificio_id']);
+    }
+
+    public function getEdificioList() 
+	{	 
+        $models = Edificio::find()->asArray()->all();
+        return ArrayHelper::map($models,'id', 'nombre');
     }
 
     /**

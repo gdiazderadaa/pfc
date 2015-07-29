@@ -12,16 +12,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
+    <!--<?= $form->field($model, 'id')->textInput() ?>-->
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'numeracion')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'edificio_id')->textInput() ?>
+    <?= $form->field($model, 'edificio_id')->dropDownList($model->getEdificioList(),['prompt'=>'- Selecciona el edificio donde está ubicado el espacio -']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

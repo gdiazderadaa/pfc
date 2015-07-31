@@ -19,7 +19,7 @@ class ObjetoSearch extends Objeto
     {
         return [
             [['id', 'espacio_id', 'tipo_id'], 'integer'],
-            [['nombre'], 'safe'],
+            [['codigo', 'nombre'], 'safe'],
         ];
     }
 
@@ -61,7 +61,8 @@ class ObjetoSearch extends Objeto
             'tipo_id' => $this->tipo_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
+        $query->andFilterWhere(['like', 'codigo', $this->codigo])
+            ->andFilterWhere(['like', 'nombre', $this->nombre]);
 
         return $dataProvider;
     }

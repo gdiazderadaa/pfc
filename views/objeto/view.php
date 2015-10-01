@@ -31,8 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'codigo',
             'nombre',
-            'espacio_id',
-            'tipo_id',
+             ['label'=>'Espacio', 'value'=>$model->getNombreEspacio()],
+            ['label'=>'Tipo', 'value'=>$model->getNombreTipo()],
+            ['label'=>'Tipo', 'value'=>$model->getTipo()->one()->nombre],
         ],
     ]) ?>
 

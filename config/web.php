@@ -14,6 +14,14 @@ $config = [
             'cost' => 12,
             'admins' => ['admin']
         ],
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+            // enter optional module parameters below - only if you need to  
+            // use your own export download action or custom translation 
+            // message source
+            // 'downloadAction' => 'gridview/export/download',
+            // 'i18n' => []
+        ]
     ],
     'components' => [
         'urlManager' => [
@@ -39,9 +47,9 @@ $config = [
                 'useFileTransport' => false,
                 'transport' => [
                     'class' => 'Swift_SmtpTransport',
-                    'host' => 'smtp.uniovi.com',
-                    'username' => 'uo197381@uniovi.com',
-                    'password' => '615167976orange',
+                    'host' => 'smtp.gmail.com',
+                    'username' => 'buffonin@gmail.com',
+                    'password' => 'jarenai',
                     'port' => '587',
                     'encryption' => 'tls',
                                 ],

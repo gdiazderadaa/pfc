@@ -6,7 +6,9 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Incidencia */
 
-$this->title = $model->id;
+/*Calculate leading zeros depending on the lenght of id content*/
+$leadingZeros=$model::ID_MAX_LENGHT-strlen((string)$model->id);
+$this->title = 'Incidencia INC'.str_pad($model->id,$leadingZeros,"0",STR_PAD_LEFT);
 $this->params['breadcrumbs'][] = ['label' => 'Incidencias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,18 +30,39 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            /*'id',*/
             'descripcion_breve',
             'descripcion:ntext',
-            'tipo_id',
-            'impacto_id',
-            'urgencia_id',
-            'tecnico_id',
-            'objeto_id',
+            [
+                'label' => 'Categoria',
+                'value'=> $model->tipo->nombre,
+            ],
+            [
+                'label' => 'Impacto',
+                'value'=> $model->impacto->nombre,
+            ],
+            [
+                'label' => 'Urgencia',
+                'value'=> $model->urgencia->nombre,
+            ],
+            [
+                'label' => 'Tecnico',
+                'value'=> $model->tecnico->username,
+            ],
+            [
+                'label' => 'Objeto',
+                'value'=> $model->objeto->nombre,
+            ],
             'fecha_creacion',
             'fecha_fin',
-            'estado_id',
-            'creador_id',
+            [
+                'label' => 'Estado',
+                'value'=> $model->estado->nombre,
+            ],
+            [
+                'label' => 'Creador',
+                'value'=> $model->creador->email,
+            ],
         ],
     ]) ?>
 

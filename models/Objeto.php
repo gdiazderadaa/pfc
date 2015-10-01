@@ -60,6 +60,10 @@ class Objeto extends \yii\db\ActiveRecord
         return $this->hasOne(Espacio::className(), ['id' => 'espacio_id']);
     }
 
+    public function getNombreEspacio() {
+        return $this->espacio->nombre.' ('.$this->espacio->numeracion.')';
+    }
+
     public function getEspacioList() 
 	{	 
         $models = Espacio::find()->asArray()->all();
@@ -74,6 +78,9 @@ class Objeto extends \yii\db\ActiveRecord
         return $this->hasOne(TipoObjeto::className(), ['id' => 'tipo_id']);
     }
     
+    public function getNombreTipo() {
+        return $this->tipo->nombre;
+    }
         public function getTipoObjetoList() 
 	{	 
         $models = TipoObjeto::find()->asArray()->all();

@@ -5,6 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\models\Incidencia;
 use app\models\IncidenciaSearch;
+use app\models\Objeto;
+use app\models\ObjetoSearch;
+use app\models\Estado;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,15 +64,31 @@ class IncidenciaController extends Controller
      */
     public function actionCreate()
     {
+        $searchModel = new ObjetoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
         $model = new Incidencia();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->fecha_creacion = time();
-            $model->creador_id = Yii::app()->user->getId();
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        
+        if ($model->load(Yii::$app->request->post())){
+            $model->fecha_creacion = date("Y-m-d H:i:s");
+            $model->creador_id =  Yii::$app->user->getId();
+            $model->estado_id = Estado::NUEVA;
+            
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                ]);
+            } 
+        }
+        else {
             return $this->render('create', [
                 'model' => $model,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
             ]);
         }
     }

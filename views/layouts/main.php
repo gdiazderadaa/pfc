@@ -26,7 +26,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'UNIOVI: Gestión de activos e incidencias',
+                'brandLabel' => 'SGAI - Sistema de Gestión de Activos e Incidencias',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',

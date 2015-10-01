@@ -22,15 +22,16 @@ use yii\helpers\ArrayHelper;
  * @property integer $creador_id
  *
  * @property Accion[] $accions
- * @property Usuario $creador
+ * @property User $creador
  * @property Estado $estado
  * @property Impacto $impacto
- * @property Usuario $tecnico
+ * @property User $tecnico
  * @property TipoIncidencia $tipo
  * @property Urgencia $urgencia
  */
 class Incidencia extends \yii\db\ActiveRecord
 {
+    const ID_MAX_LENGHT =15;
     /**
      * @inheritdoc
      */
@@ -45,7 +46,7 @@ class Incidencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['descripcion_breve', 'tipo_id', 'impacto_id', 'urgencia_id', 'tecnico_id', 'objeto_id', 'fecha_creacion', 'estado_id', 'creador_id'], 'required'],
+            [['descripcion_breve', 'tipo_id', 'impacto_id', 'urgencia_id', 'objeto_id', 'fecha_creacion', 'estado_id', 'creador_id'], 'required'],
             [['descripcion'], 'string'],
             [['tipo_id', 'impacto_id', 'urgencia_id', 'tecnico_id', 'objeto_id', 'estado_id', 'creador_id'], 'integer'],
             [['fecha_creacion', 'fecha_fin'], 'safe'],
@@ -87,7 +88,7 @@ class Incidencia extends \yii\db\ActiveRecord
      */
     public function getCreador()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'creador_id']);
+        return $this->hasOne(\dektrium\user\models\User::className(), ['id' => 'creador_id']);
     }
 
     /**
@@ -111,7 +112,7 @@ class Incidencia extends \yii\db\ActiveRecord
      */
     public function getTecnico()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'tecnico_id']);
+        return $this->hasOne(\dektrium\user\models\User::className(), ['id' => 'tecnico_id']);
     }
 
     /**
@@ -130,6 +131,13 @@ class Incidencia extends \yii\db\ActiveRecord
         return $this->hasOne(Urgencia::className(), ['id' => 'urgencia_id']);
     }
 	
+	    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getObjeto()
+    {
+        return $this->hasOne(Objeto::className(), ['id' => 'objeto_id']);
+    }
 	 public function getTipoList() 
 	{	 
         $models = TipoIncidencia::find()->asArray()->all();
@@ -145,6 +153,12 @@ class Incidencia extends \yii\db\ActiveRecord
     public function getUrgenciaList() 
 	{	 
         $models = Urgencia::find()->asArray()->all();
+        return ArrayHelper::map($models,'id', 'nombre');
+    }
+    
+        public function getObjetoList() 
+	{	 
+        $models = Objeto::find()->asArray()->all();
         return ArrayHelper::map($models,'id', 'nombre');
     }
 

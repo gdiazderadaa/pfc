@@ -14,6 +14,7 @@ use Yii;
  */
 class Estado extends \yii\db\ActiveRecord
 {
+    const NUEVA =1;
     /**
      * @inheritdoc
      */

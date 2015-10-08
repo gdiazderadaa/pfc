@@ -38,12 +38,15 @@ class IncidenciaController extends Controller
     {
         $searchModel = new IncidenciaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        
+        /*$this->layout = 'main-fluid';*/
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+    
 
     /**
      * Displays a single Incidencia model.

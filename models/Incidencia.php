@@ -61,11 +61,11 @@ class Incidencia extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'descripcion_breve' => 'Título',
+            'descripcion_breve' => 'Resumen',
             'descripcion' => 'Descripción',
             'tipo_id' => 'Categoría',
             'impacto_id' => 'Impacto',
-            'urgencia_id' => 'Urgencia',
+            'urgencia_id' => 'Prioridad',
             'tecnico_id' => 'Técnico',
             'objeto_id' => 'Objeto',
             'fecha_creacion' => 'Fecha Creación',
@@ -156,10 +156,16 @@ class Incidencia extends \yii\db\ActiveRecord
         return ArrayHelper::map($models,'id', 'nombre');
     }
     
-        public function getObjetoList() 
+    public function getObjetoList() 
 	{	 
         $models = Objeto::find()->asArray()->all();
         return ArrayHelper::map($models,'id', 'nombre');
+    }
+    
+    public function getIdWithLeadingZeros()
+    {
+        $leadingZeros=$this::ID_MAX_LENGHT-strlen((string)$this->id);
+        return 'INC'.str_pad($this->id,$leadingZeros,"0",STR_PAD_LEFT);
     }
 
 }

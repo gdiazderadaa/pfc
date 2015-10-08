@@ -7,8 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Incidencia */
 
 /*Calculate leading zeros depending on the lenght of id content*/
-$leadingZeros=$model::ID_MAX_LENGHT-strlen((string)$model->id);
-$this->title = 'Incidencia INC'.str_pad($model->id,$leadingZeros,"0",STR_PAD_LEFT);
+$this->title = 'Incidencia '. $model->getIdWithLeadingZeros();
 $this->params['breadcrumbs'][] = ['label' => 'Incidencias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

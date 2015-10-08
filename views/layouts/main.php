@@ -26,7 +26,8 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'SGAI - Sistema de Gestión de Activos e Incidencias',
+                'brandLabel' => Html::img('@web/images/epi-logo-small.png', ['alt'=>Yii::$app->name]),
+                'brandOptions' => ['class' => 'img-responsive'],//options of the brand
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -94,9 +95,20 @@ AppAsset::register($this);
     </div>
 
     <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+        <div class="container text-center">
+            <div itemscope itemtype="http://schema.org/EducationalOrganization">
+                <a itemprop="url" href="http://www.epigijon.uniovi.es/">
+                    &copy;<div itemprop="name"><strong>Escuela Politécnica de Ingeniería de Gijón</strong></div>
+                </a>
+                <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                    <span itemprop="streetAddress">Campus de Gijón s/n</span>|
+                    <span itemprop="postalCode">33203</span>
+                    <span itemprop="addressLocality">Gijón</span>-
+                    <span itemprop="addressRegion">Asturias</span>|
+                    <span itemprop="addressCountry">Spain</span>
+                </div>
+            </div>
+
         </div>
     </footer>
 

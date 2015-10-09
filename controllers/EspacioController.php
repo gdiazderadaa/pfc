@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\base\ErrorException;
 use app\models\Espacio;
 use app\models\EspacioSearch;
 use yii\web\Controller;
@@ -98,8 +99,16 @@ class EspacioController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        try {
+            $this->findModel($id)->delete();
+        } catch (yii\db\IntegrityException $e) {
+            if($e->getCode() == 23000){
+                Yii::$app->session->setFlash('danger',Yii::t('app', 'El '.Espacio::tableName().' no se puede eliminar porque tiene objetos asociados'));
+                return $this->redirect(['index']);
+            }
+        }
 
+        Yii::$app->session->setFlash('success',Yii::t('app',  'El '.Espacio::tableName().' ha sido eliminado correctamente'));      
         return $this->redirect(['index']);
     }
 

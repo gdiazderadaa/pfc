@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\EdificioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Edificios';
+$this->title = 'Listado de Edificios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="edificio-index">
@@ -16,16 +16,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Edificio', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Edificio', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'nombre:ntext',
             'localidad:ntext',
 

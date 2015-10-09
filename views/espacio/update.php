@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Espacio */
 
-$this->title = 'Update Espacio: ' . ' ' . $model->id;
+$this->title = 'Modificar Espacio: ' . ' ' . $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Espacios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

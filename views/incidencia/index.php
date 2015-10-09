@@ -158,11 +158,17 @@ $cancelledTickets = Incidencia::find()
             [
                 'attribute' => 'creador_id',
                 'value' => function ($model) {
-                            return $model->creador->username;
+                            return $model->creador->email;
                         }
             ],
             'descripcion_breve',
-            'fecha_creacion',
+            [
+                 'attribute' => 'fecha_creacion',
+                 'value' => function ($model) {
+                            return Yii::$app->formatter->asDatetime($model->fecha_creacion,'dd/MM/yyyy HH:mm:ss');
+                        }
+             ],
+            
             //'descripcion:ntext',
             [
                  'attribute' => 'tipo_id',

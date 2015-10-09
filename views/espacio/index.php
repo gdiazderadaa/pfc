@@ -1,5 +1,6 @@
 <?php
 
+use Yii;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -7,28 +8,33 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\EspacioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Espacios';
+$this->title = 'Listado de Espacios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="espacio-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    
     <p>
-        <?= Html::a('Create Espacio', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Espacio', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'nombre',
             'numeracion',
-            'edificio_id',
+             [
+                 'attribute' => 'edificio_id',
+                 'value' => function ($model) {
+                            return $model->edificio->nombre;
+                        }
+             ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

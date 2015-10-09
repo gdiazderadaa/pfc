@@ -24,15 +24,6 @@ use kartik\grid\RadioColumn;
     <?= $form->field($model, 'descripcion_breve')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'descripcion')->textarea(['rows' => 6]) ?>
-
-	<?=$form->field($model, 'tipo_id')->dropDownList($model->getTipoList(),['prompt'=>'- Selecciona el tipo de incidencia -']) ?>
-
-    <?= $form->field($model, 'impacto_id')->dropDownList($model->getImpactoList(),['prompt'=>'- Selecciona el impacto de la incidencia -']) ?>
-
-    <?= $form->field($model, 'urgencia_id')->dropDownList($model->getUrgenciaList(),['prompt'=>'- Selecciona la urgencia de la incidencia -']) ?>
-
-    <!--<?= $form->field($model, 'tecnico_id')->textInput() ?>-->
-
     
     <?= $form->field($model, 'objeto_id')->dropDownList($model->getObjetoList(),['prompt'=>'- Selecciona el objeto relacionado con la incidencia -']) ?>
     
@@ -69,6 +60,14 @@ use kartik\grid\RadioColumn;
     <?php Modal::end();
     ?>
 
+	<?=$form->field($model, 'tipo_id')->dropDownList($model->getTipoList(),['prompt'=>'- Selecciona el tipo de incidencia -']) ?>
+
+    <?= $form->field($model, 'impacto_id')->dropDownList($model->getImpactoList(),['prompt'=>'- Selecciona el impacto de la incidencia -']) ?>
+
+    <?= $form->field($model, 'urgencia_id')->dropDownList($model->getUrgenciaList(),['prompt'=>'- Selecciona la urgencia de la incidencia -']) ?>
+
+    <!--<?= $form->field($model, 'tecnico_id')->textInput() ?>-->
+    
     <!--<?= $form->field($model, 'fecha_creacion')->textInput() ?>-->
 
     <!--<?= $form->field($model, 'fecha_fin')->textInput() ?>-->

@@ -98,8 +98,16 @@ class EdificioController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        try {
+            $this->findModel($id)->delete();
+        } catch (yii\db\IntegrityException $e) {
+            if($e->getCode() == 23000){
+                Yii::$app->session->setFlash('danger',Yii::t('app', 'El '.Edificio::tableName().' no se puede eliminar porque tiene espacios asociados'));
+                return $this->redirect(['index']);
+            }
+        }
 
+        Yii::$app->session->setFlash('success',Yii::t('app',  'El '.Edificio::tableName().' ha sido eliminado correctamente'));      
         return $this->redirect(['index']);
     }
 

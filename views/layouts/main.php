@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\bootstrap\Alert;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -90,6 +91,20 @@ AppAsset::register($this);
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
+                <?php 
+                    if($flash = Yii::$app->session->getFlash('danger')){
+                        echo Alert::widget(['options' => ['class' => 'alert-danger'], 'body' => $flash]);
+                    }
+                    elseif($flash = Yii::$app->session->getFlash('warning')){
+                        echo Alert::widget(['options' => ['class' => 'alert-warning'], 'body' => $flash]);
+                    }
+                    elseif($flash = Yii::$app->session->getFlash('info')){
+                        echo Alert::widget(['options' => ['class' => 'alert-info'], 'body' => $flash]);
+                    }
+                    elseif($flash = Yii::$app->session->getFlash('success')){
+                        echo Alert::widget(['options' => ['class' => 'alert-success'], 'body' => $flash]);
+                    }
+                ?>
             <?= $content ?>
         </div>
     </div>

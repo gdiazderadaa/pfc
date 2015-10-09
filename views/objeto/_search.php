@@ -20,6 +20,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'codigo') ?>
 
     <?= $form->field($model, 'nombre') ?>
+    
+    <?= $form->field($model, 'fecha_compra') ?>
 
     <?= $form->field($model, 'espacio_id') ?>
 

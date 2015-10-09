@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ObjetoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Objetos';
+$this->title = 'Listado de activos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="objeto-index">
@@ -16,20 +16,36 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Objeto', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear activo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'codigo',
             'nombre',
-            'espacio_id',
-            'tipo_id',
+            [
+                 'attribute' => 'fecha_compra',
+                 'value' => function ($model) {
+                            return Yii::$app->formatter->asDate($model->fecha_compra,'dd/MM/yyyy');
+                        }
+            ],
+            [
+                 'attribute' => 'espacio_id',
+                 'value' => function ($model) {
+                            return $model->espacio->nombre;
+                        }
+            ],
+            [
+                 'attribute' => 'tipo_id',
+                 'value' => function ($model) {
+                            return $model->tipo->nombre;
+                        }
+             ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
+use dektrium\user\widgets\Connect;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use dektrium\user\widgets\Connect;
 
 /**
  * @var yii\web\View                   $this
@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </p>
         <?php endif ?>
         <?= Connect::widget([
-            'baseAuthUrl' => ['/user/security/auth']
+            'baseAuthUrl' => ['/user/security/auth'],
         ]) ?>
     </div>
 </div>

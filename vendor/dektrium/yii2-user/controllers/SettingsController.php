@@ -14,12 +14,13 @@ namespace dektrium\user\controllers;
 use dektrium\user\Finder;
 use dektrium\user\models\SettingsForm;
 use dektrium\user\Module;
-use yii\web\Controller;
+use dektrium\user\traits\AjaxValidationTrait;
+use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use dektrium\user\traits\AjaxValidationTrait;
 
 /**
  * SettingsController manages updating user settings (e.g. profile, email and password).
@@ -31,7 +32,7 @@ use dektrium\user\traits\AjaxValidationTrait;
 class SettingsController extends Controller
 {
     use AjaxValidationTrait;
-    
+
     /** @inheritdoc */
     public $defaultAction = 'profile';
 
@@ -39,10 +40,10 @@ class SettingsController extends Controller
     protected $finder;
 
     /**
-     * @param string $id
+     * @param string           $id
      * @param \yii\base\Module $module
-     * @param Finder $finder
-     * @param array $config
+     * @param Finder           $finder
+     * @param array            $config
      */
     public function __construct($id, $module, Finder $finder, $config = [])
     {
@@ -57,7 +58,7 @@ class SettingsController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'disconnect' => ['post']
+                    'disconnect' => ['post'],
                 ],
             ],
             'access' => [
@@ -66,25 +67,27 @@ class SettingsController extends Controller
                     [
                         'allow'   => true,
                         'actions' => ['profile', 'account', 'confirm', 'networks', 'disconnect'],
-                        'roles'   => ['@']
+                        'roles'   => ['@'],
                     ],
-                ]
+                ],
             ],
         ];
     }
 
     /**
      * Shows profile settings form.
+     *
      * @return string|\yii\web\Response
      */
     public function actionProfile()
     {
-        $model = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
+        $model = $this->finder->findProfileById(Yii::$app->user->identity->getId());
 
         $this->performAjaxValidation($model);
 
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your profile has been updated'));
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('user', 'Your profile has been updated'));
+
             return $this->refresh();
         }
 
@@ -95,17 +98,19 @@ class SettingsController extends Controller
 
     /**
      * Displays page where user can update account settings (username, email or password).
+     *
      * @return string|\yii\web\Response
      */
     public function actionAccount()
     {
         /** @var SettingsForm $model */
-        $model = \Yii::createObject(SettingsForm::className());
+        $model = Yii::createObject(SettingsForm::className());
 
         $this->performAjaxValidation($model);
 
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->session->setFlash('success', \Yii::t('user', 'Your account details have been updated'));
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('user', 'Your account details have been updated'));
+
             return $this->refresh();
         }
 
@@ -116,8 +121,10 @@ class SettingsController extends Controller
 
     /**
      * Attempts changing user's password.
-     * @param  integer $id
-     * @param  string  $code
+     *
+     * @param int    $id
+     * @param string $code
+     *
      * @return string
      * @throws \yii\web\HttpException
      */
@@ -126,7 +133,7 @@ class SettingsController extends Controller
         $user = $this->finder->findUserById($id);
 
         if ($user === null || $this->module->emailChangeStrategy == Module::STRATEGY_INSECURE) {
-            throw new NotFoundHttpException;
+            throw new NotFoundHttpException();
         }
 
         $user->attemptEmailChange($code);
@@ -136,30 +143,34 @@ class SettingsController extends Controller
 
     /**
      * Displays list of connected network accounts.
+     *
      * @return string
      */
     public function actionNetworks()
     {
         return $this->render('networks', [
-            'user' => \Yii::$app->user->identity
+            'user' => Yii::$app->user->identity,
         ]);
     }
 
     /**
      * Disconnects a network account from user.
-     * @param  integer $id
+     *
+     * @param int $id
+     *
      * @return \yii\web\Response
      * @throws \yii\web\NotFoundHttpException
      * @throws \yii\web\ForbiddenHttpException
      */
     public function actionDisconnect($id)
     {
-        $account = $this->finder->findAccountById($id);
+        $account = $this->finder->findAccount()->byId($id)->one();
+
         if ($account === null) {
-            throw new NotFoundHttpException;
+            throw new NotFoundHttpException();
         }
-        if ($account->user_id != \Yii::$app->user->id) {
-            throw new ForbiddenHttpException;
+        if ($account->user_id != Yii::$app->user->id) {
+            throw new ForbiddenHttpException();
         }
         $account->delete();
 

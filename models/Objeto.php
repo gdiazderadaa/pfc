@@ -12,6 +12,7 @@ use yii\helpers\ArrayHelper;
  * @property string $nombre
  * @property integer $espacio_id
  * @property integer $tipo_id
+ * @property date fecha_compra
  *
  * @property Espacio $espacio
  * @property TipoObjeto $tipo
@@ -34,7 +35,7 @@ class Objeto extends \yii\db\ActiveRecord
         return [
             [['nombre','codigo', 'espacio_id', 'tipo_id'], 'required'],
             [['espacio_id', 'tipo_id'], 'integer'],
-            [['nombre','codigo'], 'string', 'max' => 128]
+            [['nombre','codigo','fecha_compra'], 'string', 'max' => 128]
         ];
     }
 
@@ -49,6 +50,7 @@ class Objeto extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'espacio_id' => 'Espacio',
             'tipo_id' => 'Tipo',
+            'fecha_compra' => 'Fecha de compra'
         ];
     }
 

@@ -31,12 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php $form = ActiveForm::begin([
                     'id'                     => 'registration-form',
                     'enableAjaxValidation'   => true,
-                    'enableClientValidation' => false
+                    'enableClientValidation' => false,
                 ]); ?>
 
-                <?= $form->field($model, 'username') ?>
-
                 <?= $form->field($model, 'email') ?>
+
+                <?= $form->field($model, 'username') ?>
 
                 <?php if ($module->enableGeneratingPassword == false): ?>
                     <?= $form->field($model, 'password')->passwordInput() ?>

@@ -32,36 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
             /*'id',*/
             'descripcion_breve',
             'descripcion:ntext',
-            [
-                'label' => 'Categoria',
-                'value'=> $model->tipo->nombre,
-            ],
-            [
-                'label' => 'Impacto',
-                'value'=> $model->impacto->nombre,
-            ],
-            [
-                'label' => 'Urgencia',
-                'value'=> $model->urgencia->nombre,
-            ],
-            [
-                'label' => 'Tecnico',
-                'value'=> $model->tecnico->username,
-            ],
-            [
-                'label' => 'Objeto',
-                'value'=> $model->objeto->nombre,
-            ],
-            'fecha_creacion',
-            'fecha_fin',
-            [
-                'label' => 'Estado',
-                'value'=> $model->estado->nombre,
-            ],
-            [
-                'label' => 'Creador',
-                'value'=> $model->creador->email,
-            ],
+            ['label' => 'Categoria','value'=> $model->tipo->nombre],
+            ['label' => 'Impacto','value'=> $model->impacto->nombre],
+            ['label' => 'Urgencia','value'=> $model->urgencia->nombre],
+            ['label' => 'Tecnico','value'=> $model->tecnico->username],
+            ['label' => 'Objeto','value'=> $model->objeto->nombre],
+            ['label'=>'Fecha de creación','value' => Yii::$app->formatter->asDatetime($model->fecha_creacion,'dd/MM/yyyy HH:mm:ss')],
+            ['label'=>'Fecha de finalización','value' => Yii::$app->formatter->asDatetime($model->fecha_fin,'dd/MM/yyyy HH:mm:ss')],
+            ['label' => 'Estado','value'=> $model->estado->nombre],
+            ['label' => 'Creador','value'=> $model->creador->email],
         ],
     ]) ?>
 

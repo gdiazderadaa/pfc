@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 0.9.5 [27 September 2015]
+
+- `fix` Don't set mailer subject in bootstrap #451 (dmeroff)
+- `enh` Remove old user tokens with same type while creating new #340 (dmeroff)
+- `fix` Forbid ability to login via networks for blocked users #434 (dmeroff)
+- `fix` Fixed problems with url rules #351 (dmeroff)
+- `enh` Regenerate `auth_key` after blocking the user (dmeroff)
+- `enh` Improved registration process #236 (dmeroff)
+- `fix` Ensure user/index works without php-intl extension #370 (thyseus)
+- `fix` Fixed display of confirmation time #361 (pedros80)
+- `fix` Do not limit username length to 25 chars #369 (thyseus)
+
 ## 0.9.4 [6 April 2015]
 
 - `enh` Added ability to override translations (dmeroff)

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\datecontrol\DateControl;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Objeto */
@@ -15,6 +16,16 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'codigo')->textInput(['maxlength' => true]) ?>
+    
+    <?php echo $form->field($model, 'fecha_compra')->widget(DateControl::classname(), [
+        'type'=>DateControl::FORMAT_DATE,
+        'ajaxConversion'=>true,
+        'options' => [
+            'pluginOptions' => [
+                'autoclose' => true
+            ]
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'espacio_id')->dropDownList($model->getEspacioList(),['prompt'=>'- Selecciona el espacio donde está ubicado el activo -']) ?>
 

@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="panel-body">
                 <div class="alert alert-info">
                     <p>
-                        <?= Yii::t('user', 'In order to finish your registration, we need you to enter your email address') ?>.
+                        <?= Yii::t('user', 'In order to finish your registration, we need you to enter following fields') ?>:
                     </p>
                 </div>
                 <?php $form = ActiveForm::begin([
@@ -39,6 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]); ?>
 
                 <?= $form->field($model, 'email') ?>
+
+                <?= $form->field($model, 'username') ?>
 
                 <?= Html::submitButton(Yii::t('user', 'Continue'), ['class' => 'btn btn-success btn-block']) ?>
 

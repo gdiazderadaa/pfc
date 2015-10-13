@@ -44,33 +44,38 @@ AppAsset::register($this);
                         ],
                     ],
                     [
-                       'label' => 'Activos',
-                       'items' => [
-                            ['label' => 'Crear', 'url' => ['/objeto/create']],
-                            ['label' => 'Consultar', 'url' => ['/objeto/index']],
+                        'label' => 'Administracion',
+                        'items' => [
+                           [
+                               'label' => 'Activos',
+                               'items' => [
+                                    ['label' => 'Crear', 'url' => ['/objeto/create']],
+                                    ['label' => 'Consultar', 'url' => ['/objeto/index']],
+                                ],
+                            ],
+                            [
+                               'label' => 'Informes',
+                               'items' => [
+                                    ['label' => 'Crear', 'url' => ['/informe/create']],
+                                    ['label' => 'Consultar', 'url' => ['/informe/index']],
+                                ],
+                            ],
+    					    [
+                               'label' => 'Edificios',
+                               'items' => [
+                                    ['label' => 'Crear', 'url' => ['/edificio/create']],
+                                    ['label' => 'Consultar', 'url' => ['/edificio/index']],
+                                ],
+                            ],
+    					    [
+                                'label' => 'Espacios',
+                                'items' => [
+                                    ['label' => 'Crear', 'url' => ['/espacio/create']],
+                                    ['label' => 'Consultar', 'url' => ['/espacio/index']],
+                                ],
+                            ],
                         ],
-                    ],
-                    [
-                       'label' => 'Informes',
-                       'items' => [
-                            ['label' => 'Crear', 'url' => ['/informe/create']],
-                            ['label' => 'Consultar', 'url' => ['/informe/index']],
-                        ],
-                    ],
-					  [
-                       'label' => 'Edificios',
-                       'items' => [
-                            ['label' => 'Crear', 'url' => ['/edificio/create']],
-                            ['label' => 'Consultar', 'url' => ['/edificio/index']],
-                        ],
-                    ],
-					  [
-                       'label' => 'Espacios',
-                       'items' => [
-                            ['label' => 'Crear', 'url' => ['/espacio/create']],
-                            ['label' => 'Consultar', 'url' => ['/espacio/index']],
-                        ],
-                    ],
+                     ],
                 ];
             if (Yii::$app->user->isGuest) {
                 array_push($navItems,['label' => 'Iniciar sesión', 'url' => ['/user/login']]);

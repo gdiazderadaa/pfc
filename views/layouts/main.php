@@ -27,8 +27,8 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => Html::img('@web/images/epi-logo-small.png', ['alt'=>Yii::$app->name]),
-                'brandOptions' => ['class' => 'img-responsive'],//options of the brand
+                'brandLabel' => 'Gestión de activos e incidencias',//Html::img('@web/images/uniovi-flat-logo-small.png', ['alt'=>Yii::$app->name]),
+                //'brandOptions' => ['class' => 'img-responsive'],//options of the brand
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -118,13 +118,13 @@ AppAsset::register($this);
         <div class="container text-center">
             <div itemscope itemtype="http://schema.org/EducationalOrganization">
                 <a itemprop="url" href="http://www.epigijon.uniovi.es/">
-                    &copy;<div itemprop="name"><strong>Escuela Politécnica de Ingeniería de Gijón</strong></div>
+                    &copy;<span itemprop="name"><strong>Escuela Politécnica de Ingeniería de Gijón</strong></span>
                 </a>
                 <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                    <span itemprop="streetAddress">Campus de Gijón s/n</span>|
+                    <span itemprop="streetAddress">Campus de Gijón s/n</span> |
                     <span itemprop="postalCode">33203</span>
                     <span itemprop="addressLocality">Gijón</span>-
-                    <span itemprop="addressRegion">Asturias</span>|
+                    <span itemprop="addressRegion">Asturias</span> |
                     <span itemprop="addressCountry">Spain</span>
                 </div>
             </div>

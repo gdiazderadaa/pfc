@@ -15,11 +15,15 @@ Thumbs.db
 # 
 /runtime/debug
 /web/assets
+<<<<<<< HEAD
 /vendor
 <<<<<<< HEAD
 
 =======
 >>>>>>> c84eb50afe93f7328f6d8ab6ec3eef2a64c7d9d4
+=======
+/vendor/*
+>>>>>>> 050ba25e22e18fd3336e3e4dddddb6fcf230361c
 
 # composer itself is not needed
 composer.phar

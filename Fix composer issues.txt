@@ -1,0 +1,4 @@
+composer require "yiisoft/yii2"
+composer update
+<<Delete vendor/kartik-v/yii2-datecontrol folder>>
+composer require "kartik-v/yii2-datecontrol"

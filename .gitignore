@@ -15,6 +15,8 @@ Thumbs.db
 # 
 /runtime/debug
 /web/assets
+/vendor
+
 
 # composer itself is not needed
 composer.phar

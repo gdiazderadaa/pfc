@@ -15,7 +15,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": "*",
+        "yiisoft/yii2": "^2.0",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "dektrium/yii2-user": "*",
@@ -23,7 +23,7 @@
         "kartik-v/yii2-mpdf": "@dev",
         "yiisoft/yii2-jui": "dev-master",
         "miloschuman/yii2-highcharts-widget": "*",
-        "kartik-v/yii2-datecontrol": "dev-master",
+        "kartik-v/yii2-datecontrol": "^1.9",
         "kartik-v/yii2-widgets": "@dev"
     },
     "require-dev": {

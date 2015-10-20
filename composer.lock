@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "14e78f80fe29d642f995d94dcf2b1451",
+    "hash": "f4f56f0d0976d4cf56be6473cc7d78e9",
+    "content-hash": "5ce9279aab1e56c2443026b899a63a83",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -625,16 +626,16 @@
         },
         {
             "name": "kartik-v/yii2-datecontrol",
-            "version": "dev-master",
+            "version": "v1.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-datecontrol.git",
-                "reference": "4e858b5cd38130c37739b2f582b66a044f77c95c"
+                "reference": "ab4ab5dec33db2790ca6d3da6788b2ae339efa3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-datecontrol/zipball/4e858b5cd38130c37739b2f582b66a044f77c95c",
-                "reference": "4e858b5cd38130c37739b2f582b66a044f77c95c",
+                "url": "https://api.github.com/repos/kartik-v/yii2-datecontrol/zipball/ab4ab5dec33db2790ca6d3da6788b2ae339efa3c",
+                "reference": "ab4ab5dec33db2790ca6d3da6788b2ae339efa3c",
                 "shasum": ""
             },
             "require": {
@@ -668,7 +669,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2015-07-30 18:30:18"
+            "time": "2015-07-19 05:01:43"
         },
         {
             "name": "kartik-v/yii2-grid",
@@ -1754,16 +1755,16 @@
         },
         {
             "name": "miloschuman/yii2-highcharts-widget",
-            "version": "v4.1.8",
+            "version": "v4.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/miloschuman/yii2-highcharts.git",
-                "reference": "d092818143963bcc68ec72e0c749bf1d056b7b8c"
+                "reference": "b251a9e3491f5f18721cc36d36c310047408dfad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/miloschuman/yii2-highcharts/zipball/d092818143963bcc68ec72e0c749bf1d056b7b8c",
-                "reference": "d092818143963bcc68ec72e0c749bf1d056b7b8c",
+                "url": "https://api.github.com/repos/miloschuman/yii2-highcharts/zipball/b251a9e3491f5f18721cc36d36c310047408dfad",
+                "reference": "b251a9e3491f5f18721cc36d36c310047408dfad",
                 "shasum": ""
             },
             "require": {
@@ -1795,7 +1796,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-09-23 19:25:06"
+            "time": "2015-10-12 20:08:30"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2497,7 +2498,6 @@
         "kartik-v/yii2-grid": 20,
         "kartik-v/yii2-mpdf": 20,
         "yiisoft/yii2-jui": 20,
-        "kartik-v/yii2-datecontrol": 20,
         "kartik-v/yii2-widgets": 20
     },
     "prefer-stable": false,

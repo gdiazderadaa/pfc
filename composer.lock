@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "819680561c237cae9dd9916f4f47e233",
-    "content-hash": "6fce19b9f6e43b68ec50997842ae63a5",
+    "hash": "3bd38273041be2a2398cc9475e58927c",
+    "content-hash": "e490547a731b1581c0b40de98e57bbbb",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -404,6 +404,50 @@
                 "html"
             ],
             "time": "2013-11-30 08:25:19"
+        },
+        {
+            "name": "jlorente/yii2-activerecord-inheritance",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jlorente/yii2-activerecord-inheritance.git",
+                "reference": "6895e332b4c0f432dde59e82c29df7266e6be2bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jlorente/yii2-activerecord-inheritance/zipball/6895e332b4c0f432dde59e82c29df7266e6be2bf",
+                "reference": "6895e332b4c0f432dde59e82c29df7266e6be2bf",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "jlorente\\db\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jose Lorente Martin",
+                    "email": "jose.lorente.martin@gmail.com"
+                }
+            ],
+            "description": "ActiveRecord Inheritance is an util to provide the Class Table Inheritance Pattern the to the Yii2 framework. It fakes inheritance between two ActiveRecord classes.",
+            "homepage": "https://github.com/jlorente/yii2-activerecord-inheritance",
+            "keywords": [
+                "activerecord",
+                "class table inheritance",
+                "inheritance",
+                "table",
+                "yii2"
+            ],
+            "time": "2015-10-14 22:21:21"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",

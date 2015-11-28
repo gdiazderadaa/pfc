@@ -49,31 +49,15 @@ AppAsset::register($this);
                            [
                                'label' => 'Activos',
                                'items' => [
-                                    ['label' => 'Crear', 'url' => ['/objeto/create']],
-                                    ['label' => 'Consultar', 'url' => ['/objeto/index']],
+                                    ['label' => 'Hardware', 'url' => ['/activo-hardware/index']],
+                                    ['label' => 'Software', 'url' => ['/activo-software/index']],
+                                    ['label' => 'Infraestructura', 'url' => ['/activo-infraestructura/index']],
                                 ],
                             ],
-                            [
-                               'label' => 'Informes',
-                               'items' => [
-                                    ['label' => 'Crear', 'url' => ['/informe/create']],
-                                    ['label' => 'Consultar', 'url' => ['/informe/index']],
-                                ],
-                            ],
-    					    [
-                               'label' => 'Edificios',
-                               'items' => [
-                                    ['label' => 'Crear', 'url' => ['/edificio/create']],
-                                    ['label' => 'Consultar', 'url' => ['/edificio/index']],
-                                ],
-                            ],
-    					    [
-                                'label' => 'Espacios',
-                                'items' => [
-                                    ['label' => 'Crear', 'url' => ['/espacio/create']],
-                                    ['label' => 'Consultar', 'url' => ['/espacio/index']],
-                                ],
-                            ],
+                            ['label' => 'Informes', 'url' => ['/informes/index']],
+                            ['label' => 'Edificios', 'url' => ['/edificios/index']],
+                            ['label' => 'Espacios', 'url' => ['/espacios/index']],
+
                         ],
                      ],
                 ];

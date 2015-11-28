@@ -301,4 +301,13 @@ return array (
       '@kartik/datecontrol' => $vendorDir . '/kartik-v/yii2-datecontrol',
     ),
   ),
+  'jlorente/yii2-activerecord-inheritance' => 
+  array (
+    'name' => 'jlorente/yii2-activerecord-inheritance',
+    'version' => '1.0.5.0',
+    'alias' => 
+    array (
+      '@jlorente/db' => $vendorDir . '/jlorente/yii2-activerecord-inheritance/src',
+    ),
+  ),
 );

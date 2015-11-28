@@ -24,7 +24,8 @@
         "yiisoft/yii2-jui": "dev-master",
         "miloschuman/yii2-highcharts-widget": "*",
         "kartik-v/yii2-datecontrol": "^1.9",
-        "kartik-v/yii2-widgets": "@dev"
+        "kartik-v/yii2-widgets": "@dev",
+        "jlorente/yii2-activerecord-inheritance": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

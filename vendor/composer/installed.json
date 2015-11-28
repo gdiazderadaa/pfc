@@ -2584,5 +2584,51 @@
             "utf8",
             "yii2"
         ]
+    },
+    {
+        "name": "jlorente/yii2-activerecord-inheritance",
+        "version": "1.0.5",
+        "version_normalized": "1.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jlorente/yii2-activerecord-inheritance.git",
+            "reference": "6895e332b4c0f432dde59e82c29df7266e6be2bf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jlorente/yii2-activerecord-inheritance/zipball/6895e332b4c0f432dde59e82c29df7266e6be2bf",
+            "reference": "6895e332b4c0f432dde59e82c29df7266e6be2bf",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2015-10-14 22:21:21",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "jlorente\\db\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jose Lorente Martin",
+                "email": "jose.lorente.martin@gmail.com"
+            }
+        ],
+        "description": "ActiveRecord Inheritance is an util to provide the Class Table Inheritance Pattern the to the Yii2 framework. It fakes inheritance between two ActiveRecord classes.",
+        "homepage": "https://github.com/jlorente/yii2-activerecord-inheritance",
+        "keywords": [
+            "activerecord",
+            "class table inheritance",
+            "inheritance",
+            "table",
+            "yii2"
+        ]
     }
 ]

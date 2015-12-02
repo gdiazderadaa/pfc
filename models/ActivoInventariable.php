@@ -12,6 +12,9 @@ use Yii;
  * @property string $Nombre
  * @property string $FechaCompra
  * @property string $PrecioCompra
+ *
+ * @property ValorCaracteristicaActivo[] $valorCaracteristicaActivos
+ * @property Caracteristica[] $caracteristicas
  */
 class ActivoInventariable extends \yii\db\ActiveRecord
 {
@@ -45,10 +48,26 @@ class ActivoInventariable extends \yii\db\ActiveRecord
     {
         return [
             'ActivoInventariableID' => 'Activo Inventariable ID',
-            'Codigo' => 'Codigo/Nº serie',
+            'Codigo' => 'Codigo / Nº Serie',
             'Nombre' => 'Nombre',
             'FechaCompra' => 'Fecha Compra',
             'PrecioCompra' => 'Precio Compra',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getValorCaracteristicaActivos()
+    {
+        return $this->hasMany(ValorCaracteristicaActivo::className(), ['ActivoInventariableID' => 'ActivoInventariableID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCaracteristicas()
+    {
+        return $this->hasMany(Caracteristica::className(), ['CaracteristicaID' => 'CaracteristicaID'])->viaTable('ValorCaracteristicaActivo', ['ActivoInventariableID' => 'ActivoInventariableID']);
     }
 }

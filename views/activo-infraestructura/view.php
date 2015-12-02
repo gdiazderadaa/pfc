@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use models\ValorCaracteristicaActivo;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoInfraestructura */
 
-$this->title = $model->ActivoInventariableID;
-$this->params['breadcrumbs'][] = ['label' => 'Activo Infraestructuras', 'url' => ['index']];
+$this->title = 'Activo ' . $model->Codigo;
+$this->params['breadcrumbs'][] = ['label' => 'Activos Infraestructura', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-infraestructura-view">
@@ -28,9 +29,33 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'ActivoInventariableID',
-            'SubcategoriaID',
+            'Codigo',
+            'Nombre',
+            ['label' => 'Subcategoria','value'=> $model->subcategoria->Nombre],
+            ['label' => 'Fecha de compra','value'=> Yii::$app->formatter->asDate($model->FechaCompra,'dd/MM/yy')],
+            ['label' => 'Precio de Compra', 'value' => Yii::$app->formatter->asCurrency($model->PrecioCompra,'EUR')]          
         ],
     ]) ?>
+    
+    <h2>Caracteristicas</h2>
+
+    <?php
+        
+        $caracteristicas = $model->getValorCaracteristicaActivos()->all();
+        
+        foreach ($caracteristicas as $variable) {      
+    ?>
+    
+        <?= DetailView::widget([
+            'model' => $variable,
+            'attributes' => [
+                ['label' => $variable->caracteristica->Nombre,'value'=> $variable->caracteristica->Unidades == null ? $variable->Valor : $variable->Valor  . ' ' . $variable->caracteristica->Unidades],       
+            ],
+        ]) ?>
+    
+    <?php
+        }
+                                                    
+    ?>
 
 </div>

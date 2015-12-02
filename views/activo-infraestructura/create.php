@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoInfraestructura */
 
-$this->title = 'Create Activo Infraestructura';
-$this->params['breadcrumbs'][] = ['label' => 'Activo Infraestructuras', 'url' => ['index']];
+$this->title = 'Crear Activo Infraestructura';
+$this->params['breadcrumbs'][] = ['label' => 'Activos Infraestructura', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-infraestructura-create">

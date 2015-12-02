@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ActivoInfraestructuraSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Activo Infraestructuras';
+$this->title = 'Activos Infraestructura';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-infraestructura-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Activo Infraestructura', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Activo Infraestructura', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,12 +25,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'SubcategoriaID',
             'Codigo',
-            'FechaCompra',
-            'PrecioCompra',   
             'Nombre',
-            
+            [
+                 'attribute' => 'SubcategoriaID',
+                 'value' => function ($model) {
+                            return $model->subcategoria->Nombre;
+                        }
+            ],    
+            [
+                 'attribute' => 'FechaCompra',
+                 'value' => function ($model) {
+                            return Yii::$app->formatter->asDate($model->FechaCompra,'dd/MM/yy');
+                        }
+            ],
+            [
+                 'attribute' => 'PrecioCompra',
+                 'value' => function ($model) {
+                            return Yii::$app->formatter->asCurrency($model->PrecioCompra,'EUR');
+                        }
+            ],   
+                 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

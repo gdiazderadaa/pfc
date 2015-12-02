@@ -54,9 +54,9 @@ AppAsset::register($this);
                                     ['label' => 'Infraestructura', 'url' => ['/activo-infraestructura/index']],
                                 ],
                             ],
-                            ['label' => 'Informes', 'url' => ['/informes/index']],
-                            ['label' => 'Edificios', 'url' => ['/edificios/index']],
-                            ['label' => 'Espacios', 'url' => ['/espacios/index']],
+                            ['label' => 'Informes', 'url' => ['/informe/index']],
+                            ['label' => 'Edificios', 'url' => ['/edificio/index']],
+                            ['label' => 'Espacios', 'url' => ['/espacio/index']],
 
                         ],
                      ],

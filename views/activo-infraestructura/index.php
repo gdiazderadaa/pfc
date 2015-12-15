@@ -32,19 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
                  'value' => function ($model) {
                             return $model->subcategoria->Nombre;
                         }
-            ],    
-            [
-                 'attribute' => 'FechaCompra',
-                 'value' => function ($model) {
-                            return Yii::$app->formatter->asDate($model->FechaCompra,'dd/MM/yy');
-                        }
             ],
             [
-                 'attribute' => 'PrecioCompra',
-                 'value' => function ($model) {
-                            return Yii::$app->formatter->asCurrency($model->PrecioCompra,'EUR');
-                        }
-            ],   
+                'attribute' => 'FechaCompra',
+                'format'    => ['date', 'dd/MM/yy']
+            ],
+            [
+                'attribute' => 'PrecioCompra',
+                'format'    => ['currency', 'EUR']
+            ],    
                  
             ['class' => 'yii\grid\ActionColumn'],
         ],

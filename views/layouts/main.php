@@ -116,6 +116,20 @@ AppAsset::register($this);
         </div>
     </footer>
 
+<?php
+yii\bootstrap\Modal::begin([
+    'header' => '<span id="modalHeaderTitle"></span>',
+    'headerOptions' => ['id' => 'modalHeader'],
+    'id' => 'modal',
+    'size' => 'modal-lg',
+    //keeps from closing modal with esc key or by clicking out of the modal.
+    // user must click cancel or X to close
+    'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE]
+]);
+echo "<div id='modalContent'><div style='text-align:center'><img src='../../web/css/loader.gif'></div></div>";
+yii\bootstrap\Modal::end();
+?>
+
 <?php $this->endBody() ?>
 </body>
 </html>

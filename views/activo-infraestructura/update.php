@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoInfraestructura */
 
-$this->title = 'Update Activo Infraestructura: ' . ' ' . $model->ActivoInventariableID;
-$this->params['breadcrumbs'][] = ['label' => 'Activo Infraestructuras', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->ActivoInventariableID, 'url' => ['view', 'id' => $model->ActivoInventariableID]];
+$this->title = 'Update Activo Infraestructura: ' . ' ' . $model->Codigo;
+$this->params['breadcrumbs'][] = ['label' => 'Activos Infraestructura', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->Codigo, 'url' => ['view', 'id' => $model->ActivoInventariableID]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="activo-infraestructura-update">

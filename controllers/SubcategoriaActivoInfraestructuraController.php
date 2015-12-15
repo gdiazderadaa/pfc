@@ -64,12 +64,17 @@ class SubcategoriaActivoInfraestructuraController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->SubcategoriaActivoInfraestructuraID]);
+        }elseif (Yii::$app->request->isAjax) {
+            return $this->renderAjax('_form', [
+                        'model' => $model
+            ]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
+
 
     /**
      * Updates an existing SubcategoriaActivoInfraestructura model.

@@ -10,7 +10,11 @@ use yii\widgets\ActiveForm;
 
 <div class="subcategoria-activo-infraestructura-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+                'options' => [
+                    'id' => 'create-subcategoria-activo-infraestructura-form'
+                ]
+    ]); ?>
 
     <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true]) ?>
 

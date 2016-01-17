@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ValorCaracteristicaActivo".
@@ -42,8 +43,8 @@ class ValorCaracteristicaActivo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'CaracteristicaID' => 'Caracteristica ID',
-            'ActivoInventariableID' => 'Activo Inventariable ID',
+            'CaracteristicaID' => 'Caracteristica',
+            'ActivoInventariableID' => 'Activo',
             'Valor' => 'Valor',
         ];
     }
@@ -55,6 +56,12 @@ class ValorCaracteristicaActivo extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ActivoInventariable::className(), ['ActivoInventariableID' => 'ActivoInventariableID']);
     }
+    
+    public function getActivosInventariables() 
+	{	 
+        $models = ActivoInventariable::find()->asArray()->all();
+        return ArrayHelper::map($models,'ActivoInventariableID', 'Nombre');
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -62,6 +69,12 @@ class ValorCaracteristicaActivo extends \yii\db\ActiveRecord
     public function getCaracteristica()
     {
         return $this->hasOne(Caracteristica::className(), ['CaracteristicaID' => 'CaracteristicaID']);
+    }
+    
+    public function getCaracteristicas() 
+	{	 
+        $models = Caracteristica::find()->asArray()->all();
+        return ArrayHelper::map($models,'CaracteristicaID', 'Nombre');
     }
 
     /**

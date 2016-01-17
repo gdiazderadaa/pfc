@@ -8,6 +8,7 @@ use app\models\SubcategoriaActivoInfraestructuraSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * SubcategoriaActivoInfraestructuraController implements the CRUD actions for SubcategoriaActivoInfraestructura model.
@@ -64,10 +65,6 @@ class SubcategoriaActivoInfraestructuraController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->SubcategoriaActivoInfraestructuraID]);
-        }elseif (Yii::$app->request->isAjax) {
-            return $this->renderAjax('_form', [
-                        'model' => $model
-            ]);
         } else {
             return $this->render('create', [
                 'model' => $model,

@@ -126,7 +126,7 @@ yii\bootstrap\Modal::begin([
     // user must click cancel or X to close
     'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE]
 ]);
-echo "<div id='modalContent'><div style='text-align:center'><img src='../../web/css/loader.gif'></div></div>";
+echo "<div id='modalContent'></div>";
 yii\bootstrap\Modal::end();
 ?>
 

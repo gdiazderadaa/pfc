@@ -8,6 +8,7 @@ use app\models\ValorCaracteristicaActivoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * ValorCaracteristicaActivoController implements the CRUD actions for ValorCaracteristicaActivo model.

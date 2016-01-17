@@ -58,11 +58,6 @@ class ActivoInfraestructura extends \yii\db\ActiveRecord implements ActiveRecord
         return $this->hasOne(SubcategoriaActivoInfraestructura::className(), ['SubcategoriaActivoInfraestructuraID' => 'SubcategoriaID']);
     }
     
-	 public function getSubcategorias() 
-	{	 
-        $models = SubcategoriaActivoInfraestructura::find()->asArray()->all();
-        return ArrayHelper::map($models,'SubcategoriaActivoInfraestructuraID', 'Nombre');
-    }
 
     /**
      * @inheritdoc

@@ -25,8 +25,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'CaracteristicaID',
-            'ActivoInventariableID',
+            [
+                 'attribute' => 'ActivoInventariableID',
+                 'value' => function ($model) {
+                            return $model->activoInventariable->Nombre;
+                        }
+            ],
+
+            [
+                 'attribute' => 'Subcategoria',
+                 'value' => function ($model) {
+                            return $model->caracteristica->Nombre;
+                        }
+            ],
+            
             'Valor',
 
             ['class' => 'yii\grid\ActionColumn'],

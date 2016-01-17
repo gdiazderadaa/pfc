@@ -8,15 +8,13 @@ use yii\bootstrap\Modal;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoInfraestructura */
 /* @var $form yii\widgets\ActiveForm */
+
+
 ?>
 
 <div class="activo-infraestructura-form">
 
-    <?php $form = ActiveForm::begin([
-                'options' => [
-                    'id' => 'create-activo-infraestructura-form'
-                ]
-    ]); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
     <!--<?= $form->field($model, 'ActivoInventariableID')->textInput(['maxlength' => true]) ?>-->
     
@@ -30,13 +28,13 @@ use yii\bootstrap\Modal;
 
     <?= $form->field($model, 'SubcategoriaID')->dropDownList($model->getSubcategorias(),['prompt'=>'- Selecciona la categoría del activo infraestructura -']) ?>
     
-    <?= Html::button(
-        'Nueva categoria', 
+    <!--<?= Html::button(
+        'Nueva categoria',
         [
             'value' => Url::to(['subcategoria-activo-infraestructura/create']), 
             'title' => 'Crear nueva categoria', 
             'class' => 'showModalButton btn btn-success'
-        ]); ?>
+        ]); ?>-->
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

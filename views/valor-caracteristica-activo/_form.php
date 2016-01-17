@@ -12,9 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'CaracteristicaID')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'CaracteristicaID')->dropDownList($model->getCaracteristicas(),['prompt'=>'- Selecciona la característica -']) ?>
 
-    <?= $form->field($model, 'ActivoInventariableID')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'ActivoInventariableID')->dropDownList($model->getActivosInventariables(),['prompt'=>'- Selecciona lel activo -']) ?>
 
     <?= $form->field($model, 'Valor')->textInput(['maxlength' => true]) ?>
 

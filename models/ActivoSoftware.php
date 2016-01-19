@@ -1,8 +1,10 @@
 <?php
 
 namespace app\models;
-
+use yii\helpers\ArrayHelper;
 use Yii;
+use jlorente\db\ActiveRecordInheritanceTrait,
+    jlorente\db\ActiveRecordInheritanceInterface;
 
 /**
  * This is the model class for table "ActivoSoftware".
@@ -14,14 +16,19 @@ use Yii;
  * @property ConfiguracionActivoHardware $configuracionActivoHardware
  * @property ActivoHardware[] $activoHardwares
  */
-class ActivoSoftware extends \yii\db\ActiveRecord
+class ActivoSoftware extends \yii\db\ActiveRecord implements ActiveRecordInheritanceInterface
 {
+    use ActiveRecordInheritanceTrait;
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'ActivoSoftware';
+    }
+
+    public static function extendsFrom() {
+        return ActivoInventariable::className();
     }
 
     /**
@@ -43,7 +50,7 @@ class ActivoSoftware extends \yii\db\ActiveRecord
     {
         return [
             'ActivoInventariableID' => 'Activo Inventariable ID',
-            'SubcategoriaID' => 'Subcategoria ID',
+            'SubcategoriaID' => 'Subcategoria',
         ];
     }
 
@@ -55,6 +62,12 @@ class ActivoSoftware extends \yii\db\ActiveRecord
         return $this->hasOne(SubcategoriaActivoSoftware::className(), ['SubcategoriaActivoSoftwareID' => 'SubcategoriaID']);
     }
 
+    public function getSubcategorias()
+    {
+       $models = SubcategoriaActivoSoftware::find()->asArray()->all();
+        return ArrayHelper::map($models,'SubcategoriaActivoSoftwareID', 'Nombre'); 
+    }
+    
     /**
      * @return \yii\db\ActiveQuery
      */

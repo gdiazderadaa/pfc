@@ -37,11 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
     
-    <h2>Caracteristicas</h2>
+    
 
     <?php
         
         $caracteristicas = $model->getValorCaracteristicaActivos()->all();
+        
+        if(count($caracteristicas)>0) 
+            echo "<h2>Caracteristicas</h2>";
         
         foreach ($caracteristicas as $variable) {      
     ?>

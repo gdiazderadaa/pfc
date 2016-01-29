@@ -15,6 +15,9 @@ $config = [
             'cost' => 12,
             'admins' => ['admin']
         ],
+        'dynamicrelations' => [
+            'class' => '\synatree\dynamicrelations\Module'
+        ],
         'gridview' =>  [
             'class' => '\kartik\grid\Module'
             // enter optional module parameters below - only if you need to  

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3bd38273041be2a2398cc9475e58927c",
-    "content-hash": "e490547a731b1581c0b40de98e57bbbb",
+    "hash": "3e4f6441299873e36df43169847a68e8",
+    "content-hash": "8597a6c1dcb29e31a4e55a4330508d70",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -815,7 +815,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/f65fe859e01374545276d40428d6ff75e4985050",
+                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/873a4f10ba961bbf3c63c9ede82a13d407f00acf",
                 "reference": "f65fe859e01374545276d40428d6ff75e4985050",
                 "shasum": ""
             },
@@ -854,16 +854,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
-            "version": "v1.4.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
-                "reference": "c62c8b92e8ee38892cc4e2b29851864a7a20ee01"
+                "reference": "6acc1539c37d731c79a67989409ad76e389fd5f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/c62c8b92e8ee38892cc4e2b29851864a7a20ee01",
-                "reference": "c62c8b92e8ee38892cc4e2b29851864a7a20ee01",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/6acc1539c37d731c79a67989409ad76e389fd5f0",
+                "reference": "6acc1539c37d731c79a67989409ad76e389fd5f0",
                 "shasum": ""
             },
             "require": {
@@ -897,7 +897,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-07-08 11:36:38"
+            "time": "2015-12-11 19:07:50"
         },
         {
             "name": "kartik-v/yii2-widget-affix",
@@ -1745,7 +1745,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widgets/zipball/b7eb84987a1bb55e227f6bf148a8322ec553a427",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widgets/zipball/24d3a3942a5943233d912b3adc06b3beae3dd076",
                 "reference": "b7eb84987a1bb55e227f6bf148a8322ec553a427",
                 "shasum": ""
             },
@@ -1894,6 +1894,46 @@
                 "mailer"
             ],
             "time": "2015-06-06 14:19:39"
+        },
+        {
+            "name": "synatree/yii2-dynamic-relations",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/synatree/yii2-dynamic-relations.git",
+                "reference": "25115616855130e2b172e9d1aa8be1dbffd864fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/synatree/yii2-dynamic-relations/zipball/25115616855130e2b172e9d1aa8be1dbffd864fd",
+                "reference": "25115616855130e2b172e9d1aa8be1dbffd864fd",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "synatree\\dynamicrelations\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "David Baltusavich, SynaTree",
+                    "email": "david@synatree.com"
+                }
+            ],
+            "description": "Allows Yii2 views to contain a dynamically expanding set of fields based on model relations.",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2015-12-21 02:15:32"
         },
         {
             "name": "yiisoft/yii2",
@@ -2138,7 +2178,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/022637087b4f8b0d321e697cc0a01b09cd2d7345",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/1425ab29929dd195f468d3c4eb340ab509f28b83",
                 "reference": "022637087b4f8b0d321e697cc0a01b09cd2d7345",
                 "shasum": ""
             },
@@ -2541,7 +2581,9 @@
     "stability-flags": {
         "kartik-v/yii2-mpdf": 20,
         "yiisoft/yii2-jui": 20,
-        "kartik-v/yii2-widgets": 20
+        "kartik-v/yii2-widgets": 20,
+        "synatree/yii2-dynamic-relations": 20,
+        "kartik-v/yii2-widget-activeform": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -15,9 +15,11 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'CaracteristicaID') ?>
+    <?= $form->field($model, 'ValorCaracteristicaActivoID') ?>
 
     <?= $form->field($model, 'ActivoInventariableID') ?>
+
+    <?= $form->field($model, 'CaracteristicaID') ?>
 
     <?= $form->field($model, 'Valor') ?>
 

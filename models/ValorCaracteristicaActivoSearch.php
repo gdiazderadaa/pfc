@@ -18,7 +18,7 @@ class ValorCaracteristicaActivoSearch extends ValorCaracteristicaActivo
     public function rules()
     {
         return [
-            [['CaracteristicaID', 'ActivoInventariableID'], 'integer'],
+            [['ValorCaracteristicaActivoID', 'ActivoInventariableID', 'CaracteristicaID'], 'integer'],
             [['Valor'], 'safe'],
         ];
     }
@@ -56,8 +56,9 @@ class ValorCaracteristicaActivoSearch extends ValorCaracteristicaActivo
         }
 
         $query->andFilterWhere([
-            'CaracteristicaID' => $this->CaracteristicaID,
+            'ValorCaracteristicaActivoID' => $this->ValorCaracteristicaActivoID,
             'ActivoInventariableID' => $this->ActivoInventariableID,
+            'CaracteristicaID' => $this->CaracteristicaID,
         ]);
 
         $query->andFilterWhere(['like', 'Valor', $this->Valor]);

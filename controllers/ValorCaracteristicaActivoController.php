@@ -8,7 +8,6 @@ use app\models\ValorCaracteristicaActivoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
 
 /**
  * ValorCaracteristicaActivoController implements the CRUD actions for ValorCaracteristicaActivo model.
@@ -44,14 +43,13 @@ class ValorCaracteristicaActivoController extends Controller
 
     /**
      * Displays a single ValorCaracteristicaActivo model.
-     * @param string $CaracteristicaID
-     * @param string $ActivoInventariableID
+     * @param string $id
      * @return mixed
      */
-    public function actionView($CaracteristicaID, $ActivoInventariableID)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($CaracteristicaID, $ActivoInventariableID),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -65,7 +63,7 @@ class ValorCaracteristicaActivoController extends Controller
         $model = new ValorCaracteristicaActivo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'CaracteristicaID' => $model->CaracteristicaID, 'ActivoInventariableID' => $model->ActivoInventariableID]);
+            return $this->redirect(['view', 'id' => $model->ValorCaracteristicaActivoID]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -76,16 +74,15 @@ class ValorCaracteristicaActivoController extends Controller
     /**
      * Updates an existing ValorCaracteristicaActivo model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $CaracteristicaID
-     * @param string $ActivoInventariableID
+     * @param string $id
      * @return mixed
      */
-    public function actionUpdate($CaracteristicaID, $ActivoInventariableID)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($CaracteristicaID, $ActivoInventariableID);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'CaracteristicaID' => $model->CaracteristicaID, 'ActivoInventariableID' => $model->ActivoInventariableID]);
+            return $this->redirect(['view', 'id' => $model->ValorCaracteristicaActivoID]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -96,28 +93,31 @@ class ValorCaracteristicaActivoController extends Controller
     /**
      * Deletes an existing ValorCaracteristicaActivo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $CaracteristicaID
-     * @param string $ActivoInventariableID
+     * @param string $id
      * @return mixed
      */
-    public function actionDelete($CaracteristicaID, $ActivoInventariableID)
+    public function actionDelete($id)
     {
-        $this->findModel($CaracteristicaID, $ActivoInventariableID)->delete();
-
-        return $this->redirect(['index']);
+        $this->findModel($id)->delete();
+        if(! Yii::$app->request->isAjax){
+            return $this->redirect(['index']);
+        }
+        else
+        {
+            return "OK";
+        }
     }
 
     /**
      * Finds the ValorCaracteristicaActivo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $CaracteristicaID
-     * @param string $ActivoInventariableID
+     * @param string $id
      * @return ValorCaracteristicaActivo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($CaracteristicaID, $ActivoInventariableID)
+    protected function findModel($id)
     {
-        if (($model = ValorCaracteristicaActivo::findOne(['CaracteristicaID' => $CaracteristicaID, 'ActivoInventariableID' => $ActivoInventariableID])) !== null) {
+        if (($model = ValorCaracteristicaActivo::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

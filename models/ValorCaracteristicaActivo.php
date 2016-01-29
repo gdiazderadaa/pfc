@@ -8,8 +8,9 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "ValorCaracteristicaActivo".
  *
- * @property string $CaracteristicaID
+ * @property string $ValorCaracteristicaActivoID
  * @property string $ActivoInventariableID
+ * @property string $CaracteristicaID
  * @property string $Valor
  *
  * @property ActivoInventariable $activoInventariable
@@ -31,8 +32,8 @@ class ValorCaracteristicaActivo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['CaracteristicaID', 'ActivoInventariableID', 'Valor'], 'required'],
-            [['CaracteristicaID', 'ActivoInventariableID'], 'integer'],
+            [['ActivoInventariableID', 'CaracteristicaID', 'Valor'], 'required'],
+            [['ActivoInventariableID', 'CaracteristicaID'], 'integer'],
             [['Valor'], 'string', 'max' => 128]
         ];
     }
@@ -43,8 +44,9 @@ class ValorCaracteristicaActivo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'ValorCaracteristicaActivoID' => 'Valor Caracteristica Activo ID',
+            'ActivoInventariableID' => 'Activo Inventariable',
             'CaracteristicaID' => 'Caracteristica',
-            'ActivoInventariableID' => 'Activo',
             'Valor' => 'Valor',
         ];
     }
@@ -56,12 +58,14 @@ class ValorCaracteristicaActivo extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ActivoInventariable::className(), ['ActivoInventariableID' => 'ActivoInventariableID']);
     }
-    
-    public function getActivosInventariables() 
-	{	 
-        $models = ActivoInventariable::find()->asArray()->all();
-        return ArrayHelper::map($models,'ActivoInventariableID', 'Nombre');
-    }
+
+
+    public function getActivosInventariables()  
+    {     
+        $models = ActivoInventariable::find()->asArray()->all(); 
+        return ArrayHelper::map($models,'ActivoInventariableID', 'Nombre'); 
+    } 
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -70,13 +74,15 @@ class ValorCaracteristicaActivo extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Caracteristica::className(), ['CaracteristicaID' => 'CaracteristicaID']);
     }
-    
-    public function getCaracteristicas() 
-	{	 
-        $models = Caracteristica::find()->asArray()->all();
-        return ArrayHelper::map($models,'CaracteristicaID', 'Nombre');
-    }
 
+
+    public function getCaracteristicas()  
+    {     
+        $models = Caracteristica::find()->asArray()->all(); 
+        return ArrayHelper::map($models,'CaracteristicaID', 'Nombre'); 
+    }
+    
+    
     /**
      * @inheritdoc
      * @return ValorCaracteristicaActivoQuery the active query used by this AR class.
@@ -85,4 +91,5 @@ class ValorCaracteristicaActivo extends \yii\db\ActiveRecord
     {
         return new ValorCaracteristicaActivoQuery(get_called_class());
     }
+    
 }

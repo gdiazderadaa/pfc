@@ -47,7 +47,7 @@ AppAsset::register($this);
                         'label' => 'Administracion',
                         'items' => [
                            [
-                               'label' => 'Activos',
+                               'label' => 'Inventario',
                                'items' => [
                                     ['label' => 'Hardware', 'url' => ['/activo-hardware/index']],
                                     ['label' => 'Software', 'url' => ['/activo-software/index']],
@@ -57,6 +57,7 @@ AppAsset::register($this);
                             ['label' => 'Informes', 'url' => ['/informe/index']],
                             ['label' => 'Edificios', 'url' => ['/edificio/index']],
                             ['label' => 'Espacios', 'url' => ['/espacio/index']],
+                            ['label' => 'Usuarios', 'url' => ['/usuario/index']],
 
                         ],
                      ],

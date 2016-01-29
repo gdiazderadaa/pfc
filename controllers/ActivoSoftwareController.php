@@ -8,6 +8,8 @@ use app\models\ActivoSoftwareSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use synatree\dynamicrelations\DynamicRelations;
+use app\models\ValorCaracteristicaActivo;
 
 /**
  * ActivoSoftwareController implements the CRUD actions for ActivoSoftware model.
@@ -63,6 +65,7 @@ class ActivoSoftwareController extends Controller
         $model = new ActivoSoftware();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            DynamicRelations::relate($model, 'valorCaracteristicaActivos', Yii::$app->request->post(), 'ValorCaracteristicaActivo', ValorCaracteristicaActivo::className());
             return $this->redirect(['view', 'id' => $model->ActivoInventariableID]);
         } else {
             return $this->render('create', [
@@ -82,6 +85,7 @@ class ActivoSoftwareController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            DynamicRelations::relate($model, 'valorCaracteristicaActivos', Yii::$app->request->post(), 'ValorCaracteristicaActivo', ValorCaracteristicaActivo::className());
             return $this->redirect(['view', 'id' => $model->ActivoInventariableID]);
         } else {
             return $this->render('update', [

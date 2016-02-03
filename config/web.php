@@ -1,5 +1,5 @@
 <?php
-use \kartik\datecontrol\Module;
+use kartik\datecontrol\Module;
 
 $params = require(__DIR__ . '/params.php');
 

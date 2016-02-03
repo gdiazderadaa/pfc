@@ -23,7 +23,7 @@
         "kartik-v/yii2-mpdf": "@dev",
         "yiisoft/yii2-jui": "dev-master",
         "miloschuman/yii2-highcharts-widget": "*",
-        "kartik-v/yii2-datecontrol": "^1.9",
+        "kartik-v/yii2-datecontrol": "@dev",
         "kartik-v/yii2-widgets": "@dev",
         "jlorente/yii2-activerecord-inheritance": "*",
         "synatree/yii2-dynamic-relations": "dev-master",

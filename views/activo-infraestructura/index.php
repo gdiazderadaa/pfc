@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ActivoInfraestructuraSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Activos Infraestructura';
+$this->title = Yii::t('app', 'Infrastructure Assets');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-infraestructura-index">
@@ -16,32 +16,35 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Crear Activo Infraestructura', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
+		                  'modelClass' => 'Infrastructure Asset']), 
+                    ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'Codigo',
-            'Nombre',
+            
+            'codigo',
+            'nombre',
             [
-                 'attribute' => 'SubcategoriaID',
-                 'value' => function ($model) {
-                            return $model->subcategoria->Nombre;
-                        }
+                 'attribute' => 'subcategoria_activo_infraestructura_id',
+                 'value' => 'subcategoriaActivoInfraestructura.nombre'
             ],
             [
-                'attribute' => 'FechaCompra',
+                'attribute' => 'fecha_compra',
                 'format'    => ['date', 'dd/MM/yy']
             ],
             [
-                'attribute' => 'PrecioCompra',
+                'attribute' => 'precio_compra',
                 'format'    => ['currency', 'EUR']
-            ],    
-                 
+            ],
+            [
+                 'attribute' => 'espacio_id',
+                 'value' => 'espacio.nombre'
+            ],
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

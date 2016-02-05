@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ActivoSoftwareSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Activo Software';
+$this->title = Yii::t('app', 'Software Assets');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-software-index">
@@ -16,29 +16,30 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Crear Activo Software', ['create'], ['class' => 'btn btn-success']) ?>
+         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
+		                  'modelClass' => 'Software Asset']), 
+                    ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'Codigo',
-            'Nombre',
+            'codigo',
+            'nombre',
             [
-                 'attribute' => 'SubcategoriaID',
+                 'attribute' => 'subcategoria_activo_software_id',
                  'value' => function ($model) {
-                            return $model->subcategoria->Nombre;
+                            return $model->subcategoriaActivoSoftware->nombre;
                         }
             ],
             [
-                'attribute' => 'FechaCompra',
+                'attribute' => 'fecha_compra',
                 'format'    => ['date', 'dd/MM/yy']
             ],
             [
-                'attribute' => 'PrecioCompra',
+                'attribute' => 'precio_compra',
                 'format'    => ['currency', 'EUR']
             ],    
 

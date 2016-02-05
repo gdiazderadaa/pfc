@@ -63,7 +63,7 @@ class CaracteristicaController extends Controller
         $model = new Caracteristica();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->CaracteristicaID]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +82,7 @@ class CaracteristicaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->CaracteristicaID]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -101,6 +101,23 @@ class CaracteristicaController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+        
+        try {
+            $this->findModel($id)->delete();
+        } catch (yii\db\IntegrityException $e) {
+            if($e->getCode() == 23000){
+                Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
+                'modelClass' => 'feature',
+                'modelClass2' => 'asset',
+                ]));
+                
+                return $this->redirect(['index']);
+            }
+        }
+
+        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
+            'modelClass' => 'feature',
+        ]));
     }
 
     /**

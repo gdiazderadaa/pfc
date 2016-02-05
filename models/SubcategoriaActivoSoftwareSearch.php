@@ -18,8 +18,8 @@ class SubcategoriaActivoSoftwareSearch extends SubcategoriaActivoSoftware
     public function rules()
     {
         return [
-            [['SubcategoriaActivoSoftwareID'], 'integer'],
-            [['Nombre'], 'safe'],
+            [['id'], 'integer'],
+            [['nombre'], 'safe'],
         ];
     }
 
@@ -56,10 +56,10 @@ class SubcategoriaActivoSoftwareSearch extends SubcategoriaActivoSoftware
         }
 
         $query->andFilterWhere([
-            'SubcategoriaActivoSoftwareID' => $this->SubcategoriaActivoSoftwareID,
+            'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'Nombre', $this->Nombre]);
+        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
 
         return $dataProvider;
     }

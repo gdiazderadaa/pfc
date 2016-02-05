@@ -5,10 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoSoftware */
 
-$this->title = 'Update Activo Software: ' . ' ' . $model->ActivoInventariableID;
-$this->params['breadcrumbs'][] = ['label' => 'Activo Softwares', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->ActivoInventariableID, 'url' => ['view', 'id' => $model->ActivoInventariableID]];
-$this->params['breadcrumbs'][] = 'Update';
+ $this->title = Yii::t('app', 'Update {modelClass}:', [
+		              'modelClass' => 'Software Asset',
+		              ]) . ' ' . $model->codigo;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Software Assets'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->codigo, 'url' => ['view', 'id' => $model->activo_inventariable_id]];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="activo-software-update">
 

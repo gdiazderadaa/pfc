@@ -28,7 +28,8 @@
         "jlorente/yii2-activerecord-inheritance": "*",
         "synatree/yii2-dynamic-relations": "dev-master",
         "composer-plugin-api": "^1.0",
-        "kartik-v/yii2-widget-activeform": "@dev"
+        "kartik-v/yii2-widget-activeform": "@dev",
+        "kartik-v/yii2-money": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

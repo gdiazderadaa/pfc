@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\CaracteristicaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Caracteristicas';
+$this->title = Yii::t('app', 'Features');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="caracteristica-index">
@@ -16,18 +16,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Caracteristica', ['create'], ['class' => 'btn btn-success']) ?>
+         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
+		                  'modelClass' => 'Feature']), 
+                    ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'CaracteristicaID',
-            'Nombre',
-            'Unidades',
+            'nombre',
+            'unidades',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

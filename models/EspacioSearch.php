@@ -12,14 +12,21 @@ use app\models\Espacio;
  */
 class EspacioSearch extends Espacio
 {
+    
+    public function attributes()
+    {
+        // add related fields to searchable attributes
+      return array_merge(parent::attributes(), ['edificio.nombre']);
+    }
+    
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'edificio_id'], 'integer'],
-            [['nombre', 'numeracion'], 'safe'],
+            [['id'], 'integer'],
+            [['nombre', 'numeracion','edificio_id'], 'safe'],
         ];
     }
 
@@ -42,26 +49,25 @@ class EspacioSearch extends Espacio
     public function search($params)
     {
         $query = Espacio::find();
-
+        
+        $query->joinWith('edificio');
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
+        $dataProvider->sort->attributes['edificio_id'] = [
+            'asc' => ['edificio.nombre' => SORT_ASC],
+            'desc' => ['edificio.nombre' => SORT_DESC],
+        ];
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+        if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'edificio_id' => $this->edificio_id,
-        ]);
-
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'numeracion', $this->numeracion]);
+            ->andFilterWhere(['like', 'numeracion', $this->numeracion])
+            ->andFilterWhere(['like', 'edificio.nombre', $this->edificio_id]);
 
         return $dataProvider;
     }

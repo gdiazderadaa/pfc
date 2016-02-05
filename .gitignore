@@ -12,21 +12,16 @@ nbproject
 # windows thumbnail cache
 Thumbs.db
 
-# 
-/runtime/debug
-/web/assets
-<<<<<<< HEAD
+# composer vendor dir
 /vendor
-<<<<<<< HEAD
-
-=======
->>>>>>> c84eb50afe93f7328f6d8ab6ec3eef2a64c7d9d4
-=======
-/vendor/*
->>>>>>> 050ba25e22e18fd3336e3e4dddddb6fcf230361c
+# cubrid install dir
+/cubrid
 
 # composer itself is not needed
 composer.phar
+
+# composer.lock in applications is ignored since it's automatically created by composer when application is installed
+/apps/*/composer.lock
 
 # Mac DS_Store Files
 .DS_Store
@@ -35,4 +30,11 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
-*.data
+
+# ignore sub directory for dev installed apps and extensions
+/apps
+/extensions
+
+#custom
+/runtime/*/
+/web

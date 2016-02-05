@@ -18,8 +18,8 @@ class SubcategoriaActivoInfraestructuraSearch extends SubcategoriaActivoInfraest
     public function rules()
     {
         return [
-            [['SubcategoriaActivoInfraestructuraID'], 'integer'],
-            [['Nombre'], 'safe'],
+            [['id'], 'integer'],
+            [['nombre'], 'safe'],
         ];
     }
 
@@ -56,10 +56,10 @@ class SubcategoriaActivoInfraestructuraSearch extends SubcategoriaActivoInfraest
         }
 
         $query->andFilterWhere([
-            'SubcategoriaActivoInfraestructuraID' => $this->SubcategoriaActivoInfraestructuraID,
+            'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'Nombre', $this->Nombre]);
+        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
 
         return $dataProvider;
     }

@@ -18,8 +18,8 @@ class CaracteristicaSearch extends Caracteristica
     public function rules()
     {
         return [
-            [['CaracteristicaID'], 'integer'],
-            [['Nombre', 'Unidades'], 'safe'],
+            [['id'], 'integer'],
+            [['nombre', 'unidades'], 'safe'],
         ];
     }
 
@@ -56,11 +56,11 @@ class CaracteristicaSearch extends Caracteristica
         }
 
         $query->andFilterWhere([
-            'CaracteristicaID' => $this->CaracteristicaID,
+            'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'Nombre', $this->Nombre])
-            ->andFilterWhere(['like', 'Unidades', $this->Unidades]);
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'unidades', $this->unidades]);
 
         return $dataProvider;
     }

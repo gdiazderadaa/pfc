@@ -5,11 +5,15 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Caracteristica".
+ * This is the model class for table "caracteristica".
  *
- * @property string $CaracteristicaID
- * @property string $Nombre
- * @property string $Unidades
+ * @property string $id
+ * @property string $nombre
+ * @property string $unidades
+ *
+ * @property ValorCaracteristicaActivoInventariable[] $valorCaracteristicaActivoInventariables
+ * @property ValorCaracteristicaElementoHardware[] $valorCaracteristicaElementoHardwares
+ * @property ElementoHardware[] $elementoHardwares
  */
 class Caracteristica extends \yii\db\ActiveRecord
 {
@@ -18,7 +22,7 @@ class Caracteristica extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Caracteristica';
+        return 'caracteristica';
     }
 
     /**
@@ -27,9 +31,9 @@ class Caracteristica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre'], 'string', 'max' => 64],
-            [['Unidades'], 'string', 'max' => 16],
-            [['Nombre'], 'unique']
+            [['nombre'], 'required'],
+            [['nombre'], 'string', 'max' => 64],
+            [['unidades'], 'string', 'max' => 16]
         ];
     }
 
@@ -39,18 +43,33 @@ class Caracteristica extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'CaracteristicaID' => 'Caracteristica ID',
-            'Nombre' => 'Nombre',
-            'Unidades' => 'Unidades',
+            'id' => Yii::t('app', 'ID'),
+            'nombre' => Yii::t('app', 'Name'),
+            'unidades' => Yii::t('app', 'Units'),
         ];
     }
 
     /**
-     * @inheritdoc
-     * @return CaracteristicaQuery the active query used by this AR class.
+     * @return \yii\db\ActiveQuery
      */
-    public static function find()
+    public function getValorCaracteristicaActivosInventariables()
     {
-        return new CaracteristicaQuery(get_called_class());
+        return $this->hasMany(ValorCaracteristicaActivoInventariable::className(), ['caracteristica_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getValorCaracteristicaElementosHardware()
+    {
+        return $this->hasMany(ValorCaracteristicaElementoHardware::className(), ['caracteristica_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getElementosHardware()
+    {
+        return $this->hasMany(ElementoHardware::className(), ['id' => 'elemento_hardware_id'])->viaTable('valor_caracteristica_elemento_hardware', ['caracteristica_id' => 'id']);
     }
 }

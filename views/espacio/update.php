@@ -5,10 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Espacio */
 
-$this->title = 'Modificar Espacio: ' . ' ' . $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Espacios', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = Yii::t('app', 'Update {modelClass}:', [
+		   'modelClass' => 'space',
+		]) . ' ' . $model->numeracion;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Spaces'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model-> numeracion, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="espacio-update">
 

@@ -12,13 +12,15 @@ use app\models\ActivoSoftware;
  */
 class ActivoSoftwareSearch extends ActivoSoftware
 {
+
+    
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['ActivoInventariableID', 'SubcategoriaID'], 'integer'],
+            [['activo_inventariable_id','subcategoria_activo_software_id'], 'integer'],
         ];
     }
 
@@ -55,8 +57,8 @@ class ActivoSoftwareSearch extends ActivoSoftware
         }
 
         $query->andFilterWhere([
-            'ActivoInventariableID' => $this->ActivoInventariableID,
-            'SubcategoriaID' => $this->SubcategoriaID,
+            'activo_inventariable_id' => $this->activo_inventariable_id,
+            'subcategoria_activo_software_id' => $this->subcategoria_activo_software_id,
         ]);
 
         return $dataProvider;

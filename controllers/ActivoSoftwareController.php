@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use synatree\dynamicrelations\DynamicRelations;
-use app\models\ValorCaracteristicaActivo;
+use app\models\ValorCaracteristicaActivoInventariable;
 
 /**
  * ActivoSoftwareController implements the CRUD actions for ActivoSoftware model.
@@ -65,8 +65,8 @@ class ActivoSoftwareController extends Controller
         $model = new ActivoSoftware();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            DynamicRelations::relate($model, 'valorCaracteristicaActivos', Yii::$app->request->post(), 'ValorCaracteristicaActivo', ValorCaracteristicaActivo::className());
-            return $this->redirect(['view', 'id' => $model->ActivoInventariableID]);
+            DynamicRelations::relate($model->parent, 'valoresCaracteristicasActivoInventariable', Yii::$app->request->post(), 'ValorCaracteristicaActivoInventariable', ValorCaracteristicaActivoInventariable::className());
+            return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,8 +85,8 @@ class ActivoSoftwareController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            DynamicRelations::relate($model, 'valorCaracteristicaActivos', Yii::$app->request->post(), 'ValorCaracteristicaActivo', ValorCaracteristicaActivo::className());
-            return $this->redirect(['view', 'id' => $model->ActivoInventariableID]);
+            DynamicRelations::relate($model->parent, 'valoresCaracteristicasActivoInventariable', Yii::$app->request->post(), 'ValorCaracteristicaActivoInventariable', ValorCaracteristicaActivoInventariable::className());
+            return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -102,8 +102,23 @@ class ActivoSoftwareController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        try {
+            $this->findModel($id)->delete();
+        } catch (yii\db\IntegrityException $e) {
+            if($e->getCode() == 23000){
+                Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in either some {modelClass2} or {modelClass3}', [
+                'modelClass' => 'software asset',
+                'modelClass2' => 'hardware asset configuration',
+                'modelClass3' => 'feature',
+                ]));
+                
+                return $this->redirect(['index']);
+            }
+        }
 
+        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
+            'modelClass' => 'software asset',
+        ]));
         return $this->redirect(['index']);
     }
 

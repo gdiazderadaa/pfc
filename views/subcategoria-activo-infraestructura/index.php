@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SubcategoriaActivoInfraestructuraSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Subcategoria Activo Infraestructuras';
+$this->title = Yii::t('app', 'Infrastructure Asset Subcategories');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subcategoria-activo-infraestructura-index">
@@ -16,17 +16,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Subcategoria Activo Infraestructura', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
+		                  'modelClass' => 'Infrastructure Asset Subcategory']), 
+                    ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'SubcategoriaActivoInfraestructuraID',
-            'Nombre',
+            'nombre',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -8,7 +8,6 @@ use app\models\SubcategoriaActivoInfraestructuraSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
 
 /**
  * SubcategoriaActivoInfraestructuraController implements the CRUD actions for SubcategoriaActivoInfraestructura model.
@@ -64,14 +63,13 @@ class SubcategoriaActivoInfraestructuraController extends Controller
         $model = new SubcategoriaActivoInfraestructura();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->SubcategoriaActivoInfraestructuraID]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
-
 
     /**
      * Updates an existing SubcategoriaActivoInfraestructura model.
@@ -84,7 +82,7 @@ class SubcategoriaActivoInfraestructuraController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->SubcategoriaActivoInfraestructuraID]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

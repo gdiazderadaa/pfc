@@ -5,10 +5,12 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "SubcategoriaActivoInfraestructura".
+ * This is the model class for table "subcategoria_activo_infraestructura".
  *
- * @property string $SubcategoriaActivoInfraestructuraID
- * @property string $Nombre
+ * @property string $id
+ * @property string $nombre
+ *
+ * @property ActivoInfraestructura[] $activosInfraestructura
  */
 class SubcategoriaActivoInfraestructura extends \yii\db\ActiveRecord
 {
@@ -17,7 +19,7 @@ class SubcategoriaActivoInfraestructura extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'SubcategoriaActivoInfraestructura';
+        return 'subcategoria_activo_infraestructura';
     }
 
     /**
@@ -26,9 +28,9 @@ class SubcategoriaActivoInfraestructura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre'], 'required'],
-            [['Nombre'], 'string', 'max' => 128],
-            [['Nombre'], 'unique']
+            [['nombre'], 'required'],
+            [['nombre'], 'string', 'max' => 128],
+            [['nombre'], 'unique']
         ];
     }
 
@@ -38,17 +40,16 @@ class SubcategoriaActivoInfraestructura extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'SubcategoriaActivoInfraestructuraID' => 'Subcategoria Activo Infraestructura ID',
-            'Nombre' => 'Nombre',
+            'id' => Yii::t('app', 'ID'),
+            'nombre' => Yii::t('app', 'Name'),
         ];
     }
 
     /**
-     * @inheritdoc
-     * @return SubcategoriaActivoInfraestructuraQuery the active query used by this AR class.
+     * @return \yii\db\ActiveQuery
      */
-    public static function find()
+    public function getActivosInfraestructura()
     {
-        return new SubcategoriaActivoInfraestructuraQuery(get_called_class());
+        return $this->hasMany(ActivoInfraestructura::className(), ['subcategoria_activo_infraestructura_id' => 'id']);
     }
 }

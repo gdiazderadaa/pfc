@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\models\ValorCaracteristicaActivo;
 use synatree\dynamicrelations\DynamicRelations;
+use kartik\datecontrol\Module;
+use kartik\datecontrol\DateControl;
+use kartik\money\MaskMoney;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoSoftware */
@@ -14,30 +17,37 @@ use synatree\dynamicrelations\DynamicRelations;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <!--<?= $form->field($model, 'ActivoInventariableID')->textInput(['maxlength' => true]) ?>-->
+    <!--<?= $form->field($model, 'activo_inventariable_id')->textInput(['maxlength' => true]) ?>-->
     
-    <?= $form->field($model, 'Codigo')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'FechaCompra')->widget(\yii\jui\DatePicker::classname(), [
-        'language' => 'es',
-        'dateFormat' => 'dd/MM/yyyy',
-        ]) ?>
-    <?= $form->field($model, 'PrecioCompra')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'codigo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'fecha_compra')->widget(DateControl::classname(), [
+        'type'=>DateControl::FORMAT_DATE,
+        'ajaxConversion'=>false,
+        'options' => [
+            'pluginOptions' => [
+                'autoclose' => true
+            ]
+        ]
+    ]); ?>
+    <?= $form->field($model, 'precio_compra')->widget(MaskMoney::classname()) ?>
 
-    <?= $form->field($model, 'SubcategoriaID')->dropDownList($model->getSubcategorias(),['prompt'=>'- Selecciona la categoría del activo software -']) ?>  
+    <?= $form->field($model, 'subcategoria_activo_software_id')->dropDownList($model->getSubcategorias(),['prompt'=>Yii::t('app', '- Select the {modelClass} -', [
+		              'modelClass' => 'Sofware Asset Subcategory',
+		              ]) ]) ?>
     
     <?= DynamicRelations::widget([
-        'title' => 'Caracteristicas',
-        'collection' => $model->valorCaracteristicaActivos,
-        'viewPath' => '@app/views/valor-caracteristica-activo/_inline.php',
+        'title' => Yii::t('app','Features'),
+        'collection' => $model->valoresCaracteristicasActivoInventariable,
+        'viewPath' => '@app/views/valor-caracteristica-activo-inventariable/_inline.php',
 
         // this next line is only needed if there is a chance that the collection above will be empty.  This gives the script a prototype to work with.
-        'collectionType' => new app\models\ValorCaracteristicaActivo,
+        'collectionType' => new app\models\ValorCaracteristicaActivoInventariable,
 
     ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

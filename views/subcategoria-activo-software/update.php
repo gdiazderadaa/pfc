@@ -5,10 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\SubcategoriaActivoSoftware */
 
-$this->title = 'Update Subcategoria Activo Software: ' . ' ' . $model->SubcategoriaActivoSoftwareID;
-$this->params['breadcrumbs'][] = ['label' => 'Subcategoria Activo Softwares', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->SubcategoriaActivoSoftwareID, 'url' => ['view', 'id' => $model->SubcategoriaActivoSoftwareID]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = Yii::t('app', 'Update {modelClass}:', [
+		              'modelClass' => 'Software Asset Subcategory',
+	   	               ]) . ' ' . $model->nombre;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Software Asset Subcategories'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="subcategoria-activo-software-update">
 

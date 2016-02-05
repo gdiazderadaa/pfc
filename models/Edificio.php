@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "edificio".
  *
- * @property integer $id
+ * @property string $id
  * @property string $nombre
  * @property string $localidad
  *
@@ -40,9 +40,9 @@ class Edificio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'nombre' => 'Nombre',
-            'localidad' => 'Localidad',
+            'id' => Yii::t('app', 'ID'),
+            'nombre' => Yii::t('app', 'Nombre'),
+            'localidad' => Yii::t('app', 'Localidad'),
         ];
     }
 

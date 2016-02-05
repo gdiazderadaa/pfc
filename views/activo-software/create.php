@@ -6,8 +6,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoSoftware */
 
-$this->title = 'Create Activo Software';
-$this->params['breadcrumbs'][] = ['label' => 'Activo Softwares', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create {modelClass}', [
+                     'modelClass' => 'Software Asset',
+                     ]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Software Assets'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-software-create">

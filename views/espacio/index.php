@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\EspacioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Listado de Espacios';
+$this->title = Yii::t('app', 'Spaces');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="espacio-index">
@@ -16,7 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     
     <p>
-        <?= Html::a('Crear Espacio', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
+		                  'modelClass' => 'Space']), 
+                    ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -30,9 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'numeracion',
              [
                  'attribute' => 'edificio_id',
-                 'value' => function ($model) {
-                            return $model->edificio->nombre;
-                        }
+                 'value' => 'edificio.nombre'
              ],
 
             ['class' => 'yii\grid\ActionColumn'],

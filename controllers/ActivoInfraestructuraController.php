@@ -63,7 +63,7 @@ class ActivoInfraestructuraController extends Controller
         $model = new ActivoInfraestructura();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ActivoInventariableID]);
+            return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +82,7 @@ class ActivoInfraestructuraController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ActivoInventariableID]);
+            return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

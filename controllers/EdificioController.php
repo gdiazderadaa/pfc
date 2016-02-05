@@ -43,7 +43,7 @@ class EdificioController extends Controller
 
     /**
      * Displays a single Edificio model.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionView($id)
@@ -74,7 +74,7 @@ class EdificioController extends Controller
     /**
      * Updates an existing Edificio model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -93,7 +93,7 @@ class EdificioController extends Controller
     /**
      * Deletes an existing Edificio model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -102,19 +102,25 @@ class EdificioController extends Controller
             $this->findModel($id)->delete();
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
-                Yii::$app->session->setFlash('danger',Yii::t('app', 'El '.Edificio::tableName().' no se puede eliminar porque tiene espacios asociados'));
+                Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
+                'modelClass' => 'building',
+                'modelClass2' => 'spaces',
+                ]));
+                
                 return $this->redirect(['index']);
             }
         }
 
-        Yii::$app->session->setFlash('success',Yii::t('app',  'El '.Edificio::tableName().' ha sido eliminado correctamente'));      
+        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
+            'modelClass' => 'building',
+        ]));
         return $this->redirect(['index']);
     }
 
     /**
      * Finds the Edificio model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param string $id
      * @return Edificio the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

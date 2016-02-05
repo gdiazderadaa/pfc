@@ -1,41 +1,47 @@
 <?php
 
 namespace app\models;
-use yii\helpers\ArrayHelper;
+
 use Yii;
 use jlorente\db\ActiveRecordInheritanceTrait,
     jlorente\db\ActiveRecordInheritanceInterface;
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "ActivoInfraestructura".
+ * This is the model class for table "activo_infraestructura".
  *
- * @property string $ActivoInventariableID
- * @property string $SubcategoriaID
+ * @property string $activo_inventariable_id
+ * @property string $subcategoria_activo_infraestructura_id
  *
- * @property SubcategoriaActivoInventariable $subcategoria
+ * @property SubcategoriaActivoInfraestructura $subcategoriaActivoInfraestructura
+ * @property ActivoInventariable $activoInventariable
  */
 class ActivoInfraestructura extends \yii\db\ActiveRecord implements ActiveRecordInheritanceInterface
 {
-    use ActiveRecordInheritanceTrait;
+    use ActiveRecordInheritanceTrait; 
+    
+    public static function extendsFrom() {
+        return ActivoInventariable::className();
+    }
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'ActivoInfraestructura';
+        return 'activo_infraestructura';
     }
 
-    public static function extendsFrom() {
-        return ActivoInventariable::className();
-    }
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['ActivoInventariableID', 'SubcategoriaID'], 'required'],
-            [['ActivoInventariableID', 'SubcategoriaID'], 'integer']
+            [['activo_inventariable_id', 'subcategoria_activo_infraestructura_id'], 'required'],
+            [['activo_inventariable_id', 'subcategoria_activo_infraestructura_id'], 'integer'],
+            [['activo_inventariable_id'], 'unique'],
         ];
     }
 
@@ -45,32 +51,30 @@ class ActivoInfraestructura extends \yii\db\ActiveRecord implements ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ActivoInventariableID' => 'Activo Inventariable ID',
-            'SubcategoriaID' => 'Subcategoria',
+            'activo_inventariable_id' => Yii::t('app', 'Asset'),
+            'subcategoria_activo_infraestructura_id' => Yii::t('app', 'Infrastructure Asset Subcategory'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubcategoria()
+    public function getSubcategoriaActivoInfraestructura()
     {
-        return $this->hasOne(SubcategoriaActivoInfraestructura::className(), ['SubcategoriaActivoInfraestructuraID' => 'SubcategoriaID']);
+        return $this->hasOne(SubcategoriaActivoInfraestructura::className(), ['id' => 'subcategoria_activo_infraestructura_id']);
     }
-    
-    public function getSubcategorias()
-    {
-       $models = SubcategoriaActivoInfraestructura::find()->asArray()->all();
-        return ArrayHelper::map($models,'SubcategoriaActivoInfraestructuraID', 'Nombre'); 
-    }
-    
+
+    public function getSubcategorias() 
+    { 
+        $models = SubcategoriaActivoInfraestructura::find()->asArray()->all(); 
+        return ArrayHelper::map($models,'id', 'nombre');  
+    } 
 
     /**
-     * @inheritdoc
-     * @return ActivoInfraestructuraQuery the active query used by this AR class.
+     * @return \yii\db\ActiveQuery
      */
-    public static function find()
+    public function getActivoInventariable()
     {
-        return new ActivoInfraestructuraQuery(get_called_class());
+        return $this->hasOne(ActivoInventariable::className(), ['id' => 'activo_inventariable_id']);
     }
 }

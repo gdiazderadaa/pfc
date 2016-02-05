@@ -6,8 +6,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Espacio */
 
-$this->title = 'Crear Espacio';
-$this->params['breadcrumbs'][] = ['label' => 'Espacios', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create {modelClass}', [
+		   'modelClass' => 'space',
+		]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Spaces'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="espacio-create">

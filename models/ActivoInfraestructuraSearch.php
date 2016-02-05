@@ -12,13 +12,25 @@ use app\models\ActivoInfraestructura;
  */
 class ActivoInfraestructuraSearch extends ActivoInfraestructura
 {
+        
+    public function attributes()
+    {
+        // add related fields to searchable attributes
+      return array_merge(parent::attributes(), [/*'activo_inventariable.codigo',
+                                                'activo_inventariable.nombre',
+                                                'activo_inventariable.fecha_compra',
+                                                'activo_inventariable.precio_compra',*/
+                                                /*'espacio.nombre',*/
+                                                'subcategoriaActivoInfraestructura.nombre']);
+    }
+    
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['ActivoInventariableID', 'SubcategoriaID'], 'integer'],
+            [['activo_inventariable_id', 'subcategoria_activo_infraestructura_id','espacio_id'], 'safe'],
         ];
     }
 
@@ -42,26 +54,30 @@ class ActivoInfraestructuraSearch extends ActivoInfraestructura
     {
         $query = ActivoInfraestructura::find();
 
+        // $query->joinWith(['subcategoriaActivoInfraestructura']);
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
+        // $dataProvider->sort->attributes['espacio_id'] = [
+        //     'asc' => ['espacio.nombre' => SORT_ASC],
+        //     'desc' => ['espacio.nombre' => SORT_DESC],
+        // ];
+        
+        // $dataProvider->sort->attributes['subcategoria_activo_infraestructura_id'] = [
+        //     'asc' => ['subcategoria_activo_infraestructura.nombre' => SORT_ASC],
+        //     'desc' => ['subcategoria_activo_infraestructura.nombre' => SORT_DESC],
+        // ];
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+
+        if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'ActivoInventariableID' => $this->ActivoInventariableID,
-            'SubcategoriaID' => $this->SubcategoriaID,
-            'Codigo'=> $this->Codigo,
-            'Nombre'=> $this->Nombre,
-            'FechaCompra'=> $this->FechaCompra,
-            'PrecioCompra'=> $this->PrecioCompra,
-        ]);
+        // $query->andFilterWhere(['activo_inventariable_id' => $this->activo_inventariable_id])
+             $query->andFilterWhere(['like', 'subcategoria_activo_infraestructura.nombre' => $this->subcategoria_activo_infraestructura_id])
+             ->andFilterWhere(['like', 'espacio_id', $this->espacio_id]);
 
         return $dataProvider;
     }

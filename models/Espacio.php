@@ -8,13 +8,13 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "espacio".
  *
- * @property integer $id
+ * @property string $id
  * @property string $nombre
  * @property string $numeracion
- * @property integer $edificio_id
+ * @property string $edificio_id
  *
  * @property Edificio $edificio
- * @property Objeto[] $objetos
+ * @property ActivoInventariable[] $activoInventariables 
  */
 class Espacio extends \yii\db\ActiveRecord
 {
@@ -45,11 +45,19 @@ class Espacio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'nombre' => 'Nombre',
-            'numeracion' => 'Numeracion',
-            'edificio_id' => 'Edificio',
+            'id' => Yii::t('app', 'ID'),
+            'nombre' => Yii::t('app', 'Name'),
+            'numeracion' => Yii::t('app', 'Space Number'),
+            'edificio_id' => Yii::t('app', 'Building')
         ];
+    }
+
+    /** 
+    * @return \yii\db\ActiveQuery 
+    */ 
+    public function getActivosInventariables() 
+    { 
+        return $this->hasMany(ActivoInventariable::className(), ['espacio_id' => 'id']); 
     }
 
     /**
@@ -59,18 +67,11 @@ class Espacio extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Edificio::className(), ['id' => 'edificio_id']);
     }
+    
 
     public function getEdificioList() 
 	{	 
         $models = Edificio::find()->asArray()->all();
         return ArrayHelper::map($models,'id', 'nombre');
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getObjetos()
-    {
-        return $this->hasMany(Objeto::className(), ['espacio_id' => 'id']);
     }
 }

@@ -3,18 +3,23 @@
 namespace app\models;
 
 use Yii;
-
+use Yii\helpers\ArrayHelper;
 /**
- * This is the model class for table "ActivoInventariable".
+ * This is the model class for table "activo_inventariable".
  *
- * @property string $ActivoInventariableID
- * @property string $Codigo
- * @property string $Nombre
- * @property string $FechaCompra
- * @property string $PrecioCompra
+ * @property string $id
+ * @property string $codigo
+ * @property string $nombre
+ * @property string $fecha_compra
+ * @property string $precio_compra
+ * @property string $espacio_id
  *
- * @property ValorCaracteristicaActivo[] $valorCaracteristicaActivos
- * @property Caracteristica[] $caracteristicas
+ * @property ActivoHardware $activoHardware
+ * @property ActivoInfraestructura $activoInfraestructura
+ * @property Espacio $espacio
+ * @property ActivoSoftware $activoSoftware
+ * @property Incidencia[] $incidencias
+ * @property ValorCaracteristicaActivoInventariable[] $valoresCaracteristicasActivoInventariable
  */
 class ActivoInventariable extends \yii\db\ActiveRecord
 {
@@ -23,7 +28,7 @@ class ActivoInventariable extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'ActivoInventariable';
+        return 'activo_inventariable';
     }
 
     /**
@@ -32,12 +37,13 @@ class ActivoInventariable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Codigo', 'Nombre', 'FechaCompra', 'PrecioCompra'], 'required'],
-            [['FechaCompra'], 'safe'],
-            [['PrecioCompra'], 'number'],
-            [['Codigo'], 'string', 'max' => 128],
-            [['Nombre'], 'string', 'max' => 64],
-            [['Codigo'], 'unique']
+            [['codigo', 'nombre', 'fecha_compra', 'precio_compra'], 'required'],
+            [['fecha_compra'], 'safe'],
+            [['precio_compra'], 'number'],
+            [['espacio_id'], 'integer'],
+            [['codigo'], 'string', 'max' => 128],
+            [['nombre'], 'string', 'max' => 64],
+            [['codigo'], 'unique']
         ];
     }
 
@@ -47,27 +53,71 @@ class ActivoInventariable extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ActivoInventariableID' => 'Activo Inventariable ID',
-            'Codigo' => 'Codigo / Nº Serie',
-            'Nombre' => 'Nombre',
-            'FechaCompra' => 'Fecha Compra',
-            'PrecioCompra' => 'Precio Compra',
+            'id' => Yii::t('app', 'ID'),
+            'codigo' => Yii::t('app', 'Asset Number'),
+            'nombre' => Yii::t('app', 'Name'),
+            'fecha_compra' => Yii::t('app', 'Purchase Date'),
+            'precio_compra' => Yii::t('app', 'purchase Price'),
+            'espacio_id' => Yii::t('app', 'Space'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getValorCaracteristicaActivos()
+    public function getActivoHardware()
     {
-        return $this->hasMany(ValorCaracteristicaActivo::className(), ['ActivoInventariableID' => 'ActivoInventariableID']);
+        return $this->hasOne(ActivoHardware::className(), ['activo_inventariable_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getActivoInfraestructura()
+    {
+        return $this->hasOne(ActivoInfraestructura::className(), ['activo_inventariable_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEspacio()
+    {
+        return $this->hasOne(Espacio::className(), ['id' => 'espacio_id']);
+    }
+
+    public function getEspacios() 
+    { 
+        $models = Espacio::find()->asArray()->all(); 
+        return ArrayHelper::map($models,'id', 'nombre');  
+    } 
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActivoSoftware()
+    {
+        return $this->hasOne(ActivoSoftware::className(), ['activo_inventariable_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIncidencias()
+    {
+        return $this->hasMany(Incidencia::className(), ['activo_inventariable_id' => 'id']);
+    }
+
     public function getCaracteristicas()
     {
-        return $this->hasMany(Caracteristica::className(), ['CaracteristicaID' => 'CaracteristicaID'])->viaTable('ValorCaracteristicaActivo', ['ActivoInventariableID' => 'ActivoInventariableID']);
+        return $this->hasMany(Caracteristica::className(), ['caracteristica_id' => 'id'])->viaTable('valor_caracteristica_activo_inventariable', ['activo_inventariable_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getValoresCaracteristicasActivoInventariable()
+    {
+        return $this->hasMany(ValorCaracteristicaActivoInventariable::className(), ['activo_inventariable_id' => 'id']);
     }
 }

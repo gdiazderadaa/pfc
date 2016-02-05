@@ -6,8 +6,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\SubcategoriaActivoSoftware */
 
-$this->title = 'Create Subcategoria Activo Software';
-$this->params['breadcrumbs'][] = ['label' => 'Subcategoria Activo Softwares', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create {modelClass}', [
+		              'modelClass' => 'Software Asset Subcategory',
+	   	               ]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Software Asset Subcategories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subcategoria-activo-software-create">

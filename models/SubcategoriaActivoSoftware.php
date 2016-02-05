@@ -5,10 +5,12 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "SubcategoriaActivoSoftware".
+ * This is the model class for table "subcategoria_activo_software".
  *
- * @property string $SubcategoriaActivoSoftwareID
- * @property string $Nombre
+ * @property string $id
+ * @property string $nombre
+ *
+ * @property ActivoSoftware[] $activoSoftwares
  */
 class SubcategoriaActivoSoftware extends \yii\db\ActiveRecord
 {
@@ -17,7 +19,7 @@ class SubcategoriaActivoSoftware extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'SubcategoriaActivoSoftware';
+        return 'subcategoria_activo_software';
     }
 
     /**
@@ -26,9 +28,9 @@ class SubcategoriaActivoSoftware extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre'], 'required'],
-            [['Nombre'], 'string', 'max' => 128],
-            [['Nombre'], 'unique']
+            [['nombre'], 'required'],
+            [['nombre'], 'string', 'max' => 128],
+            [['nombre'], 'unique']
         ];
     }
 
@@ -38,17 +40,16 @@ class SubcategoriaActivoSoftware extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'SubcategoriaActivoSoftwareID' => 'Subcategoria Activo Software ID',
-            'Nombre' => 'Nombre',
+            'id' => Yii::t('app', 'ID'),
+            'nombre' => Yii::t('app', 'Name'),
         ];
     }
 
     /**
-     * @inheritdoc
-     * @return SubcategoriaActivoSoftwareQuery the active query used by this AR class.
+     * @return \yii\db\ActiveQuery
      */
-    public static function find()
+    public function getActivoSoftwares()
     {
-        return new SubcategoriaActivoSoftwareQuery(get_called_class());
+        return $this->hasMany(ActivoSoftware::className(), ['subcategoria_activo_software_id' => 'id']);
     }
 }

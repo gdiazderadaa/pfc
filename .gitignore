@@ -13,7 +13,7 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-/vendor
+vendor/
 # cubrid install dir
 /cubrid
 
@@ -36,5 +36,5 @@ phpunit.phar
 /extensions
 
 #custom
-/runtime/*/
-/web
+runtime/
+web/

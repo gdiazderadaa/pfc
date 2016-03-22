@@ -36,9 +36,12 @@ $this->registerJs('$(document).ready(function(){
                             //get selected elements from other selects and spans
                             removeAlreadySelectedFeatures(selectID);
                             
+                            
                             //remove view when there is no features available
                             removeUnusedView(selectID);
                         }                      
+                        
+                        removeCurrentSelectedFeatureFromOthers(selectID);
                         
                         if (!stopPropagate){
                             
@@ -101,6 +104,13 @@ $this->registerJs('$(document).ready(function(){
                                 $("#"+selectID).parent().prev(".remove-dynamic-relation").trigger("click");
                             }, 500);                           
                         } 
+                    }
+                    
+                    function removeCurrentSelectedFeatureFromOthers(selectID){
+                        getOtherSelects(selectID).each(function(){
+                            console.log("Removing "+$("#"+selectID).find("option:selected").text()+ " from " + $(this)[0].id);
+                            $("#"+$(this)[0].id +" option[value="+$("#"+selectID).find("option:selected").val()+"]").remove();
+                        });
                     }
                     
                     function getOtherSelects(selectID) {

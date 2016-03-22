@@ -15,7 +15,7 @@ Thumbs.db
 # composer vendor dir
 vendor/
 # cubrid install dir
-/cubrid
+cubrid/
 
 # composer itself is not needed
 composer.phar
@@ -32,9 +32,9 @@ phpunit.phar
 /phpunit.xml
 
 # ignore sub directory for dev installed apps and extensions
-/apps
-/extensions
+apps/
+extensions/
 
 #custom
 runtime/
-web/
+web/assets/

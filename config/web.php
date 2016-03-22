@@ -85,8 +85,8 @@ $config = [
             'thousandSeparator' => ' ',
             'currencyCode' => 'EUR',
             'numberFormatterSymbols' => [
-                                   'EUR' => '€'
-                                ],
+                NumberFormatter::CURRENCY_SYMBOL => '&#8381;',
+            ],
             'locale' => 'es-ES',
        ],
         'urlManager' => [

@@ -39,8 +39,8 @@ AppAsset::register($this);
 					[
                        'label' => 'Incidencias',
                        'items' => [
-                            ['label' => 'Crear', 'url' => ['/incidencia/create']],
-                            ['label' => 'Consultar', 'url' => ['/incidencia/index']],
+                            ['label' => 'Crear', 'url' => ''/*['/incidencia/create']*/],
+                            ['label' => 'Consultar', 'url' => ''/*['/incidencia/index']*/],
                         ],
                     ],
                     [
@@ -49,15 +49,23 @@ AppAsset::register($this);
                            [
                                'label' => 'Inventario',
                                'items' => [
-                                    ['label' => 'Hardware', 'url' => ['/activo-hardware/index']],
+                                    [
+                                        'label' => 'Hardware', 
+                                        'items' => [
+                                            ['label' => 'Elemento Hardware', 'url' => ['/elemento-hardware/index']],
+                                            ['label' => 'Subcategorías', 'url' => ['/subcategoria-activo-hardware/index']],
+                                            ['label' => 'Características', 'url' => ['/caracteristica/index']],
+                                            ['label' => 'Valores Características', 'url' => ['/valor-caracteristica-elemento-hardware/index']],
+                                        ]
+                                    ],
                                     ['label' => 'Software', 'url' => ['/activo-software/index']],
                                     ['label' => 'Infraestructura', 'url' => ['/activo-infraestructura/index']],
                                 ],
                             ],
-                            ['label' => 'Informes', 'url' => ['/informe/index']],
-                            ['label' => 'Edificios', 'url' => ['/edificio/index']],
-                            ['label' => 'Espacios', 'url' => ['/espacio/index']],
-                            ['label' => 'Usuarios', 'url' => ['/usuario/index']],
+                            ['label' => 'Informes', 'url' => ''/*['/informe/index']*/],
+                            ['label' => 'Edificios', 'url' => ''/*['/edificio/index']*/],
+                            ['label' => 'Espacios', 'url' => ''/*['/espacio/index']*/],
+                            ['label' => 'Usuarios', 'url' => ''/*['/usuario/index']*/],
 
                         ],
                      ],

@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoInfraestructura */
 
- $this->title = Yii::t('app', 'Update {modelClass}:', [
-		               'modelClass' => 'Infrastructure Asset',
+$this->title = Yii::t('app', 'Update {modelClass}:', [
+		               'modelClass' => $model->singularObjectName(),
 		               ]) . ' ' . $model->codigo;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Infrastructure Assets'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->codigo, 'url' => ['view', 'id' => $model->activo_inventariable_id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

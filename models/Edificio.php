@@ -22,6 +22,14 @@ class Edificio extends \yii\db\ActiveRecord
     {
         return 'edificio';
     }
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Building');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Buildings');
+    }
 
     /**
      * @inheritdoc
@@ -41,8 +49,8 @@ class Edificio extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'nombre' => Yii::t('app', 'Nombre'),
-            'localidad' => Yii::t('app', 'Localidad'),
+            'nombre' => Yii::t('app', 'Name'),
+            'localidad' => Yii::t('app', 'Town/City'),
         ];
     }
 

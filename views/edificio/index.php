@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\EdificioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Buildings');
+$this->title = Yii::t('app', $searchModel->pluralObjectName());
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="edificio-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-		                  'modelClass' => 'Building']), 
+		                  'modelClass' => $searchModel->singularObjectName()]),
                     ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 

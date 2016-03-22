@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ActivoInfraestructuraSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Infrastructure Assets');
+$this->title = Yii::t('app', $searchModel->pluralObjectName());
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-infraestructura-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-		                  'modelClass' => 'Infrastructure Asset']), 
+		                  'modelClass' => $searchModel->singularObjectName()]),
                     ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
@@ -29,20 +29,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'codigo',
             'nombre',
             [
-                 'attribute' => 'subcategoria_activo_infraestructura_id',
-                 'value' => 'subcategoriaActivoInfraestructura.nombre'
+                'attribute' => 'subcategoria_activo_infraestructura_id',
+                'value' => 'subcategoriaActivoInfraestructura.nombre'
             ],
             [
                 'attribute' => 'fecha_compra',
-                'format'    => ['date', 'dd/MM/yy']
+                'format'    => 'date'
             ],
             [
                 'attribute' => 'precio_compra',
-                'format'    => ['currency', 'EUR']
+                'format'    => 'currency'
             ],
             [
-                 'attribute' => 'espacio_id',
-                 'value' => 'espacio.nombre'
+                'attribute' => 'espacio_id',
+                'value' => 'espacio.nombre'
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

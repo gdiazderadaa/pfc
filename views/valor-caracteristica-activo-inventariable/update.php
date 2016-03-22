@@ -6,10 +6,10 @@ use yii\helpers\Html;
 /* @var $model app\models\ValorCaracteristicaActivoInventariable */
 
 $this->title = Yii::t('app', 'Update {modelClass}:', [
-    'modelClass' => 'Valor Caracteristica Activo Inventariable',
-]) . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Valor Caracteristica Activo Inventariables'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+		               'modelClass' => $model->singularObjectName(),
+		               ]) . ' ' . $model->caracteristica->nombre;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->caracteristica->nombre, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="valor-caracteristica-activo-inventariable-update">

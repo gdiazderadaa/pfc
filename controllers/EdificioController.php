@@ -103,8 +103,8 @@ class EdificioController extends Controller
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
                 Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
-                'modelClass' => 'building',
-                'modelClass2' => 'spaces',
+                'modelClass' => $model->singularObjectName(),
+                'modelClass2' => $model->attributeLabels['espacio_id'],
                 ]));
                 
                 return $this->redirect(['index']);
@@ -112,7 +112,7 @@ class EdificioController extends Controller
         }
 
         Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
-            'modelClass' => 'building',
+            'modelClass' => $model->singularObjectName(),
         ]));
         return $this->redirect(['index']);
     }

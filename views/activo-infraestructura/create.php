@@ -7,9 +7,9 @@ use yii\helpers\Html;
 /* @var $model app\models\ActivoInfraestructura */
 
 $this->title = Yii::t('app', 'Create {modelClass}', [
-                      'modelClass' => 'Infrastructure Asset',
+                      'modelClass' => $model->singularObjectName(),
                        ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Infrastructure Assets'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-infraestructura-create">

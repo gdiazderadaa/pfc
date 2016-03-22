@@ -27,13 +27,13 @@ else
 
 ?>
 
-<div class="ValorCaracteristicaActivoInventariable-form form" <?= $removeAttr; ?>>
+<div class="ValorCaracteristicaActivoInventariable-form form" <?= $removeAttr;  ?>>
     <?php
         if ($model->isNewRecord){
     ?>
             <select name="<?php echo $frag.'[caracteristica_id]' ?>" class="form-control">
                 <?php
-                    foreach ($model->getCaracteristicas() as $id => $nombre) {
+                    foreach ($model->getCaracteristicasByTipoActivo($params['tipo_activo']) as $id => $nombre) {
                         echo '<option value="'.$id.'">'.$nombre.'</option>';
                     }
                 ?>

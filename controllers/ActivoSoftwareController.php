@@ -107,9 +107,9 @@ class ActivoSoftwareController extends Controller
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
                 Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in either some {modelClass2} or {modelClass3}', [
-                'modelClass' => 'software asset',
-                'modelClass2' => 'hardware asset configuration',
-                'modelClass3' => 'feature',
+                                                            'modelClass' => ActivoSoftware::getSingularObjectName(),
+                                                            'modelClass2' => 'hardware asset configuration',
+                                                            'modelClass3' => 'feature',
                 ]));
                 
                 return $this->redirect(['index']);
@@ -117,7 +117,7 @@ class ActivoSoftwareController extends Controller
         }
 
         Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
-            'modelClass' => 'software asset',
+                                                        'modelClass' => 'software asset',
         ]));
         return $this->redirect(['index']);
     }

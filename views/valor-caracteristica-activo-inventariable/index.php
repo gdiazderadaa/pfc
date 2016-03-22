@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ValorCaracteristicaActivoInventariableSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Asset Feature Value');
+$this->title = Yii::t('app', $searchModel->pluralObjectName());
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="valor-caracteristica-activo-inventariable-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-		                  'modelClass' => 'Asset Feature Value']), 
+		                  'modelClass' => $searchModel->singularObjectName()]),
                     ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'activo_inventariable_id',
             'caracteristica_id',
             'valor',

@@ -7,9 +7,9 @@ use yii\helpers\Html;
 /* @var $model app\models\Caracteristica */
 
 $this->title = Yii::t('app', 'Create {modelClass}', [
-		   'modelClass' => 'feature',
-		]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Features'), 'url' => ['index']];
+                      'modelClass' => $model->singularObjectName(),
+                       ]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="caracteristica-create">

@@ -21,6 +21,14 @@ class SubcategoriaActivoInfraestructura extends \yii\db\ActiveRecord
     {
         return 'subcategoria_activo_infraestructura';
     }
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Infrastructure Asset Subcategory');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Infrastructure Asset Subcategories');
+    }
 
     /**
      * @inheritdoc

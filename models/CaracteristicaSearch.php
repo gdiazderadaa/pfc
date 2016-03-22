@@ -19,7 +19,7 @@ class CaracteristicaSearch extends Caracteristica
     {
         return [
             [['id'], 'integer'],
-            [['nombre', 'unidades'], 'safe'],
+            [['nombre', 'unidades', 'tipo_activo'], 'safe'],
         ];
     }
 
@@ -60,7 +60,8 @@ class CaracteristicaSearch extends Caracteristica
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'unidades', $this->unidades]);
+                ->andFilterWhere(['like', 'unidades', $this->unidades])
+                ->andFilterWhere(['like', 'tipo_activo', $this->tipo_activo]);
 
         return $dataProvider;
     }

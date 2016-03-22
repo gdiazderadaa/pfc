@@ -25,6 +25,14 @@ class Espacio extends \yii\db\ActiveRecord
     {
         return 'espacio';
     }
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Space');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Spaces');
+    }
 
     /**
      * @inheritdoc

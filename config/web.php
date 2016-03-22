@@ -17,7 +17,7 @@ $config = [
             'admins' => ['admin']
         ],
         'dynamicrelations' => [
-            'class' => '\synatree\dynamicrelations\Module'
+            'class' => '\synatree\dynamicrelations\Module',
         ],
         'gridview' =>  [
             'class' => '\kartik\grid\Module'
@@ -75,6 +75,20 @@ $config = [
         ]
     ],
     'components' => [
+        'assetManager' => array(
+            'linkAssets' => true,
+        ),
+
+         'formatter' => [
+            'dateFormat' => 'dd/MM/yyyy',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'EUR',
+            'numberFormatterSymbols' => [
+                                   'EUR' => '€'
+                                ],
+            'locale' => 'es-ES',
+       ],
         'urlManager' => [
           'showScriptName' => false,
           'enablePrettyUrl' => true,

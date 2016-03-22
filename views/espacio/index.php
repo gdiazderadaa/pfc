@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\EspacioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Spaces');
+$this->title = Yii::t('app', $searchModel->pluralObjectName());
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="espacio-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-		                  'modelClass' => 'Space']), 
+		                  'modelClass' => $searchModel->singularObjectName()]),
                     ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
@@ -25,9 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
             'nombre',
             'numeracion',
              [

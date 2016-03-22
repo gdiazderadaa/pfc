@@ -6,10 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\SubcategoriaActivoInfraestructura */
 
-$this->title = Yii::t('app', '{modelClass}', [
-                      'modelClass' => 'Infrastructure Asset Subcategory',
+$this->title = Yii::t('app', '{modelClass}:', [
+                      'modelClass' => $model->singularObjectName(),
                        ]) . ' ' . $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Infrastructure Asset Subcategories'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subcategoria-activo-infraestructura-view">

@@ -34,6 +34,15 @@ class ActivoSoftware extends \yii\db\ActiveRecord implements ActiveRecordInherit
     {
         return 'activo_software';
     }
+    
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Software Asset');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Software Assets');
+    }
 
     /**
      * @inheritdoc
@@ -43,7 +52,8 @@ class ActivoSoftware extends \yii\db\ActiveRecord implements ActiveRecordInherit
         return [
             [['activo_inventariable_id', 'subcategoria_activo_software_id'], 'required'],
             [['activo_inventariable_id', 'subcategoria_activo_software_id'], 'integer'],
-            [['activo_inventariable_id'], 'unique']
+            [['activo_inventariable_id'], 'unique'],
+            [['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/']
         ];
     }
 
@@ -55,6 +65,7 @@ class ActivoSoftware extends \yii\db\ActiveRecord implements ActiveRecordInherit
         return [
             'activo_inventariable_id' => Yii::t('app', 'Asset'),
             'subcategoria_activo_software_id' => Yii::t('app', 'Software Asset Subcategory'),
+            'espacio_id' => Yii::t('app', 'Space'),
         ];
     }
 
@@ -95,4 +106,10 @@ class ActivoSoftware extends \yii\db\ActiveRecord implements ActiveRecordInherit
     {
         return $this->hasMany(ActivoHardware::className(), ['activo_inventariable_id' => 'activo_hardware_id'])->viaTable('configuracion_activo_hardware', ['activo_software_id' => 'activo_inventariable_id']);
     }
+    
+    public function getTipo()
+    {
+        return "Software";
+    }
+
 }

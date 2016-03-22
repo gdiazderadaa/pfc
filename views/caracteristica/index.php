@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\CaracteristicaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Features');
+$this->title = Yii::t('app', $searchModel->pluralObjectName());
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="caracteristica-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
          <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-		                  'modelClass' => 'Feature']), 
+		                   'modelClass' => $searchModel->singularObjectName()]),
                     ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'nombre',
             'unidades',
+            'tipo_activo',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

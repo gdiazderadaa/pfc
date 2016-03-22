@@ -30,6 +30,14 @@ class ActivoInventariable extends \yii\db\ActiveRecord
     {
         return 'activo_inventariable';
     }
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Asset');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Assets');
+    }
 
     /**
      * @inheritdoc
@@ -39,7 +47,7 @@ class ActivoInventariable extends \yii\db\ActiveRecord
         return [
             [['codigo', 'nombre', 'fecha_compra', 'precio_compra'], 'required'],
             [['fecha_compra'], 'safe'],
-            [['precio_compra'], 'number'],
+            [['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/'],
             [['espacio_id'], 'integer'],
             [['codigo'], 'string', 'max' => 128],
             [['nombre'], 'string', 'max' => 64],
@@ -57,9 +65,22 @@ class ActivoInventariable extends \yii\db\ActiveRecord
             'codigo' => Yii::t('app', 'Asset Number'),
             'nombre' => Yii::t('app', 'Name'),
             'fecha_compra' => Yii::t('app', 'Purchase Date'),
-            'precio_compra' => Yii::t('app', 'purchase Price'),
+            'precio_compra' => Yii::t('app', 'Purchase Price'),
             'espacio_id' => Yii::t('app', 'Space'),
         ];
+    }
+    
+    /**
+    * @inheritdoc
+    */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->precio_compra = str_replace(",",".",$this->precio_compra);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

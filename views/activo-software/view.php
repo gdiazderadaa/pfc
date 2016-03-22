@@ -6,10 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoSoftware */
 
-$this->title = Yii::t('app', '{modelClass}', [
-		              'modelClass' => 'Software Asset',
-		              ]) . ' ' . $model->codigo;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Software Assets'), 'url' => ['index']];
+$this->title = Yii::t('app', '{modelClass}:', [
+		               'modelClass' => $model->singularObjectName(),
+		               ]) . ' ' . $model->codigo;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-software-view">
@@ -32,9 +32,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'codigo',
             'nombre',
-            ['label' => 'Subcategoria','value'=> $model->subcategoriaActivoSoftware->nombre],
-            ['label' => 'Fecha de compra','value'=> Yii::$app->formatter->asDate($model->fecha_compra,'dd/MM/yy')],
-            ['label' => 'Precio de Compra', 'value' => Yii::$app->formatter->asCurrency($model->precio_compra,'EUR')]  
+            [
+                'label' => $model->attributeLabels()['subcategoria_activo_software_id'],
+                'value' => $model->subcategoriaActivoSoftware->nombre
+            ],
+            [
+                'label' => $model->parent->attributeLabels()['fecha_compra'],
+                'value' => Yii::$app->formatter->asDate($model->fecha_compra)
+            ],
+            [
+                'label' => $model->parent->attributeLabels()['precio_compra'], 
+                'value' => Yii::$app->formatter->asCurrency($model->precio_compra)
+            ],
+            [
+                'label' => $model->parent->attributeLabels()['espacio_id'],
+                'value' => $model->espacio ? $model->espacio->nombre : ""
+            ],
         ],
     ]) ?>
 
@@ -43,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $caracteristicas = $model->getValoresCaracteristicasActivoInventariable()->all();
         
         if(count($caracteristicas)>0) 
-            echo "<h2>Caracteristicas</h2>";
+            echo "<h2>" . $caracteristicas[0]->pluralObjectName() . "</h2>";
         
         foreach ($caracteristicas as $variable) {      
     ?>
@@ -51,7 +64,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= DetailView::widget([
             'model' => $variable,
             'attributes' => [
-                ['label' => $variable->caracteristica->nombre,'value'=> $variable->caracteristica->unidades == null ? $variable->valor : $variable->valor  . ' ' . $variable->caracteristica->unidades],       
+                [
+                    'label' => $variable->caracteristica->nombre,
+                    'value' => $variable->caracteristica->unidades == null ? $variable->valor : $variable->valor  . ' ' . $variable->caracteristica->unidades
+                ],       
             ],
         ]) ?>
     

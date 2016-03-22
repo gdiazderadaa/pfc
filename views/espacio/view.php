@@ -6,10 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Espacio */
 
-$this->title = Yii::t('app', '{modelClass} ', [
-		   'modelClass' => 'Space',
-		]) . ' ' . $model->numeracion;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Spaces'), 'url' => ['index']];
+$this->title = Yii::t('app', '{modelClass}:', [
+		               'modelClass' => $model->singularObjectName(),
+		               ]) . ' ' . $model->numeracion . ' ' . $model->nombre;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="espacio-view">
@@ -33,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'numeracion',
             [
-                'label' => Yii::t('app', 'Building'),
-                'value'=> $model->edificio->nombre,
+                'label' => $model->attributeLabels()['edificio_id'],
+                'value' => $model->edificio->nombre,
             ],
         ],
     ]) ?>

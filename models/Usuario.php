@@ -27,6 +27,14 @@ class Usuario extends \yii\db\ActiveRecord
     {
         return 'usuario';
     }
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Usuario');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Usuarios');
+    }
 
     /**
      * @inheritdoc

@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Caracteristica */
 
- $this->title = Yii::t('app', 'Update {modelClass}:', [
-		   'modelClass' => 'Feature',
-		]) . ' ' . $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Features'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Update {modelClass}:', [
+		               'modelClass' => $model->singularObjectName(),
+		               ]) . ' ' . $model->nombre;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

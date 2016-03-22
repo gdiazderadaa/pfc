@@ -21,6 +21,14 @@ class SubcategoriaActivoSoftware extends \yii\db\ActiveRecord
     {
         return 'subcategoria_activo_software';
     }
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Software Asset Subcategory');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Software Asset Subcategories');
+    }
 
     /**
      * @inheritdoc

@@ -6,10 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Caracteristica */
 
-$this->title = Yii::t('app', '{modelClass} ', [
-		   'modelClass' => 'Feature',
-		]) . ' ' . $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Caracteristicas'), 'url' => ['index']];
+$this->title = Yii::t('app', '{modelClass}:', [
+		               'modelClass' => $model->singularObjectName(),
+		               ]) . ' ' . $model->nombre;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="caracteristica-view">
@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'nombre',
             'unidades',
+            'tipo_activo',
         ],
     ]) ?>
 

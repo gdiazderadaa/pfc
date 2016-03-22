@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ActivoSoftwareSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Software Assets');
+$this->title = Yii::t('app', $searchModel->pluralObjectName());
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-software-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
          <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-		                  'modelClass' => 'Software Asset']), 
+		                  'modelClass' => $searchModel->singularObjectName()]),
                     ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
@@ -30,17 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             [
                  'attribute' => 'subcategoria_activo_software_id',
-                 'value' => function ($model) {
-                            return $model->subcategoriaActivoSoftware->nombre;
-                        }
+                 'value' => 'subcategoriaActivoSoftware.nombre'
             ],
             [
                 'attribute' => 'fecha_compra',
-                'format'    => ['date', 'dd/MM/yy']
+                'format'    => 'date'
             ],
             [
                 'attribute' => 'precio_compra',
-                'format'    => ['currency', 'EUR']
+                'format'    => 'currency'
+            ],
+            [
+                 'attribute' => 'espacio_id',
+                 'value' => 'espacio.nombre'
             ],    
 
             ['class' => 'yii\grid\ActionColumn'],

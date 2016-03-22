@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model app\models\Edificio */
 
 $this->title = Yii::t('app', 'Update {modelClass}:', [
-		              'modelClass' => 'Building',
-		              ]) . ' ' . $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Building'), 'url' => ['index']];
+		               'modelClass' => $model->singularObjectName(),
+		               ]) . ' ' . $model->nombre;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->nombre, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

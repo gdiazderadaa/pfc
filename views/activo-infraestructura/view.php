@@ -6,10 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoInfraestructura */
 
-$this->title = Yii::t('app', '{modelClass}', [
-		              'modelClass' => 'Infrastructure Asset',
-		              ]) . ' ' . $model->codigo;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Infrastructure Assets'), 'url' => ['index']];
+$this->title = Yii::t('app', '{modelClass}:', [
+		               'modelClass' => $model->singularObjectName(),
+		               ]) . ' ' . $model->codigo;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activo-infraestructura-view">
@@ -32,9 +32,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'codigo',
             'nombre',
-            ['label' => 'Subcategoria','value'=> $model->subcategoriaActivoInfraestructura->nombre],
-            ['label' => 'Fecha de compra','value'=> Yii::$app->formatter->asDate($model->fecha_compra,'dd/MM/yy')],
-            ['label' => 'Precio de Compra', 'value' => Yii::$app->formatter->asCurrency($model->precio_compra,'EUR')]
+            [
+                'label' => $model->attributeLabels()['subcategoria_activo_infraestructura_id'],
+                'value' => $model->subcategoriaActivoInfraestructura->nombre
+            ],
+            [
+                'label' => $model->parent->attributeLabels()['fecha_compra'],
+                'value'=> Yii::$app->formatter->asDate($model->fecha_compra)
+            ],
+            [
+                'label' => $model->parent->attributeLabels()['precio_compra'], 
+                'value' => Yii::$app->formatter->asCurrency($model->precio_compra)
+            ],
+            [
+                'label' => $model->parent->attributeLabels()['espacio_id'],
+                'value' => $model->espacio->nombre
+            ],
         ],
     ]) ?>
 

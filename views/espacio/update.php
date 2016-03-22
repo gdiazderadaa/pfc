@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model app\models\Espacio */
 
 $this->title = Yii::t('app', 'Update {modelClass}:', [
-		   'modelClass' => 'space',
-		]) . ' ' . $model->numeracion;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Spaces'), 'url' => ['index']];
+		               'modelClass' => $model->singularObjectName(),
+		               ]) . ' ' . $model->nombre;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model-> numeracion, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

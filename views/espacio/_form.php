@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'numeracion')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'edificio_id')->dropDownList($model->getEdificioList(),['prompt'=>Yii::t('app', '- Select the {modelClass} -', [
-		              'modelClass' => 'Building',
+		               'modelClass' => $model->attributeLabels()['edificio_id'],
 		              ]) ]) ?>
 
     <div class="form-group">

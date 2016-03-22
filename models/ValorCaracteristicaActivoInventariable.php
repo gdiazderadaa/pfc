@@ -25,6 +25,14 @@ class ValorCaracteristicaActivoInventariable extends \yii\db\ActiveRecord
     {
         return 'valor_caracteristica_activo_inventariable';
     }
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Asset Feature-Value');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Asset Features-Values');
+    }
 
     /**
      * @inheritdoc
@@ -35,7 +43,10 @@ class ValorCaracteristicaActivoInventariable extends \yii\db\ActiveRecord
             [['activo_inventariable_id', 'caracteristica_id', 'valor'], 'required'],
             [['activo_inventariable_id', 'caracteristica_id'], 'integer'],
             [['valor'], 'string', 'max' => 128],
-            ['caracteristica_id', 'unique', 'targetAttribute' => ['activo_inventariable_id', 'caracteristica_id'], 'message'=>Yii::t('app','The selected feature is already being used by this asset')]
+            ['caracteristica_id', 'unique', 'targetAttribute' => ['activo_inventariable_id', 'caracteristica_id'], 
+                                                                'message'=>Yii::t('app','The selected {modelClass} is already being used by this {modelClass2}',[
+                                                                                            'modelClass' => attributeLabels()['caracteristica_id'],
+                                                                                            'modelClass' => attributeLabels()['activo_inventariable_id']])]
         ];
     }
 
@@ -46,9 +57,9 @@ class ValorCaracteristicaActivoInventariable extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'activo_inventariable_id' => Yii::t('app', 'Activo Inventariable ID'),
-            'caracteristica_id' => Yii::t('app', 'Caracteristica ID'),
-            'valor' => Yii::t('app', 'Valor'),
+            'activo_inventariable_id' => Yii::t('app', 'Asset'),
+            'caracteristica_id' => Yii::t('app', 'Feature'),
+            'valor' => Yii::t('app', 'Value'),
         ];
     }
 
@@ -77,6 +88,12 @@ class ValorCaracteristicaActivoInventariable extends \yii\db\ActiveRecord
     public function getCaracteristicas()  
     {     
         $models = Caracteristica::find()->asArray()->all(); 
+        return ArrayHelper::map($models,'id', 'nombre'); 
+    } 
+
+    public function getCaracteristicasByTipoActivo($tipo)  
+    {     
+        $models = Caracteristica::find()->andFilterWhere(['like','tipo_activo',$tipo])->asArray()->all(); 
         return ArrayHelper::map($models,'id', 'nombre'); 
     }
 }

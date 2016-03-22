@@ -10,6 +10,7 @@ use Yii;
  * @property string $id
  * @property string $nombre
  * @property string $unidades
+ * @property string $tipo_activo 
  *
  * @property ValorCaracteristicaActivoInventariable[] $valorCaracteristicaActivoInventariables
  * @property ValorCaracteristicaElementoHardware[] $valorCaracteristicaElementoHardwares
@@ -24,6 +25,14 @@ class Caracteristica extends \yii\db\ActiveRecord
     {
         return 'caracteristica';
     }
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Feature');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Features');
+    }
 
     /**
      * @inheritdoc
@@ -31,7 +40,8 @@ class Caracteristica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre'], 'required'],
+            [['nombre', 'tipo_activo'], 'required'],
+            [['tipo_activo'], 'string'],
             [['nombre'], 'string', 'max' => 64],
             [['unidades'], 'string', 'max' => 16]
         ];
@@ -46,6 +56,7 @@ class Caracteristica extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Name'),
             'unidades' => Yii::t('app', 'Units'),
+            'tipo_activo' => Yii::t('app', 'Tipo Activo'),
         ];
     }
 

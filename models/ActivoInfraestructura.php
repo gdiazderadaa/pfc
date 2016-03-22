@@ -32,6 +32,14 @@ class ActivoInfraestructura extends \yii\db\ActiveRecord implements ActiveRecord
     {
         return 'activo_infraestructura';
     }
+    
+    public static function singularObjectName(){
+        return Yii::t('app', 'Infrastructure Asset');
+    }
+    
+    public static function pluralObjectName(){
+        return Yii::t('app', 'Infrastructure Assets');
+    }
 
     /**
      * @inheritdoc
@@ -53,6 +61,7 @@ class ActivoInfraestructura extends \yii\db\ActiveRecord implements ActiveRecord
         return [
             'activo_inventariable_id' => Yii::t('app', 'Asset'),
             'subcategoria_activo_infraestructura_id' => Yii::t('app', 'Infrastructure Asset Subcategory'),
+            'espacio_id' => Yii::t('app', 'Space'),
         ];
     }
 

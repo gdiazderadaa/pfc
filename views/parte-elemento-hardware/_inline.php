@@ -40,6 +40,8 @@ $this->registerJs('$(document).ready(function(){
                         //remove view when there is no parts available
                         removeUnusedView(selectID);
                         
+                        removeCurrentSelectedPartFromOthers(selectID);
+                        
                         if (!stopPropagate){
                             
                             //Event handler to validate others when changing this
@@ -84,6 +86,13 @@ $this->registerJs('$(document).ready(function(){
                                             $("#"+selectID).parent().prev(".remove-dynamic-relation").trigger("click");
                             }, 500);                           
                         } 
+                    }
+                    
+                    function removeCurrentSelectedPartFromOthers(selectID){
+                        getOtherSelects(selectID).each(function(){
+                            console.log("Removing "+$("#"+selectID).find("option:selected").text()+ " from " + $(this)[0].id);
+                            $("#"+$(this)[0].id +" option[value="+$("#"+selectID).find("option:selected").val()+"]").remove();
+                        });
                     }
                     
                     function getOtherSelects(selectID) {

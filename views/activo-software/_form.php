@@ -32,8 +32,8 @@ use kartik\form\ActiveForm;
     ]); ?>
     
     <?= $form->field($model, 'precio_compra', [
-    'addon' => ['append' => ['content'=>Yii::$app->formatter->numberFormatterSymbols[Yii::$app->formatter->currencyCode]]],
-]); ?>
+        'addon' => ['append' => ['content'=> Yii::$app->formatter->numberFormatterSymbols[NumberFormatter::CURRENCY_SYMBOL]]],
+    ]); ?>
 
     <?= $form->field($model, 'subcategoria_activo_software_id')->dropDownList($model->getSubcategorias(),['prompt'=>Yii::t('app', '- Select the {modelClass} -', [
 		              'modelClass' => $model->attributeLabels()['subcategoria_activo_software_id'],

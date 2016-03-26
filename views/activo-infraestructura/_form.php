@@ -1,10 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+//use yii\widgets\ActiveForm;
+use yii\models\ValorCaracteristicaActivo;
+use synatree\dynamicrelations\DynamicRelations;
 use kartik\datecontrol\Module;
 use kartik\datecontrol\DateControl;
-use kartik\money\MaskMoney;
+use kartik\form\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoInfraestructura */
@@ -30,7 +32,9 @@ use kartik\money\MaskMoney;
             ]
         ]
     ]); ?>
-    <?= $form->field($model, 'precio_compra')->widget(MaskMoney::classname()) ?>
+    <?= $form->field($model, 'precio_compra', [
+        'addon' => ['append' => ['content'=> Yii::$app->formatter->numberFormatterSymbols[NumberFormatter::CURRENCY_SYMBOL]]],
+    ]); ?>
 
     <?= $form->field($model, 'subcategoria_activo_infraestructura_id')->dropDownList($model->getSubcategorias(),['prompt'=>Yii::t('app', '- Select the {modelClass} -', [
 		              'modelClass' => $model->attributeLabels()['subcategoria_activo_infraestructura_id'],

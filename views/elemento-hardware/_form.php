@@ -40,7 +40,7 @@ use kartik\form\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'precio_compra', [
-                    'addon' => ['append' => ['content'=>Yii::$app->formatter->numberFormatterSymbols[Yii::$app->formatter->currencyCode]]],
+                    'addon' => ['append' => ['content'=> Yii::$app->formatter->numberFormatterSymbols[NumberFormatter::CURRENCY_SYMBOL]]],
                     ]); ?>
 
     <?= $form->field($model, 'activo_hardware_id')->dropDownList($model->getActivoHardwareList(),['prompt'=>Yii::t('app', '- Select the {modelClass} -', [

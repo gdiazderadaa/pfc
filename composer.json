@@ -13,6 +13,13 @@
         "source": "https://github.com/yiisoft/yii2"
     },
     "minimum-stability": "stable",
+    "repositories":
+    [
+        {
+            "type": "git",
+            "url": "https://github.com/gdiazderadaa/yii2-dynamic-relations"
+        }
+    ],
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "^2.0",
@@ -26,10 +33,10 @@
         "kartik-v/yii2-datecontrol": "@dev",
         "kartik-v/yii2-widgets": "@dev",
         "jlorente/yii2-activerecord-inheritance": "*",
-        "synatree/yii2-dynamic-relations": "dev-master",
+        "synatree/yii2-dynamic-relations": "dev-custom",
         "composer-plugin-api": "^1.0",
         "kartik-v/yii2-widget-activeform": "@dev",
-        "kartik-v/yii2-money": "*"
+        "kartik-v/yii2-nav-x": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

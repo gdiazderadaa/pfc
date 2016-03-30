@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use jlorente\db\ActiveRecordInheritanceTrait,
+    jlorente\db\ActiveRecordInheritanceInterface;
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "activo_hardware".
@@ -12,12 +16,18 @@ use Yii;
  *
  * @property ActivoInventariable $activoInventariable
  * @property SubcategoriaActivoHardware $subcategoriaActivoHardware
- * @property ConfiguracionActivoHardware[] $configuracionActivoHardwares
+ * @property ConfiguracionActivoHardware[] $configuracionesActivoHardware
  * @property ActivoSoftware[] $activoSoftwares
- * @property ElementoHardware[] $elementoHardwares
+ * @property ElementoHardware[] $elementosHardware
  */
-class ActivoHardware extends \yii\db\ActiveRecord
+class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInheritanceInterface
 {
+    use ActiveRecordInheritanceTrait; 
+    
+    public static function extendsFrom() {
+        return ActivoInventariable::className();
+    }
+    
     /**
      * @inheritdoc
      */
@@ -53,6 +63,7 @@ class ActivoHardware extends \yii\db\ActiveRecord
         return [
             'activo_inventariable_id' => Yii::t('app', 'Asset'),
             'subcategoria_activo_hardware_id' => Yii::t('app', 'Hardware Asset Subcategory'),
+            'espacio_id' => Yii::t('app', 'Space'),
         ];
     }
 
@@ -71,11 +82,17 @@ class ActivoHardware extends \yii\db\ActiveRecord
     {
         return $this->hasOne(SubcategoriaActivoHardware::className(), ['id' => 'subcategoria_activo_hardware_id']);
     }
+    
+    public function getSubcategorias() 
+    { 
+        $models = SubcategoriaActivoHardware::find()->asArray()->all(); 
+        return ArrayHelper::map($models,'id', 'nombre');  
+    } 
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getConfiguracionActivoHardwares()
+    public function getConfiguracionesActivoHardware()
     {
         return $this->hasMany(ConfiguracionActivoHardware::className(), ['activo_hardware_id' => 'activo_inventariable_id']);
     }
@@ -83,7 +100,7 @@ class ActivoHardware extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActivoSoftwares()
+    public function getActivosSoftware()
     {
         return $this->hasMany(ActivoSoftware::className(), ['activo_inventariable_id' => 'activo_software_id'])->viaTable('configuracion_activo_hardware', ['activo_hardware_id' => 'activo_inventariable_id']);
     }
@@ -91,8 +108,13 @@ class ActivoHardware extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getElementoHardwares()
+    public function getElementosHardware()
     {
         return $this->hasMany(ElementoHardware::className(), ['activo_hardware_id' => 'activo_inventariable_id']);
+    }
+    
+        public function getTipo()
+    {
+        return "Hardware";
     }
 }

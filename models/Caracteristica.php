@@ -56,7 +56,7 @@ class Caracteristica extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Name'),
             'unidades' => Yii::t('app', 'Units'),
-            'tipo_activo' => Yii::t('app', 'Tipo Activo'),
+            'tipo_activo' => Yii::t('app', 'Asset Type'),
         ];
     }
 

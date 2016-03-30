@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ActivoSoftware */
+/* @var $model app\models\ActivoHardware */
 
 $this->title = Yii::t('app', '{modelClass}:', [
 		               'modelClass' => $model->singularObjectName(),
@@ -12,7 +12,7 @@ $this->title = Yii::t('app', '{modelClass}:', [
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activo-software-view">
+<div class="activo-hardware-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -33,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'codigo',
             'nombre',
             [
-                'label' => $model->attributeLabels()['subcategoria_activo_software_id'],
-                'value' => $model->subcategoriaActivoSoftware->nombre
+                'label' => $model->attributeLabels()['subcategoria_activo_hardware_id'],
+                'value' => $model->subcategoriaActivoHardware->nombre
             ],
             [
                 'label' => $model->parent->attributeLabels()['fecha_compra'],
@@ -53,20 +53,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
         
-        $caracteristicas = $model->getValoresCaracteristicasActivoInventariable()->all();
+        $configuraciones = $model->getConfiguracionesActivoHardware()->all();
         
-        if(count($caracteristicas)>0) 
-            echo "<h2>" . $caracteristicas[0]->pluralObjectName() . "</h2>";
+        if(count($configuraciones)>0) 
+            echo "<h2>" . $configuraciones[0]->pluralObjectName() . "</h2>";
         
-        foreach ($caracteristicas as $variable) {      
+        foreach ($configuraciones as $variable) {      
     ?>
     
         <?= DetailView::widget([
             'model' => $variable,
             'attributes' => [
                 [
-                    'label' => $variable->caracteristica->nombre,
-                    'value' => $variable->caracteristica->unidades == null ? $variable->valor : $variable->valor  . ' ' . $variable->caracteristica->unidades
+                    'label' => $variable->activoSoftware->subcategoriaActivoSoftware->nombre,
+                    'value' => $variable->activoSoftware->nombre
                 ],       
             ],
         ]) ?>
@@ -77,8 +77,3 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
 </div>
-
-
-
-
-

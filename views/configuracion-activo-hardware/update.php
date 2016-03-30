@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ActivoSoftware */
+/* @var $model app\models\ConfiguracionActivoHardware */
 
 $this->title = Yii::t('app', 'Update {modelClass}:', [
 		               'modelClass' => $model->singularObjectName(),
@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectN
 $this->params['breadcrumbs'][] = ['label' => $model->codigo, 'url' => ['view', 'id' => $model->activo_inventariable_id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="activo-software-update">
+<div class="configuracion-activo-hardware-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

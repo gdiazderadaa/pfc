@@ -64,9 +64,10 @@ class ElementoHardwareController extends Controller
     public function actionCreate()
     {
         $model = new ElementoHardware();
-        DynamicRelations::relate($model, 'valoresCaracteristicasElementoHardware', Yii::$app->request->post(), 'ValorCaracteristicaElementoHardware', ValorCaracteristicaElementoHardware::className());
-        DynamicRelations::relate($model, 'partesElementoHardware', Yii::$app->request->post(), 'ParteElementoHardware', ParteElementoHardware::className());
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            DynamicRelations::relate($model, 'valoresCaracteristicasElementoHardware', Yii::$app->request->post(), 'ValorCaracteristicaElementoHardware', ValorCaracteristicaElementoHardware::className());
+            DynamicRelations::relate($model, 'partesElementoHardware', Yii::$app->request->post(), 'ParteElementoHardware', ParteElementoHardware::className());
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -85,9 +86,9 @@ class ElementoHardwareController extends Controller
     {
         $model = $this->findModel($id);
         
-        DynamicRelations::relate($model, 'valoresCaracteristicasElementoHardware', Yii::$app->request->post(), 'ValorCaracteristicaElementoHardware', ValorCaracteristicaElementoHardware::className());
-        DynamicRelations::relate($model, 'partesElementoHardware', Yii::$app->request->post(), 'ParteElementoHardware', ParteElementoHardware::className());
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            DynamicRelations::relate($model, 'valoresCaracteristicasElementoHardware', Yii::$app->request->post(), 'ValorCaracteristicaElementoHardware', ValorCaracteristicaElementoHardware::className());
+            DynamicRelations::relate($model, 'partesElementoHardware', Yii::$app->request->post(), 'ParteElementoHardware', ParteElementoHardware::className());
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

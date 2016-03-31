@@ -99,7 +99,7 @@ $this->registerJs('$(document).ready(function(){
                     
                     function removeUnusedView(selectID){
                         if ( $("#"+selectID +" option").size() == 0){
-                            alert("'.Yii::t('app',"No features available").'");
+                            alert("'.Yii::t('app',"No features availables").'");
                             setTimeout(function removeView(){
                                 $("#"+selectID).parent().prev(".remove-dynamic-relation").trigger("click");
                             }, 500);                           

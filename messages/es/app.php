@@ -69,7 +69,7 @@ return [
     'Manufacturer' => 'Marca/Fabricante',
     'Model' => 'Modelo',
     'Name' => 'Nombre',
-    'No features available' => 'No hay características disponibles',
+    'No features availables' => 'No hay características disponibles',
     'No parts available' => 'No hay partes disponibles',
     'No software available' => 'No hay sofware disponible',
     'Parts' => 'Partes',

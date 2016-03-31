@@ -50,14 +50,29 @@ AppAsset::register($this);
                                         ['label' => Yii::t('app','Hardware Elements'), 'url' => ['/elemento-hardware/index']],
                                         '<li class="divider"></li>',
                                         ['label' => Yii::t('app','Hardware Asset Subcategories'), 'url' => ['/subcategoria-activo-hardware/index']],
-                                        '<li class="divider"></li>',
-                                        ['label' => Yii::t('app','Hardware Element Features-Values'), 'url' => ['/valor-caracteristica-elemento-hardware/index']],
+                                        /*'<li class="divider"></li>',
+                                        ['label' => Yii::t('app','Hardware Element Features-Values'), 'url' => ['/valor-caracteristica-elemento-hardware/index']],*/
                                     ]
                                 ],
-                                ['label' => Yii::t('app','Software'), 'url' => ['/activo-software/index']],
-                                ['label' => Yii::t('app','Infrastructure'), 'url' => ['/activo-infraestructura/index']],
+                                [
+                                    'label' => Yii::t('app','Software'), 
+                                    'items' => [
+                                        ['label' => Yii::t('app','Software Assets'),'url' => ['/activo-software/index']],
+                                        '<li class="divider"></li>',
+                                        ['label' => Yii::t('app','Software Asset Subcategories'), 'url' => ['/subcategoria-activo-software/index']],
+                                    ]
+                                ],
+                                [
+                                    'label' => Yii::t('app','Infrastructure'), 
+                                    'items' => [
+                                        ['label' => Yii::t('app','Infrastructure Assets'),'url' => ['/activo-infraestructura/index']],
+                                        '<li class="divider"></li>',
+                                        ['label' => Yii::t('app','Infrastructure Asset Subcategories'), 'url' => ['/subcategoria-activo-infraestructura/index']],
+                                    ]
+                                ],
                                 '<li class="divider"></li>',
                                 ['label' => Yii::t('app','Features'), 'url' => ['/caracteristica/index']],
+                                /*['label' => Yii::t('app','Asset Features-Values'), 'url' => ['/valor-caracteristica-activo-inventariable/index']],*/
                             ],
                         ],
                         ['label' => Yii::t('app','Reports'), 'url' => '#'/*['/informe/index']*/],

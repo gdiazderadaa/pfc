@@ -5,6 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\bootstrap\Alert;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use kartik\nav\NavX;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -36,49 +37,53 @@ AppAsset::register($this);
             ]);
             $navItems=[
                 ['label' => 'Home', 'url' => ['/site/index']],
-					[
-                       'label' => 'Incidencias',
-                       'items' => [
-                            ['label' => 'Crear', 'url' => ''/*['/incidencia/create']*/],
-                            ['label' => 'Consultar', 'url' => ''/*['/incidencia/index']*/],
-                        ],
-                    ],
-                    [
-                        'label' => 'Administracion',
-                        'items' => [
-                           [
-                               'label' => 'Inventario',
-                               'items' => [
-                                    [
-                                        'label' => 'Hardware', 
-                                        'items' => [
-                                            ['label' => 'Elemento Hardware', 'url' => ['/elemento-hardware/index']],
-                                            ['label' => 'Subcategorías', 'url' => ['/subcategoria-activo-hardware/index']],
-                                            ['label' => 'Características', 'url' => ['/caracteristica/index']],
-                                            ['label' => 'Valores Características', 'url' => ['/valor-caracteristica-elemento-hardware/index']],
-                                        ]
-                                    ],
-                                    ['label' => 'Software', 'url' => ['/activo-software/index']],
-                                    ['label' => 'Infraestructura', 'url' => ['/activo-infraestructura/index']],
+                [
+                    'label' => Yii::t('app','Dashboard'),
+                    'items' => [
+                        [
+                            'label' => Yii::t('app','Inventory'),
+                            'items' => [
+                                [
+                                    'label' => Yii::t('app','Hardware'), 
+                                    'items' => [
+                                        ['label' => Yii::t('app','Hardware Assets'), 'url' => ['/activo-hardware/index']],
+                                        ['label' => Yii::t('app','Hardware Elements'), 'url' => ['/elemento-hardware/index']],
+                                        '<li class="divider"></li>',
+                                        ['label' => Yii::t('app','Hardware Asset Subcategories'), 'url' => ['/subcategoria-activo-hardware/index']],
+                                        '<li class="divider"></li>',
+                                        ['label' => Yii::t('app','Hardware Element Features-Values'), 'url' => ['/valor-caracteristica-elemento-hardware/index']],
+                                    ]
                                 ],
+                                ['label' => Yii::t('app','Software'), 'url' => ['/activo-software/index']],
+                                ['label' => Yii::t('app','Infrastructure'), 'url' => ['/activo-infraestructura/index']],
+                                '<li class="divider"></li>',
+                                ['label' => Yii::t('app','Features'), 'url' => ['/caracteristica/index']],
                             ],
-                            ['label' => 'Informes', 'url' => ''/*['/informe/index']*/],
-                            ['label' => 'Edificios', 'url' => ''/*['/edificio/index']*/],
-                            ['label' => 'Espacios', 'url' => ''/*['/espacio/index']*/],
-                            ['label' => 'Usuarios', 'url' => ''/*['/usuario/index']*/],
-
                         ],
-                     ],
-                ];
+                        ['label' => Yii::t('app','Reports'), 'url' => '#'/*['/informe/index']*/],
+                        ['label' => Yii::t('app','Buildings'), 'url' => '#'/*['/edificio/index']*/],
+                        ['label' => Yii::t('app','Spaces'), 'url' => '#'/*['/espacio/index']*/],
+                        ['label' => Yii::t('app','Users'), 'url' => '#'/*['/usuario/index']*/],
+
+                    ],
+                ],
+                [
+                    'label' => Yii::t('app','Incidents'),
+                    'items' => [
+                        ['label' => Yii::t('app','Create'), 'url' => '#'/*['/incidencia/create']*/],
+                        ['label' => Yii::t('app','Search'), 'url' => '#'/*['/incidencia/index']*/],
+                    ],
+                ],           
+            ];
             if (Yii::$app->user->isGuest) {
-                array_push($navItems,['label' => 'Iniciar sesión', 'url' => ['/user/login']]);
+                array_push($navItems,['label' => Yii::t('app','Login'), 'url' => '#'/*['/user/login']*/]);
               } else {
-                array_push($navItems,['label' => 'Cerrar sesión (' . Yii::$app->user->identity->username . ')',
+                array_push($navItems,['label' => Yii::t('app','Logout').' (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']]
                 );
               }
-            echo Nav::widget([
+            echo NavX::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $navItems,
             ]);

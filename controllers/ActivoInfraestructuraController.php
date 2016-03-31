@@ -8,6 +8,8 @@ use app\models\ActivoInfraestructuraSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use synatree\dynamicrelations\DynamicRelations;
+use app\models\ValorCaracteristicaActivoInventariable;
 
 /**
  * ActivoInfraestructuraController implements the CRUD actions for ActivoInfraestructura model.
@@ -63,6 +65,7 @@ class ActivoInfraestructuraController extends Controller
         $model = new ActivoInfraestructura();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            DynamicRelations::relate($model, 'valoresCaracteristicasActivoInventariable', Yii::$app->request->post(), 'ValorCaracteristicaActivoInventariable', ValorCaracteristicaActivoInventariable::className());
             return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
         } else {
             return $this->render('create', [
@@ -82,6 +85,7 @@ class ActivoInfraestructuraController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            DynamicRelations::relate($model, 'valoresCaracteristicasActivoInventariable', Yii::$app->request->post(), 'ValorCaracteristicaActivoInventariable', ValorCaracteristicaActivoInventariable::className());
             return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
         } else {
             return $this->render('update', [

@@ -46,9 +46,34 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => $model->parent->attributeLabels()['espacio_id'],
-                'value' => $model->espacio->nombre
+                'value' => $model->espacio ? $model->espacio->nombre : ""
             ],
         ],
     ]) ?>
+
+<?php
+        
+        $caracteristicas = $model->getValoresCaracteristicasActivoInventariable()->all();
+        
+        if(count($caracteristicas)>0) 
+            echo "<h2>" . Yii::t('app','Features') . "</h2>";
+        
+        foreach ($caracteristicas as $variable) {      
+    ?>
+    
+        <?= DetailView::widget([
+            'model' => $variable,
+            'attributes' => [
+                [
+                    'label' => $variable->caracteristica->nombre,
+                    'value' => $variable->caracteristica->unidades == null ? $variable->valor : $variable->valor  . ' ' . $variable->caracteristica->unidades
+                ],       
+            ],
+        ]) ?>
+    
+    <?php
+        }
+                                                    
+    ?>
 
 </div>

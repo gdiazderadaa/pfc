@@ -65,7 +65,7 @@ class ActivoInfraestructuraController extends Controller
         $model = new ActivoInfraestructura();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            DynamicRelations::relate($model, 'valoresCaracteristicasActivoInventariable', Yii::$app->request->post(), 'ValorCaracteristicaActivoInventariable', ValorCaracteristicaActivoInventariable::className());
+            DynamicRelations::relate($model->parent, 'valoresCaracteristicasActivoInventariable', Yii::$app->request->post(), 'ValorCaracteristicaActivoInventariable', ValorCaracteristicaActivoInventariable::className());
             return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
         } else {
             return $this->render('create', [
@@ -85,7 +85,7 @@ class ActivoInfraestructuraController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            DynamicRelations::relate($model, 'valoresCaracteristicasActivoInventariable', Yii::$app->request->post(), 'ValorCaracteristicaActivoInventariable', ValorCaracteristicaActivoInventariable::className());
+            DynamicRelations::relate($model->parent, 'valoresCaracteristicasActivoInventariable', Yii::$app->request->post(), 'ValorCaracteristicaActivoInventariable', ValorCaracteristicaActivoInventariable::className());
             return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
         } else {
             return $this->render('update', [

@@ -27,11 +27,11 @@ class ValorCaracteristicaActivoInventariable extends \yii\db\ActiveRecord
     }
     
     public static function singularObjectName(){
-        return Yii::t('app', 'Asset Feature-Value');
+        return Yii::t('app', 'Asset Feature');
     }
     
     public static function pluralObjectName(){
-        return Yii::t('app', 'Asset Features-Values');
+        return Yii::t('app', 'Asset Features');
     }
 
     /**
@@ -45,8 +45,8 @@ class ValorCaracteristicaActivoInventariable extends \yii\db\ActiveRecord
             [['valor'], 'string', 'max' => 128],
             ['caracteristica_id', 'unique', 'targetAttribute' => ['activo_inventariable_id', 'caracteristica_id'], 
                                                                 'message'=>Yii::t('app','The selected {modelClass} is already being used by this {modelClass2}',[
-                                                                                            'modelClass' => attributeLabels()['caracteristica_id'],
-                                                                                            'modelClass' => attributeLabels()['activo_inventariable_id']])]
+                                                                                            'modelClass' => $this->attributeLabels()['caracteristica_id'],
+                                                                                            'modelClass' => $this->attributeLabels()['activo_inventariable_id']])]
         ];
     }
 

@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $caracteristicas = $model->getValoresCaracteristicasActivoInventariable()->all();
         
         if(count($caracteristicas)>0) 
-            echo "<h2>" . $caracteristicas[0]->pluralObjectName() . "</h2>";
+            echo "<h2>" . Yii::t('app','Features') . "</h2>";
         
         foreach ($caracteristicas as $variable) {      
     ?>

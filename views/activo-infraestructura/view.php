@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 
 $this->title = Yii::t('app', '{modelClass}:', [
 		               'modelClass' => $model->singularObjectName(),
-		               ]) . ' ' . $model->codigo;
+		               ]) . ' ' . $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

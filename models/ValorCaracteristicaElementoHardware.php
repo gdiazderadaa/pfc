@@ -27,11 +27,11 @@ class ValorCaracteristicaElementoHardware extends \yii\db\ActiveRecord
     }
     
     public static function singularObjectName(){
-        return Yii::t('app', 'Hardware Element Feature-Value');
+        return Yii::t('app', 'Hardware Element Feature');
     }
     
     public static function pluralObjectName(){
-        return Yii::t('app', 'Hardware Element Features-Values');
+        return Yii::t('app', 'Hardware Element Features');
     }
 
     /**

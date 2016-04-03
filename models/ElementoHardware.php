@@ -85,8 +85,8 @@ class ElementoHardware extends \yii\db\ActiveRecord
     
     public function getActivoHardwareList()
     {
-        $models = ActivoHardware::find()->asArray()->all();
-        return ArrayHelper::map($models,'id', 'nombre');
+        $models = ActivoHardware::find()->joinWith('activoInventariable')->asArray()->all();
+        return ArrayHelper::map($models,'activo_inventariable_id', 'activoInventariable.nombre');
     }
 
 

@@ -6,11 +6,9 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoSoftware */
 
-$this->title = Yii::t('app', '{modelClass}:', [
-		               'modelClass' => $model->singularObjectName(),
-		               ]) . ' ' . $model->nombre;
+$this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = Yii::t('app', 'View') . ' ' . $model->nombre;
 ?>
 <div class="activo-software-view">
 
@@ -43,10 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => $model->parent->attributeLabels()['precio_compra'], 
                 'value' => Yii::$app->formatter->asCurrency($model->precio_compra)
-            ],
-            [
-                'label' => $model->parent->attributeLabels()['espacio_id'],
-                'value' => $model->espacio ? $model->espacio->nombre : ""
             ],
         ],
     ]) ?>

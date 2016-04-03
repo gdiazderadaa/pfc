@@ -6,11 +6,9 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ElementoHardware */
 
-$this->title = Yii::t('app', '{modelClass}:', [
-		               'modelClass' => $model->singularObjectName(),
-		               ]) . ' ' . $model->marca . ' ' . $model->modelo;
+$this->title = $model->marca . ' ' . $model->modelo;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = Yii::t('app', 'View') . ' ' . $model->marca . ' ' . $model->modelo;
 ?>
 <div class="elemento-hardware-view">
 
@@ -57,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $caracteristicas = $model->valoresCaracteristicasElementoHardware;
         
         if(count($caracteristicas)>0) 
-            echo "<h2>" . $caracteristicas[0]->pluralObjectName() ."</h2>";
+            echo "<h2>" . Yii::t('app','Features') ."</h2>";
         
         foreach ($caracteristicas as $variable) {      
     ?>
@@ -80,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
          $partes = $model->partesElementoHardware;
         
         if(count($partes)>0) 
-            echo "<h2>" . $partes[0]->pluralObjectName() ."</h2>";
+            echo "<h2>" . Yii::t('app','Parts') ."</h2>";
         
         foreach ($partes as $variable) {      
     ?>

@@ -41,7 +41,7 @@ AppAsset::register($this);
                     'label' => Yii::t('app','Dashboard'),
                     'items' => [
                         [
-                            'label' => Yii::t('app','Inventory'),
+                            'label' => Yii::t('app','Assets'),
                             'items' => [
                                 [
                                     'label' => Yii::t('app','Hardware'), 
@@ -76,8 +76,8 @@ AppAsset::register($this);
                             ],
                         ],
                         ['label' => Yii::t('app','Reports'), 'url' => '#'/*['/informe/index']*/],
-                        ['label' => Yii::t('app','Buildings'), 'url' => '#'/*['/edificio/index']*/],
-                        ['label' => Yii::t('app','Spaces'), 'url' => '#'/*['/espacio/index']*/],
+                        ['label' => Yii::t('app','Buildings'), 'url' => ['/edificio/index']],
+                        ['label' => Yii::t('app','Spaces'), 'url' => ['/espacio/index']],
                         ['label' => Yii::t('app','Users'), 'url' => '#'/*['/usuario/index']*/],
 
                     ],

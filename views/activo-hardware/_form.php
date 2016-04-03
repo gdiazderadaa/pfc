@@ -41,7 +41,7 @@ use kartik\form\ActiveForm;
         ]) ]) ?>
     
     <?= DynamicRelations::widget([
-        'title' => Yii::t('app','Software'),
+        'title' => Yii::t('app','Configuration'),
         'collection' => $model->configuracionesActivoHardware,
         'viewPath' => '@app/views/configuracion-activo-hardware/_inline.php',
         'params' => ['tipo_activo' => 'Hardware'],
@@ -51,17 +51,6 @@ use kartik\form\ActiveForm;
 
     ]); ?>
     
-    <!--<?= DynamicRelations::widget([
-        'title' => Yii::t('app','Hardware Elements'),
-        'collection' => $model->elementosHardware,
-        'viewPath' => '@app/views/configuracion-activo-hardware/_inline.php',
-        'params' => ['tipo_activo' => 'Hardware'],
-
-        // this next line is only needed if there is a chance that the collection above will be empty.  This gives the script a prototype to work with.
-        'collectionType' => new app\models\ElementoHardware,
-
-    ]); ?>-->
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

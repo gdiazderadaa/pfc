@@ -30,7 +30,7 @@ class ConfiguracionActivoHardware extends \yii\db\ActiveRecord
     }
     
     public static function pluralObjectName(){
-        return Yii::t('app', 'Hardware Assets Configurations');
+        return Yii::t('app', 'Hardware Assets Configuration');
     }
 
     /**
@@ -74,8 +74,6 @@ class ConfiguracionActivoHardware extends \yii\db\ActiveRecord
     
     public function getActivosSoftware()  
     {     
-        // $models = ActivoSoftware::find()->asArray()->all(); 
-        // return ArrayHelper::map($models,'activo_inventariable_id', 'nombre');
         return ActivoSoftware::find()->all();
     }
 }

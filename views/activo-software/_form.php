@@ -39,10 +39,10 @@ use kartik\form\ActiveForm;
 		              'modelClass' => $model->attributeLabels()['subcategoria_activo_software_id'],
 		              ]) ]) ?>
                       
-    <?= $form->field($model, 'espacio_id')->dropDownList($model->getEspacios(),['prompt'=>Yii::t('app', '- Select the {modelClass} where the {modelClass2} is located -', [
+    <!--<?= $form->field($model, 'espacio_id')->dropDownList($model->getEspacios(),['prompt'=>Yii::t('app', '- Select the {modelClass} where the {modelClass2} is located -', [
 		              'modelClass' => $model->attributeLabels()['espacio_id'],
                       'modelClass2' => $model->singularObjectName(),
-		              ]) ]) ?>
+		              ]) ]) ?>-->
     
     <?= DynamicRelations::widget([
         'title' => Yii::t('app','Features'),

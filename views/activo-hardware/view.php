@@ -6,11 +6,9 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoHardware */
 
-$this->title = Yii::t('app', '{modelClass}:', [
-		               'modelClass' => $model->singularObjectName(),
-		               ]) . ' ' . $model->nombre;
+$this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = Yii::t('app', 'View') . ' ' . $model->nombre;
 ?>
 <div class="activo-hardware-view">
 
@@ -56,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $configuraciones = $model->getConfiguracionesActivoHardware()->all();
         
         if(count($configuraciones)>0) 
-            echo "<h2>" . $configuraciones[0]->pluralObjectName() . "</h2>";
+            echo "<h2>" . Yii::t('app','Configuration') . "</h2>";
         
         foreach ($configuraciones as $variable) {      
     ?>
@@ -74,6 +72,45 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
         }
                                                     
+   $partes = $model->elementosHardware;
+        
+        if(count($partes)>0) 
+            echo "<h2>" . Yii::t('app','Parts') ."</h2>";
+        
+        foreach ($partes as $variable) {      
+    ?>
+    
+        <?= DetailView::widget([
+        'model' => $variable,
+        'attributes' => [
+            [
+                'label' => $variable->attributeLabels()['numero_serie'],
+                'value' => $variable->numero_serie
+            ],
+            [
+                'label' => $variable->attributeLabels()['marca'],
+                'value' => $variable->marca
+            ],
+            [
+                'label' => $variable->attributeLabels()['modelo'],
+                'value' => $variable->modelo],
+            [
+                'label' => $variable->attributeLabels()['subcategoria_elemento_hardware_id'], 
+                'value' => $variable->subcategoriaElementoHardware->nombre
+            ],
+            [
+                'label' => $variable->attributeLabels()['fecha_compra'],
+                'value'=> Yii::$app->formatter->asDate($variable->fecha_compra)
+            ],
+            [
+                'label' => $variable->attributeLabels()['precio_compra'], 
+                'value' => Yii::$app->formatter->asCurrency($variable->precio_compra)
+            ],
+        ],
+    ]) ?>
+    
+    <?php
+        }                                                   
     ?>
 
 </div>

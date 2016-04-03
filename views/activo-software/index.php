@@ -39,11 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'precio_compra',
                 'format'    => 'currency'
-            ],
-            [
-                 'attribute' => 'espacio_id',
-                 'value' => 'espacio.nombre'
-            ],    
+            ],   
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

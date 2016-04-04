@@ -84,7 +84,7 @@ return [
     'Software Asset Subcategory' => 'Subcategoría Activo Software',
     'Software Assets' => 'Activos Software',
     'Space' => 'Espacio',
-    'Space Number' => 'Espacio',
+    'Space Number' => 'Numeración',
     'Spaces' => 'Espacios',
     'The selected {modelClass} is already being used by this {modelClass2}' => 'El {modelClass} seleccionado ya está siendo usado en este {modelClass2}',
     'The {modelClass} has been successfully deleted' => 'El {modelClass} ha sido eliminado correctamente',

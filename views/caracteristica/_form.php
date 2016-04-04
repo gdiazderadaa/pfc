@@ -21,11 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'tipo_activo')->dropDownList([ Yii::t('app','Infrastructure') => 'Infraestructura', Yii::t('app','Software') => 'Software', Yii::t('app','Hardware') => 'Hardware', ], ['prompt' => Yii::t('app','- Select the asset type -') ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?php if ($model->isNewRecord){ ?>
-            <?= Html::a(Yii::t('app', 'Create and continue'), ['create-multiple'], ['class'=>'btn btn-success']) ?>
-        <?php } ?>
-        
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>        
     </div>
 
     <?php ActiveForm::end(); ?>

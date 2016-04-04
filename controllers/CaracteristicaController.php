@@ -71,22 +71,6 @@ class CaracteristicaController extends Controller
         }
     }
     
-        /**
-     * Creates a new Caracteristica model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreateMultiple()
-    {
-        $model = new Caracteristica();
-
-        $model->load(Yii::$app->request->post()) && $model->save();
-         
-        return $this->render('create', [
-            'model' => $model,
-        ]);
- 
-    }
 
     /**
      * Updates an existing Caracteristica model.

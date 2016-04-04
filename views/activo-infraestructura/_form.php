@@ -28,7 +28,8 @@ use kartik\form\ActiveForm;
         'ajaxConversion'=>false,
         'options' => [
             'pluginOptions' => [
-                'autoclose' => true
+                'autoclose' => true,
+                'endDate' => '+0d'
             ]
         ]
     ]); ?>

@@ -51,7 +51,8 @@ class ActivoInventariable extends \yii\db\ActiveRecord
             [['espacio_id'], 'integer'],
             [['codigo'], 'string', 'max' => 128],
             [['nombre'], 'string', 'max' => 64],
-            [['codigo'], 'unique']
+            [['codigo'], 'unique'],
+            [['precio_compra'], 'compare', 'compareValue' => 0, 'operator' => '>'],
         ];
     }
 

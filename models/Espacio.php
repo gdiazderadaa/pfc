@@ -11,9 +11,9 @@ use yii\helpers\ArrayHelper;
  * @property string $id
  * @property string $nombre
  * @property string $numeracion
- * @property string $edificio_id
+ * @property string $planta_edificio_id
  *
- * @property Edificio $edificio
+ * @property PlantaEdificio $plantaEdificio
  * @property ActivoInventariable[] $activoInventariables 
  */
 class Espacio extends \yii\db\ActiveRecord
@@ -40,8 +40,8 @@ class Espacio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'numeracion', 'edificio_id'], 'required'],
-            [['edificio_id'], 'integer'],
+            [['nombre', 'numeracion', 'planta_edificio_id'], 'required'],
+            [['planta_edificio_id'], 'integer'],
             [['nombre'], 'string', 'max' => 128],
             [['numeracion'], 'string', 'max' => 24]
         ];
@@ -56,7 +56,7 @@ class Espacio extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Name'),
             'numeracion' => Yii::t('app', 'Space Number'),
-            'edificio_id' => Yii::t('app', 'Building')
+            'planta_edificio_id' => Yii::t('app', 'Floor')
         ];
     }
 
@@ -69,17 +69,17 @@ class Espacio extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEdificio()
+    * @return \yii\db\ActiveQuery
+    */
+    public function getPlantaEdificio()
     {
-        return $this->hasOne(Edificio::className(), ['id' => 'edificio_id']);
+        return $this->hasOne(PlantaEdificio::className(), ['id' => 'planta_edificio_id']);
     }
     
 
-    public function getEdificioList() 
+    public function getPlantaEdificioList()
 	{	 
-        $models = Edificio::find()->asArray()->all();
+        $models = PlantaEdificio::find()->asArray()->all();
         return ArrayHelper::map($models,'id', 'nombre');
     }
 }

@@ -8,6 +8,10 @@ use app\models\EdificioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use synatree\dynamicrelations\DynamicRelations;
+use app\models\PlantaEdificio;
+use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 
 /**
  * EdificioController implements the CRUD actions for Edificio model.
@@ -60,9 +64,19 @@ class EdificioController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Edificio();
+        $model = new Espacio();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            DynamicRelations::relate($model, 'plantasEdificio', Yii::$app->request->post(), 'PlantaEdificio', PlantaEdificio::className());
+            var_dump($_POST);
+            die;
+            // $plantaEdificio = ArrayHelper::getValue(Yii::$app->request->post(), 'PlantaEdificio');
+            // if ($plantaEdificio != null)
+            // {
+            //     foreach ($variable as $key => $value) {
+            //         # code...
+            //     }
+            // }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -82,6 +96,13 @@ class EdificioController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            DynamicRelations::relate($model, 'plantasEdificio', Yii::$app->request->post(), 'PlantaEdificio', PlantaEdificio::className());
+            //$plantas = ArrayHelper::getValue(Yii::$app->request->post(), 'PlantaEdificio');
+            $plantas = $model->getPlantasEdificio()->all(); 
+
+            foreach ($plantas as $planta) {
+                $planta->uploadImageFromDynamicRelations();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -99,12 +120,12 @@ class EdificioController extends Controller
     public function actionDelete($id)
     {
         try {
-            $this->findModel($id)->delete();
+            $this->findModel($id)->delete();         
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
                 Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
                 'modelClass' => $model->singularObjectName(),
-                'modelClass2' => $model->attributeLabels['espacio_id'],
+                'modelClass2' => $model->attributeLabels['planta_edificio_id'],
                 ]));
                 
                 return $this->redirect(['index']);
@@ -114,7 +135,14 @@ class EdificioController extends Controller
         Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
             'modelClass' => $model->singularObjectName(),
         ]));
-        return $this->redirect(['index']);
+        
+        if(! Yii::$app->request->isAjax){
+                return $this->redirect(['index']);
+        }
+        else
+        {
+                return "OK";
+        }
     }
 
     /**

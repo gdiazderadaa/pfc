@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "edificio".
@@ -11,10 +12,11 @@ use Yii;
  * @property string $nombre
  * @property string $localidad
  *
- * @property Espacio[] $espacios
+ * @property PlantaEdificio[] $plantasEdificio
  */
 class Edificio extends \yii\db\ActiveRecord
 {
+    
     /**
      * @inheritdoc
      */
@@ -38,7 +40,7 @@ class Edificio extends \yii\db\ActiveRecord
     {
         return [
             [['nombre', 'localidad'], 'required'],
-            [['nombre', 'localidad'], 'string']
+            [['nombre', 'localidad'], 'string'],
         ];
     }
 
@@ -51,14 +53,16 @@ class Edificio extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Name'),
             'localidad' => Yii::t('app', 'Town/City'),
+            'planta_edificio_id' => Yii::t('app','Floor'),
         ];
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEspacios()
-    {
-        return $this->hasMany(Espacio::className(), ['edificio_id' => 'id']);
-    }
+    
+    	 
+    /** 
+    * @return \yii\db\ActiveQuery 
+    */ 
+    public function getPlantasEdificio() 
+    { 
+        return $this->hasMany(PlantaEdificio::className(), ['edificio_id' => 'id']); 
+    } 
 }

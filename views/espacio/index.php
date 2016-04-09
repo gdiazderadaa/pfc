@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'numeracion',
              [
-                 'attribute' => 'edificio_id',
-                 'value' => 'edificio.nombre'
+                 'attribute' => 'planta_edificio_id',
+                 'value' => 'plantaEdificio.nombre'
              ],
 
             ['class' => 'yii\grid\ActionColumn'],

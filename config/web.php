@@ -7,7 +7,10 @@ $config = [
     'id' => 'basic',
     'language'=>'es', // spanish
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'app\components\Bootstrap',
+    ],
     'modules' =>  [       
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -92,6 +95,7 @@ $config = [
         'urlManager' => [
           'showScriptName' => false,
           'enablePrettyUrl' => true,
+          'baseUrl' => 'http://localhost/pfc/web'
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

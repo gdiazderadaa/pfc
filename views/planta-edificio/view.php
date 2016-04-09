@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Edificio */
+/* @var $model app\models\PlantaEdificio */
 
 $this->title = $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Yii::t('app', 'View') . ' ' . $model->nombre;
 ?>
-<div class="edificio-view">
+<div class="planta-edificio-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -28,10 +28,22 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View') . ' ' . $model->nombre;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'nombre:ntext',
-            'localidad:ntext',
+            'nombre',
+            'imagen',
+            [
+                'label' => $model->attributeLabels()['edificio_id'],
+                'value' => $model->edificio->nombre
+            ],
         ],
     ]) ?>
     
+    <?php
+    $title = isset($model->ruta_imagen) && !empty($model->ruta_imagen) ? $model->ruta_imagen : Yii::t('app','Image');
+    echo Html::img($model->getImageUrl(), [
+        'class'=>'img-thumbnail', 
+        'alt'=>$title, 
+        'title'=>$title
+    ]);
+    ?>
 
 </div>

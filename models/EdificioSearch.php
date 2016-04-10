@@ -19,7 +19,7 @@ class EdificioSearch extends Edificio
     {
         return [
             [['id'], 'integer'],
-            [['nombre', 'localidad'], 'safe'],
+            [['nombre', 'localidad', 'imagen', 'imagen_servidor'], 'safe'],
         ];
     }
 
@@ -60,7 +60,9 @@ class EdificioSearch extends Edificio
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'localidad', $this->localidad]);
+            ->andFilterWhere(['like', 'localidad', $this->localidad])
+            ->andFilterWhere(['like', 'imagen', $this->imagen])
+            ->andFilterWhere(['like', 'imagen_servidor', $this->imagen_servidor]);
 
         return $dataProvider;
     }

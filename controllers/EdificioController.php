@@ -64,24 +64,26 @@ class EdificioController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Espacio();
+        $model = new Edificio();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            DynamicRelations::relate($model, 'plantasEdificio', Yii::$app->request->post(), 'PlantaEdificio', PlantaEdificio::className());
-            var_dump($_POST);
-            die;
-            // $plantaEdificio = ArrayHelper::getValue(Yii::$app->request->post(), 'PlantaEdificio');
-            // if ($plantaEdificio != null)
-            // {
-            //     foreach ($variable as $key => $value) {
-            //         # code...
-            //     }
-            // }
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            
+            // process uploaded image file instance
+            $image = $model->uploadImage();
+
+            if ($model->save()) {
+                DynamicRelations::relate($model, 'plantasEdificio', Yii::$app->request->post(), 'PlantaEdificio', PlantaEdificio::className());
+                // upload only if valid uploaded file instance found
+                if ($image !== false) {
+                    $path = $model->getImageFile();
+                    $image->saveAs($path);
+                }
+                return $this->redirect(['view', 'id'=>$model->id]);
+            } else {
+                 return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         }
     }
 
@@ -94,21 +96,46 @@ class EdificioController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $oldFile = $model->getImageFile();
+        $oldImagenServidor = $model->imagen_servidor;
+        $oldImagen = $model->imagen;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            DynamicRelations::relate($model, 'plantasEdificio', Yii::$app->request->post(), 'PlantaEdificio', PlantaEdificio::className());
-            //$plantas = ArrayHelper::getValue(Yii::$app->request->post(), 'PlantaEdificio');
-            $plantas = $model->getPlantasEdificio()->all(); 
-
-            foreach ($plantas as $planta) {
-                $planta->uploadImageFromDynamicRelations();
+        if ($model->load(Yii::$app->request->post())) {
+            
+            if ($oldImagen != null && $model->imagen == "") {
+                $model->deleteImage();
             }
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            
+            // process uploaded image file instance
+            $image = $model->uploadImage();
+
+            // revert back if no valid file instance uploaded
+            if ($image === false) {
+                $model->imagen_servidor = $oldImagenServidor;
+                $model->imagen = $oldImagen;
+            }
+    
+            if ($model->save()) {
+                // upload only if valid uploaded file instance found
+                if ($image !== false && ($oldFile==null || $oldFile != null && unlink($oldFile)) ) { // delete old and overwrite
+                    $path = $model->getImageFile();
+                    $image->saveAs($path);
+                }
+                
+                DynamicRelations::relate($model, 'plantasEdificio', Yii::$app->request->post(), 'PlantaEdificio', PlantaEdificio::className());               
+                $plantas = $model->getPlantasEdificio()->all(); 
+
+                foreach ($plantas as $planta) {
+                    $planta->uploadImageFromDynamicRelations();
+                }
+                return $this->redirect(['view', 'id'=>$model->id]);
+            } else {
+                // error in saving model
+            }
         }
+        return $this->render('update', [
+            'model'=>$model,
+        ]);   
     }
 
     /**
@@ -120,7 +147,12 @@ class EdificioController extends Controller
     public function actionDelete($id)
     {
         try {
-            $this->findModel($id)->delete();         
+            $model=$this->findModel($id);
+            if ($model->delete()){
+                 if (!$model->deleteImage()) {
+                    Yii::$app->session->setFlash('error', Yii::t('app','Error deleting image'));
+                }
+            }       
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
                 Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [

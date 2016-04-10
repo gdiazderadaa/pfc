@@ -30,8 +30,43 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View') . ' ' . $model->nombre;
         'attributes' => [
             'nombre:ntext',
             'localidad:ntext',
+            'imagen',
         ],
     ]) ?>
     
+    <?php
+    $title = isset($model->ruta_imagen) && !empty($model->ruta_imagen) ? $model->ruta_imagen : Yii::t('app','Image');
+    echo Html::img($model->getImageUrl(), [
+        'class'=>'img-thumbnail', 
+        'alt'=>$title, 
+        'title'=>$title
+    ]);
+    
+    $plantas = $model->plantasEdificio;
+        
+        if(count($plantas)>0) 
+            echo "<h2>" . Yii::t('app','Floors') ."</h2>";
+        
+        foreach ($plantas as $variable) { 
+    ?>
+    
+    <?= DetailView::widget([
+        'model' => $variable,
+        'attributes' => [
+            [
+                'label' => $variable->attributeLabels()['nombre'],
+                'value' => $variable->nombre
+            ],
+            [
+                'attribute' => $variable->attributeLabels()['imagen'],
+                'format' => ['image',['width'=>'200']],
+                'value' => $variable->getImageUrl(),
+            ],
+        ],
+    ]) ?>
+    
+    <?php
+        }                                                   
+    ?>
 
 </div>

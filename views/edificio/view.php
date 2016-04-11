@@ -24,23 +24,26 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View') . ' ' . $model->nombre;
             ],
         ]) ?>
     </p>
-
+    <?php $title = isset($model->ruta_imagen) && !empty($model->ruta_imagen) ? $model->ruta_imagen : Yii::t('app','Image'); ?>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'nombre:ntext',
             'localidad:ntext',
-            'imagen',
+            [
+                'attribute' => $model->attributeLabels()['imagen'],
+                'format' => ['image',[
+                                'class'=>'img-thumbnail', 
+                                'width'=>'33%',
+                                'alt'=>$title, 
+                                'title'=>$title,]],
+                'value' => $model->getImageUrl(),
+            ],
         ],
     ]) ?>
     
     <?php
-    $title = isset($model->ruta_imagen) && !empty($model->ruta_imagen) ? $model->ruta_imagen : Yii::t('app','Image');
-    echo Html::img($model->getImageUrl(), [
-        'class'=>'img-thumbnail', 
-        'alt'=>$title, 
-        'title'=>$title
-    ]);
+
     
     $plantas = $model->plantasEdificio;
         
@@ -59,7 +62,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View') . ' ' . $model->nombre;
             ],
             [
                 'attribute' => $variable->attributeLabels()['imagen'],
-                'format' => ['image',['width'=>'200']],
+                'format' => ['image',['class'=>'img-thumbnail', 'width'=>'33%']],
                 'value' => $variable->getImageUrl(),
             ],
         ],

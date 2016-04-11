@@ -56,7 +56,7 @@ class Edificio extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Name'),
-            'localidad' => Yii::t('app', 'Town/City'),
+            'localidad' => Yii::t('app', 'Address'),
             'planta_edificio_id' => Yii::t('app','Floor'),
             'imagen' => Yii::t('app', 'Image'),
             'imagen_servidor' => Yii::t('app', 'Image'),

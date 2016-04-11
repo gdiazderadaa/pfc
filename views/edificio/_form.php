@@ -5,17 +5,60 @@ use yii\widgets\ActiveForm;
 use kartik\widgets\FileInput;
 use yii\Helpers\Url;
 use synatree\dynamicrelations\DynamicRelations;
-use PetraBarus\Yii2\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
+use kartik\widgets\SwitchInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Edificio */
 /* @var $form yii\widgets\ActiveForm */
 
+use app\assets\MapAsset;
+MapAsset::register($this);
+
+$this->registerJsFile('http://maps.google.com/maps/api/js?sensor=false&libraries=places');
 $this->registerJs('$(document).ready(function(){
-                       $("#edificio-localidad").addClass("form-control");
-                                          
+                        // Default to EPI
+                        latitude = 43.5243283;
+                        longitude = -5.6346751;
+                        
+                        var geocoder = new google.maps.Geocoder();
+                        geocoder.geocode({ "address": "'.$model->localidad.'" }, function (results, status) {
+                            
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                document.getElementsByName("use-gmaps")[0].checked = true;
+                                $("#edificio-localidad").attr("readonly",true);
+                                latitude = results[0].geometry.location.lat();
+                                longitude = results[0].geometry.location.lng();
+                            }
+                            else{
+                                document.getElementsByName("use-gmaps")[0].checked = false;
+                                $("#edificio-localidad").attr("readonly",false);
+                            }
+                            
+                            $("#mapa").locationpicker({
+                                location: {latitude: latitude, longitude: longitude},
+                                radius: 0,
+                                inputBinding: {
+                                    locationNameInput: $("#search")        
+                                },
+                                enableAutocomplete: true,
+                                oninitialized: function(component) {
+                                    //$("#search").val("'.$model->localidad.'");                         
+                                },
+                                onchanged: function(currentLocation, radius, isMarkerDropped) {
+                                    var location = $(this).locationpicker("map").location;
+                                    updateControls(location);
+                                }	
+                            });
+                        });
+                        
+                        function updateControls(location) {
+                            $("#edificio-localidad").val(location.formattedAddress);    
+                        }
+
+                        
                 });
-                    ', \yii\web\VIEW::POS_END);
+                
+                    ', \yii\web\VIEW::POS_READY);
                     
 ?>
 
@@ -27,12 +70,45 @@ $this->registerJs('$(document).ready(function(){
 
     <!--<?= $form->field($model, 'id')->textInput(['maxlength' => true]) ?>-->
 
-    <?= $form->field($model, 'nombre')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+    
+    <label class="control-label"><?php echo Yii::t('app','Location') ?></label>
+    
+    <div id="address" class="file-preview">
+        <label class="control-label"><?php echo Yii::t('app','Use Google maps to locate the place') ?></label>
+        
+        <?= SwitchInput::widget(['name'=>'use-gmaps', 
+            'value'=>true,
+            'pluginOptions' => [
+                'onText' => Yii::t('app','Yes'),
+                'offText' => Yii::t('app','No'),
+            ],
+            'pluginEvents' => [
+            'switchChange.bootstrapSwitch' => 'function() { 
+                console.log(this.checked);
+                if (this.checked == false){
+                    $("#gmaps-panel").hide("slow");
+                    $("#edificio-localidad").attr("readonly", false);
+                    }
+                    else {
+                        $("#gmaps-panel").show("slow");
+                        $("#edificio-localidad").attr("readonly", true);
+                    }
+                }'
+            ]
+        ]); ?>
+    
+    <div class="form-group" id="gmaps-panel">
+        <label class="control-label" for="search"><?php echo Yii::t('app','Place lookup') ?></label>
+        <input id="search" class="form-control" placeholder="<?php echo Yii::t('app','Type in the name or address of a building') ?>"/>
+            <div id="mapa" class="form-control" style="height:350px; margin-top:15px"></div>
+        </div>
+            
+        <?= $form->field($model, 'localidad')->textInput(['maxlength' => true]) ?>
+    </div>
+  
 
-    <!--<?= $form->field($model, 'localidad')->textarea(['rows' => 6]) ?>-->
-    
-    <?= $form->field($model, 'localidad')->widget(GooglePlacesAutoComplete::className()) ?>
-    
+      
     <?php 
         if($model->isNewRecord || !isset($model->imagen) || !isset($model->imagen_servidor)){
             echo $form->field($model, 'imagen')->widget(FileInput::classname(),[

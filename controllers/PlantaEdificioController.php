@@ -8,6 +8,7 @@ use app\models\PlantaEdificioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * PlantaEdificioController implements the CRUD actions for PlantaEdificio model.
@@ -156,6 +157,26 @@ class PlantaEdificioController extends Controller
             'modelClass' => $model->singularObjectName(),
         ]));
         return $this->redirect(['index']);
+    }
+    
+    public function actionPlanta() {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $edificio_id = $parents[0];
+                $out = PlantaEdificio::getPlantaList($edificio_id); 
+                // the getSubCatList function will query the database based on the
+                // cat_id and return an array like below:
+                // [
+                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+                // ]
+                echo Json::encode(['output'=>$out, 'selected'=>'']);
+                return;
+            }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
     }
 
     /**

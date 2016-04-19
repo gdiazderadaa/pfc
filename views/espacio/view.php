@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'View') . ' ' . $model->nombre;
             'nombre',
             'numeracion',
             [
+                'label' => $model->plantaEdificio->attributeLabels()['edificio_id'],
+                'value' => $model->plantaEdificio->edificio->nombre,
+            ],
+            [
                 'label' => $model->attributeLabels()['planta_edificio_id'],
                 'value' => $model->plantaEdificio->nombre,
             ],

@@ -13,6 +13,8 @@ use Yii\helpers\ArrayHelper;
  * @property string $fecha_compra
  * @property string $precio_compra
  * @property string $espacio_id
+ * @property string $fecha_fin_garantia 
+ * @property string $estado
  *
  * @property ActivoHardware $activoHardware
  * @property ActivoInfraestructura $activoInfraestructura
@@ -23,6 +25,22 @@ use Yii\helpers\ArrayHelper;
  */
 class ActivoInventariable extends \yii\db\ActiveRecord
 {
+    const ORDERED = 'Pedido';
+    const RECEIVED = 'Recibido';
+    const AWAITING_TAG = 'Esperando Etiquetado';
+    const AVAILABLE = 'Disponible';
+    const IN_USE = 'En Uso';
+    const BROKEN = 'Averiado';
+    const IN_REPAIR = 'En Reparación';
+    const IN_EXTERNAL_REPAIR = 'En Reparación (por terceros)';
+    const RMA = 'RMA';
+    const LOST = 'Perdido';
+    const LEND = 'Prestado';
+    const DISPOSED = 'Retirado';
+    
+    const MONTHS = 0;
+    const YEARS = 1;
+
     /**
      * @inheritdoc
      */
@@ -45,14 +63,15 @@ class ActivoInventariable extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'nombre', 'fecha_compra', 'precio_compra'], 'required'],
-            [['fecha_compra'], 'safe'],
+            [['codigo', 'nombre', 'fecha_compra', 'precio_compra','estado'], 'required'],
+            [['fecha_compra', 'fecha_fin_garantia'], 'safe'],
             [['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/'],
             [['espacio_id'], 'integer'],
-            [['codigo'], 'string', 'max' => 128],
+            [['codigo', 'estado'], 'string', 'max' => 128],
             [['nombre'], 'string', 'max' => 64],
             [['codigo'], 'unique'],
             [['precio_compra'], 'compare', 'compareValue' => 0, 'operator' => '>'],
+            [['espacio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Espacio::className(), 'targetAttribute' => ['espacio_id' => 'id']],
         ];
     }
 
@@ -63,11 +82,13 @@ class ActivoInventariable extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'codigo' => Yii::t('app', 'Asset Number'),
+            'codigo' => Yii::t('app', 'Asset Tag'),
             'nombre' => Yii::t('app', 'Name'),
             'fecha_compra' => Yii::t('app', 'Purchase Date'),
             'precio_compra' => Yii::t('app', 'Purchase Price'),
             'espacio_id' => Yii::t('app', 'Space'),
+            'fecha_fin_garantia' => Yii::t('app', 'Warranty Expiration Date'),
+            'estado' => Yii::t('app', 'Status'),
         ];
     }
     
@@ -141,5 +162,76 @@ class ActivoInventariable extends \yii\db\ActiveRecord
     public function getValoresCaracteristicasActivoInventariable()
     {
         return $this->hasMany(ValorCaracteristicaActivoInventariable::className(), ['activo_inventariable_id' => 'id']);
+    }
+    
+    
+    public function setFechaFinGarantia($lenght, $unit)
+    {
+        $fecha = new \DateTime($this->fecha_compra);
+        if ($unit == self::YEARS) {
+            $interval = 'P'.$lenght.'Y';
+        }
+        else{
+            $interval = 'P'.$lenght.'M';
+        }
+
+        $this->fecha_fin_garantia =  $fecha->add(new \DateInterval($interval))->format('Y-m-d');        
+    }
+    
+    
+    /**
+    * @return boolean
+    */
+    public function enGarantia()
+    {
+        $fecha = new \DateTime($this->fecha_fin_garantia);
+        $hoy = new \DateTime("now");
+        
+        return ($fecha > $hoy);
+    }  
+    
+    
+    /**
+    * @return string
+    */
+    public function getTextoGarantia()
+    {
+        return $this->enGarantia() ?
+                          Yii::t('app','Under Warranty')
+                        : Yii::t('app','Expired Warranty');
+    } 
+    
+    
+    /**
+    * @return array
+    */
+    public function getTiposGarantia()
+    {
+        return [
+            self::MONTHS => Yii::t('app','Months'),
+            self::YEARS  => Yii::t('app','Years')         
+        ];
+    }  
+    
+     
+    /**
+    * @return array
+    */
+    public function getEstados()
+    {
+        return [
+            self::ORDERED            => Yii::t('app','Ordered'),
+            self::RECEIVED           => Yii::t('app','Received'),
+            self::AWAITING_TAG       => Yii::t('app','Awaiting Tag'),
+            self::AVAILABLE          => Yii::t('app','Operational'),
+            self::IN_USE             => Yii::t('app','In Use'),
+            self::BROKEN             => Yii::t('app','Broken'),
+            self::IN_REPAIR          => Yii::t('app','In Repair'),
+            self::IN_EXTERNAL_REPAIR => Yii::t('app','In Repair (By a third company)'),
+            self::RMA                => Yii::t('app','RMA'),
+            self::LOST               => Yii::t('app','Lost'),
+            self::LEND               => Yii::t('app','Lend'),
+            self::DISPOSED           => Yii::t('app','Disposed'),           
+        ];
     }
 }

@@ -56,7 +56,8 @@ class Espacio extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Name'),
             'numeracion' => Yii::t('app', 'Space Number'),
-            'planta_edificio_id' => Yii::t('app', 'Floor')
+            'planta_edificio_id' => Yii::t('app', 'Floor'),
+            'edificio_id' => Yii::t('app', 'Building')
         ];
     }
 
@@ -68,6 +69,7 @@ class Espacio extends \yii\db\ActiveRecord
         return $this->hasMany(ActivoInventariable::className(), ['espacio_id' => 'id']); 
     }
 
+
     /**
     * @return \yii\db\ActiveQuery
     */
@@ -75,11 +77,18 @@ class Espacio extends \yii\db\ActiveRecord
     {
         return $this->hasOne(PlantaEdificio::className(), ['id' => 'planta_edificio_id']);
     }
-    
+      
 
     public function getPlantaEdificioList()
 	{	 
         $models = PlantaEdificio::find()->asArray()->all();
+        return ArrayHelper::map($models,'id', 'nombre');
+    }
+    
+    
+    public function getEdificioList()
+	{	 
+        $models = Edificio::find()->asArray()->all();
         return ArrayHelper::map($models,'id', 'nombre');
     }
 }

@@ -213,6 +213,7 @@ class PlantaEdificio extends \yii\db\ActiveRecord
         return $this->hasMany(Espacio::className(), ['planta_edificio_id' => 'id']);
     }
     
+    
     /**
     * @return \yii\db\ActiveQuery
     */
@@ -221,9 +222,22 @@ class PlantaEdificio extends \yii\db\ActiveRecord
         return $this->hasOne(Edificio::className(), ['id' => 'edificio_id']);
     }
     
+    
     public function getEdificioList() 
 	{	 
         $models = Edificio::find()->asArray()->all();
         return ArrayHelper::map($models,'id', 'nombre');
+    }
+    
+    
+    public static function getPlantaList($edificio_id) 
+	{	 
+        $models = PlantaEdificio::find()->where(['edificio_id' => $edificio_id])->all();
+        return ArrayHelper::toArray($models, [
+            PlantaEdificio::classname() => [
+                'id',
+                'name' => 'nombre',
+            ],
+        ]);
     }
 }

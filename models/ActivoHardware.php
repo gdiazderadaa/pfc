@@ -113,7 +113,7 @@ class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInherit
         return $this->hasMany(ElementoHardware::className(), ['activo_hardware_id' => 'activo_inventariable_id']);
     }
     
-        public function getTipo()
+    public function getTipo()
     {
         return "Hardware";
     }

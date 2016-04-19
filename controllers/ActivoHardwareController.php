@@ -64,6 +64,11 @@ class ActivoHardwareController extends Controller
     {
         $model = new ActivoHardware();
         
+        if (Yii::$app->request->post('garantia') != "") {
+            $model->parent->setFechaFinGarantia(Yii::$app->request->post('garantia'),
+                                                Yii::$app->request->post('unidad-garantia'));
+        }
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             DynamicRelations::relate($model, 'configuracionesActivoHardware', Yii::$app->request->post(), 'ConfiguracionActivoHardware', ConfiguracionActivoHardware::className());
             return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
@@ -83,7 +88,12 @@ class ActivoHardwareController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-       
+        
+        if (Yii::$app->request->post('garantia') != "") {
+            $model->parent->setFechaFinGarantia(Yii::$app->request->post('garantia'),
+                                                Yii::$app->request->post('unidad-garantia'));
+        }
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             DynamicRelations::relate($model, 'configuracionesActivoHardware', Yii::$app->request->post(), 'ConfiguracionActivoHardware', ConfiguracionActivoHardware::className());
             return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);

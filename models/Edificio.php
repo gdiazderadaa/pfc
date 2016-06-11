@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\UploadedFile;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "edificio".
@@ -146,4 +147,13 @@ class Edificio extends \yii\db\ActiveRecord
     { 
         return $this->hasMany(PlantaEdificio::className(), ['edificio_id' => 'id']); 
     } 
+    
+   /** 
+    * @return array 
+    */      
+    public static function getEdificios()
+	{	 
+        $models = Edificio::find()->asArray()->all();
+        return ArrayHelper::map($models,'id', 'nombre');
+    }
 }

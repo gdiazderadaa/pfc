@@ -12,11 +12,11 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "activo_software".
  *
  * @property string $activo_inventariable_id
- * @property string $subcategoria_activo_software_id
+ * @property string $categoria_id
  *
- * @property SubcategoriaActivoSoftware $subcategoriaActivoSoftware
+ * @property Categoria $categoria
  * @property ActivoInventariable $activoInventariable
- * @property ConfiguracionActivoHardware[] $configuracionActivoHardwares
+ * @property ConfiguracionActivoHardware[] $configuracionesActivoHardware
  * @property ActivoHardware[] $activoHardwares
  */
 class ActivoSoftware extends \yii\db\ActiveRecord implements ActiveRecordInheritanceInterface
@@ -49,11 +49,17 @@ class ActivoSoftware extends \yii\db\ActiveRecord implements ActiveRecordInherit
      */
     public function rules()
     {
-        return [
-            [['activo_inventariable_id', 'subcategoria_activo_software_id'], 'required'],
-            [['activo_inventariable_id', 'subcategoria_activo_software_id'], 'integer'],
-            [['activo_inventariable_id'], 'unique'],
-            [['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/']
+         return [
+            [['activo_inventariable_id', 'categoria_id','codigo','nombre','fecha_compra','precio_compra'], 'required'],
+            [['activo_inventariable_id', 'categoria_id'], 'integer'],
+            [['activo_inventariable_id'], 'unique'],      		
+        	[['fecha_compra'], 'safe'],
+        	[['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/'],
+        	[['codigo', 'estado'], 'string', 'max' => 128],
+        	[['nombre'], 'string', 'max' => 64],
+        	[['codigo'], 'unique'],
+        	[['precio_compra'], 'compare', 'compareValue' => 0, 'operator' => '>','type' => 'number'],
+         	[['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['categoria_id' => 'id']],
         ];
     }
 
@@ -64,22 +70,26 @@ class ActivoSoftware extends \yii\db\ActiveRecord implements ActiveRecordInherit
     {
         return [
             'activo_inventariable_id' => Yii::t('app', 'Asset'),
-            'subcategoria_activo_software_id' => Yii::t('app', 'Software Asset Subcategory'),
-            'espacio_id' => Yii::t('app', 'Space'),
+            'categoria_id' => Yii::t('app', 'Category'),
+            'codigo' => Yii::t('app', 'Asset Tag'),
+            'nombre' => Yii::t('app', 'Name'),
+            'fecha_compra' => Yii::t('app', 'Purchase Date'),
+            'precio_compra' => Yii::t('app', 'Purchase Price'),
+            'espacio_id' => Yii::t('app', 'Room'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubcategoriaActivoSoftware()
+    public function getCategoria()
     {
-        return $this->hasOne(SubcategoriaActivoSoftware::className(), ['id' => 'subcategoria_activo_software_id']);
+        return $this->hasOne(Categoria::className(), ['id' => 'categoria_id']);
     }
 
-    public function getSubcategorias() 
+   public function getCategorias() 
     { 
-        $models = SubcategoriaActivoSoftware::find()->asArray()->all(); 
+        $models = Categoria::find()->asArray()->where(['tipo' => $this->tipo])->all(); 
         return ArrayHelper::map($models,'id', 'nombre');  
     } 
 
@@ -94,7 +104,7 @@ class ActivoSoftware extends \yii\db\ActiveRecord implements ActiveRecordInherit
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getConfiguracionActivosHardware()
+    public function getConfiguracionesActivoHardware()
     {
         return $this->hasMany(ConfiguracionActivoHardware::className(), ['activo_software_id' => 'activo_inventariable_id']);
     }

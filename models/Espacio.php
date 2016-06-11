@@ -68,6 +68,28 @@ class Espacio extends \yii\db\ActiveRecord
     { 
         return $this->hasMany(ActivoInventariable::className(), ['espacio_id' => 'id']); 
     }
+    
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActivosInfraestructura()
+    {
+    	return $this->getActivosInventariables()
+    			->innerJoin(ActivoInfraestructura::tableName(),
+    					'activo_inventariable.id = activo_infraestructura.activo_inventariable_id');
+    }
+    
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActivosHardware()
+    {
+    	return $this->getActivosInventariables()
+    			->innerJoin(ActivoHardware::tableName(),
+    					'activo_inventariable.id = activo_hardware.activo_inventariable_id');
+    }
 
 
     /**
@@ -85,10 +107,23 @@ class Espacio extends \yii\db\ActiveRecord
         return ArrayHelper::map($models,'id', 'nombre');
     }
     
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEdificio()
+    {
+    	$model = $this->plantaEdificio;
+    	return $model->hasOne(Edificio::className(), ['id' => 'edificio_id']);
+    }
     
-    public function getEdificioList()
+    public static function getEspaciosByPlantaEdificioId($plantaEdificioId) 
 	{	 
-        $models = Edificio::find()->asArray()->all();
-        return ArrayHelper::map($models,'id', 'nombre');
+        $models = Espacio::find()->where(['planta_edificio_id' => $plantaEdificioId])->all();
+        return ArrayHelper::toArray($models, [
+            Espacio::classname() => [
+                'id',
+                'name' => 'nombre',
+            ],
+        ]);
     }
 }

@@ -6,9 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ConfiguracionActivoHardware */
 
-$this->title = Yii::t('app', 'Create {modelClass}', [
-                      'modelClass' => $model->singularObjectName(),
-                       ]);
+$this->title = Yii::t('app', 'Create {modelClass}', ['modelClass' => $model::singularObjectName()]);
+$this->params['breadcrumbs'][] = ['label' => $model::pluralObjectName(), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="configuracion-activo-hardware-create">

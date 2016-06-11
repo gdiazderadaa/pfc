@@ -93,7 +93,6 @@ class ValorCaracteristicaActivoInventariable extends \yii\db\ActiveRecord
 
     public function getCaracteristicasByTipoActivo($tipo)  
     {     
-        $models = Caracteristica::find()->andFilterWhere(['like','tipo_activo',$tipo])->asArray()->all(); 
-        return ArrayHelper::map($models,'id', 'nombre'); 
+return Caracteristica::find()->andFilterWhere(['like','tipo_activo',$tipo])->all();
     }
 }

@@ -38,3 +38,4 @@ extensions/
 #custom
 runtime/*
 web/assets/*
+.vscode/launch.json

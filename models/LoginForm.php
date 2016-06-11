@@ -7,6 +7,9 @@ use yii\base\Model;
 
 /**
  * LoginForm is the model behind the login form.
+ *
+ * @property User|null $user This property is read-only.
+ *
  */
 class LoginForm extends Model
 {
@@ -28,7 +31,7 @@ class LoginForm extends Model
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+            ['password', 'validatePasswordLdap'],
         ];
     }
 
@@ -45,9 +48,50 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, Yii::t('app','Incorrect username or password.'));
             }
         }
+    }
+    
+    public function validatePasswordLdap($attribute, $params)
+    {
+    	if (!$this->hasErrors()) {
+    		
+    		$conectado_LDAP = ldap_connect('localhost');
+    		ldap_set_option($conectado_LDAP, LDAP_OPT_PROTOCOL_VERSION, 3);
+    		ldap_set_option($conectado_LDAP, LDAP_OPT_REFERRALS, 0);
+    		ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
+    		
+    		if ($conectado_LDAP)
+    		{
+    			try {
+    				$autenticado_LDAP_personal = ldap_bind($conectado_LDAP, "cn={$this->username},ou=Personal,dc=ident,dc=uniovi,dc=es", $this->password);
+    			    			
+    			} catch (yii\base\ErrorException $e) {
+    				try {
+    					$autenticado_LDAP_alumnos = ldap_bind($conectado_LDAP, "cn={$this->username},ou=Alumnos,dc=ident,dc=uniovi,dc=es", $this->password);
+    				} catch (yii\base\ErrorException $e) {
+    				}
+    			}
+    			
+    			
+    			
+    			//$autenticado_LDAP = ldap_bind($conectado_LDAP, "{$this->username}@ident.uniovi.es", $this->password);
+    			if (isset($autenticado_LDAP_alumnos) || isset($autenticado_LDAP_personal)) {
+    				die("autenticado");
+    			}
+    			else{
+    				die("No autenticado");
+    			}
+    		}
+    		
+    		
+    		$user = $this->getUserLdap();
+    		
+    		if (!$user || !Yii::$app->ldap->authenticate($this->username,$this->password)) {
+    			$this->addError($attribute, Yii::t('app','Incorrect username or password.'));
+    		}
+    	}
     }
 
     /**
@@ -58,9 +102,17 @@ class LoginForm extends Model
     {
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
-        } else {
-            return false;
         }
+        return false;
+    }
+    
+    public function loginLdap()
+    {
+    	if ($this->validate()) {
+    		return Yii::$app->user->login($this->getUserLdap(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+    	} else {
+    		return false;
+    	}
     }
 
     /**
@@ -71,9 +123,18 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = Usuario::findByUsername($this->username);
         }
 
         return $this->_user;
+    }
+    
+    public function getUserLdap()
+    {
+    	if ($this->_user === false) {
+    		$this->_user = Usuario::findIdentity($this->username);
+    	}
+    
+    	return $this->_user;
     }
 }

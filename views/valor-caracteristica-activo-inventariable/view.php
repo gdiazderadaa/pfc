@@ -6,10 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ValorCaracteristicaActivoInventariable */
 
-$this->title = Yii::t('app', '{modelClass}:', [
-		               'modelClass' => $model->singularObjectName(),
-		               ]) . ' ' . $model->caracteristica->nombre;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
+$this->title = Yii::t('app', 'View {modelClass}', ['modelClass' => $model->nombre]);
+$this->params['breadcrumbs'][] = ['label' =>  $model->pluralObjectName(), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="valor-caracteristica-activo-inventariable-view">

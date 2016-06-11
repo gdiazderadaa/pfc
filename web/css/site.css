@@ -106,29 +106,13 @@ a.desc:after {
 }
 
 /*CUSTOM CSS*/
-body{
-    font-family:"Segoe UI", "Open Sans";
-}
-
-/*.navbar-nav > li > a{*/
-/* line-height: 40px;*/
-/*}*/
-/*.navbar-brand{*/
-/*    padding:10px 15px;*/
-/*}*/
+/*body{
+    font-family:"Segoe UI", "Open Sans" !important;
+}*/
 
 .dropdown-submenu ul{
     list-style-type:none;
 }
-
-/*.navbar-inverse{*/
-/*    border:none;*/
-/*}*/
-/*.navbar-inverse,*/
-/*.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{*/
-/*    background-color:#ffffff;*/
-/*    color: #000000;*/
-/*}*/
 
 .footer .container{
     font-size:75%;
@@ -136,4 +120,42 @@ body{
 
 .wrap > .container {
     padding: 90px 15px 20px;
+}
+
+input.no-label {
+    margin-top:25px;
+}
+
+.bootstrap-switch,
+.bootstrap-switch .bootstrap-switch-handle-on,
+.bootstrap-switch .bootstrap-switch-handle-off{
+    border-radius:0 !important;
+    -moz-border-radius:0 !important;
+    -webkit-border-radius:0 !important;
+}
+.bootstrap-switch .bootstrap-switch-handle-on{
+    background-color:#028980 !important;
+}
+.buttons-container{
+    margin-bottom:15px;
+}
+
+.sidebar-collapse .user-panel > .brand > img{
+    display: none;
+}
+
+.user-panel > .brand > img{
+    max-width: 210px;
+    width:100%;
+}
+
+button.close.remove-dynamic-relation{
+    padding:6px 5px;
+}
+li.form-group{
+    list-style-type: none;
+}
+
+table.details th{
+    text-align: right;
 }

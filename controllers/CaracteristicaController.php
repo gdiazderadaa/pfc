@@ -8,21 +8,37 @@ use app\models\CaracteristicaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * CaracteristicaController implements the CRUD actions for Caracteristica model.
  */
 class CaracteristicaController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['POST'],
                 ],
             ],
+//             'access' => [
+//             	'class' => \yii\filters\AccessControl::className(),
+//             	'only' => ['index','create','update','view'],
+//             	'rules' => [
+//             			// allow authenticated users
+//             			[
+//             					'allow' => true,
+//             					'roles' => ['@'],
+//             			],
+//             			// everything else is denied
+//             	],
+//            ],
         ];
     }
 
@@ -70,7 +86,6 @@ class CaracteristicaController extends Controller
             ]);
         }
     }
-    
 
     /**
      * Updates an existing Caracteristica model.
@@ -102,23 +117,38 @@ class CaracteristicaController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-        
-        try {
-            $this->findModel($id)->delete();
-        } catch (yii\db\IntegrityException $e) {
-            if($e->getCode() == 23000){
-                Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
-                'modelClass' => 'feature',
-                'modelClass2' => 'asset',
-                ]));
-                
-                return $this->redirect(['index']);
-            }
-        }
-
-        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
-            'modelClass' => 'feature',
-        ]));
+    }
+    
+    public function actionNombres($q = null) {
+    	$query = new yii\db\Query;
+    
+    	$query->select('nombre')
+    	->from('caracteristica')
+    	->where('nombre LIKE "%' . $q .'%"')
+    	->orderBy('nombre');
+    	$command = $query->createCommand();
+    	$data = $command->queryAll();
+    	$out = [];
+    	foreach ($data as $d) {
+    		$out[] = ['value' => $d['nombre']];
+    	}
+    	echo Json::encode($out);
+    }
+    
+    public function actionUnidades($q = null) {
+    	$query = new yii\db\Query;
+    
+    	$query->select('unidades')
+    	->from('caracteristica')
+    	->where('unidades LIKE "%' . $q .'%"')
+    	->orderBy('unidades');
+    	$command = $query->createCommand();
+    	$data = $command->queryAll();
+    	$out = [];
+    	foreach ($data as $d) {
+    		$out[] = ['value' => $d['unidades']];
+    	}
+    	echo Json::encode($out);
     }
 
     /**

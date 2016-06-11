@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use synatree\dynamicrelations\DynamicRelations;
 use app\models\ConfiguracionActivoHardware;
+use yii\data\ActiveDataProvider;
+
 
 /**
  * ActivoHardwareController implements the CRUD actions for ActivoHardware model.
@@ -50,8 +52,22 @@ class ActivoHardwareController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+    	
+        // Set dataProvider for the related ConfiguracionActivoHardware array
+        $configuracionesDataProvider = new ActiveDataProvider([
+            'query' => $model->getConfiguracionesActivoHardware(),
+        ]);
+        
+        // Set dataProvider for the related ConfiguracionActivoHardware array
+        $componentessDataProvider = new ActiveDataProvider([
+        		'query' => $model->getComponentesHardware(),
+        ]);
+        
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'configuraciones' => $configuracionesDataProvider,
+        	'componentes' => $componentessDataProvider,
         ]);
     }
 

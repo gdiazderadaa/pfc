@@ -10,8 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use synatree\dynamicrelations\DynamicRelations;
 use app\models\PlantaEdificio;
-use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
+use yii\data\ActiveDataProvider;
 
 /**
  * EdificioController implements the CRUD actions for Edificio model.
@@ -52,9 +51,39 @@ class EdificioController extends Controller
      */
     public function actionView($id)
     {
+    	$model = $this->findModel($id);
+    	
+    	// Set dataProvider for the related PlantaEdificio array
+    	$plantasEdificioDataProvider = new ActiveDataProvider([
+    			'query' => $model->getPlantasEdificio(),
+    	]);
+    	
         return $this->render('view', [
             'model' => $this->findModel($id),
+        	'dataProvider' => $plantasEdificioDataProvider,
         ]);
+    }
+    
+    /**
+     * Displays the floors of a single Building model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionViewPlantas($id)
+    {
+    	// Set dataProvider for the related ValorCaracteristicaModeloComponenteHardware array
+    	$query = PlantaEdificio::find()
+    	->andFilterWhere(['edificio_id' => $id]);
+    	$plantasDataProvider = new ActiveDataProvider([
+    			'query' => $query,
+    	]);
+    
+    	$model = $this->findModel($id);
+    
+    	return $this->renderAjax('view-plantas', [
+    			'dataProvider' => $plantasDataProvider,
+    			'model' => $model
+    	]);
     }
 
     /**
@@ -84,6 +113,11 @@ class EdificioController extends Controller
                     'model' => $model,
                 ]);
             }
+        }
+        else {
+        	return $this->render('create', [
+        			'model' => $model,
+        	]);
         }
     }
 

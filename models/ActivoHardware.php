@@ -12,13 +12,14 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "activo_hardware".
  *
  * @property string $activo_inventariable_id
- * @property string $subcategoria_activo_hardware_id
+ * @property string $categoria_id
+ *
  *
  * @property ActivoInventariable $activoInventariable
- * @property SubcategoriaActivoHardware $subcategoriaActivoHardware
+ * @property Categoria $categoria
  * @property ConfiguracionActivoHardware[] $configuracionesActivoHardware
  * @property ActivoSoftware[] $activoSoftwares
- * @property ElementoHardware[] $elementosHardware
+ * @property ComponenteHardware[] $componentesHardware
  */
 class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInheritanceInterface
 {
@@ -50,8 +51,10 @@ class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInherit
     public function rules()
     {
         return [
-            [['activo_inventariable_id', 'subcategoria_activo_hardware_id'], 'required'],
-            [['activo_inventariable_id', 'subcategoria_activo_hardware_id'], 'integer']
+            [['activo_inventariable_id', 'categoria_id'], 'required'],
+            [['activo_inventariable_id', 'categoria_id'], 'integer'],
+            [['activo_inventariable_id'], 'unique'],
+            [['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/']
         ];
     }
 
@@ -62,7 +65,7 @@ class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInherit
     {
         return [
             'activo_inventariable_id' => Yii::t('app', 'Asset'),
-            'subcategoria_activo_hardware_id' => Yii::t('app', 'Hardware Asset Subcategory'),
+            'categoria_id' => Yii::t('app', 'Category'),
             'espacio_id' => Yii::t('app', 'Space'),
         ];
     }
@@ -78,14 +81,14 @@ class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInherit
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubcategoriaActivoHardware()
+    public function getCategoria()
     {
-        return $this->hasOne(SubcategoriaActivoHardware::className(), ['id' => 'subcategoria_activo_hardware_id']);
+        return $this->hasOne(Categoria::className(), ['id' => 'categoria_id']);
     }
     
-    public function getSubcategorias() 
+   public function getCategorias() 
     { 
-        $models = SubcategoriaActivoHardware::find()->asArray()->all(); 
+        $models = Categoria::find()->asArray()->where(['tipo' => $this->tipo])->all(); 
         return ArrayHelper::map($models,'id', 'nombre');  
     } 
 
@@ -108,9 +111,9 @@ class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInherit
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getElementosHardware()
+    public function getComponentesHardware()
     {
-        return $this->hasMany(ElementoHardware::className(), ['activo_hardware_id' => 'activo_inventariable_id']);
+        return $this->hasMany(ComponenteHardware::className(), ['activo_hardware_id' => 'activo_inventariable_id']);
     }
     
     public function getTipo()

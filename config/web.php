@@ -5,20 +5,24 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'name' => 'Coruxa',
     'language'=>'es', // spanish
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
         'app\components\Bootstrap',
     ],
-    'modules' =>  [       
-        'user' => [
-            'class' => 'dektrium\user\Module',
-            'enableUnconfirmedLogin' => true,
-            'confirmWithin' => 21600,
-            'cost' => 12,
-            'admins' => ['admin']
-        ],
+    'modules' =>  [  
+    		'actionlog' => [
+    				'class' => 'cakebake\actionlog\Module',
+    		],
+//         'user' => [
+//             'class' => 'app\models\Usuario',
+//             'enableUnconfirmedLogin' => true,
+//             'confirmWithin' => 21600,
+//             'cost' => 12,
+//             'admins' => ['admin']
+//         ],
         'dynamicrelations' => [
             'class' => '\synatree\dynamicrelations\Module',
         ],
@@ -78,12 +82,35 @@ $config = [
         ]
     ],
     'components' => [
-        'assetManager' => array(
+    		'user' => [
+    				'identityClass' => 'app\models\Usuario',
+    		],
+    		'ldap' => [
+    				'class'=>'Edvlerblog\Ldap',
+    				'options'=> [
+    						'ad_port'      => 389,
+    						'domain_controllers'    => array('localhost'),
+    						//'account_suffix' =>  '@ident.uniovi.es',
+    						'base_dn' => 'dc=ident,dc=uniovi,dc=es',
+    						// for basic functionality this could be a standard, non privileged domain user (required)
+    						'admin_username' => 'cn=manager,dc=ident,dc=uniovi,dc=es',
+    						'admin_password' => 'secret',
+    						'autoConnect' => false
+    				],
+   				
+    		],
+        'assetManager' => [
             'linkAssets' => true,
-        ),
+        	'appendTimestamp' => true,
+             'bundles' => [
+                'dmstr\web\AdminLteAsset' => [
+                    'skin' => 'skin-epi-green',
+                ],
+            ],
+        ],
 
          'formatter' => [
-            'dateFormat' => 'dd/mm/yyyy',
+            'dateFormat' => 'dd/MM/yyyy',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'EUR',
@@ -91,6 +118,7 @@ $config = [
                 NumberFormatter::CURRENCY_SYMBOL => '&#8364;',
             ],
             'locale' => 'es-ES',
+            'nullDisplay' => '',
        ],
         'urlManager' => [
           'showScriptName' => false,
@@ -130,6 +158,27 @@ $config = [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+            ],
+        ],
+        'view' => [
+            'theme' => [
+                'class' => 'singrana\thememanager\components\ThemeManager',
+                'current' => 'adminLTE',
+
+                'themes'    => [
+                    'adminLTE'  => [
+                        'pathMap' => [
+                            // '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
+                            '@app/views' => '@app/themes/adminLTE'
+                        ],
+                    ],
+                    'default'  => [
+                        'pathMap' => [
+                            //'@app/views' => '@app/views'
+                             '@app/views' => '@app/themes/default'
+                        ],
+                    ],
+                ]
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),

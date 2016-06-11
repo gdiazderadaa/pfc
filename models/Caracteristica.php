@@ -10,11 +10,11 @@ use Yii;
  * @property string $id
  * @property string $nombre
  * @property string $unidades
- * @property string $tipo_activo 
+ * @property string $tipo_activo
  *
- * @property ValorCaracteristicaActivoInventariable[] $valorCaracteristicaActivoInventariables
- * @property ValorCaracteristicaElementoHardware[] $valorCaracteristicaElementoHardwares
- * @property ElementoHardware[] $elementoHardwares
+ * @property ValorCaracteristicaActivoInventariable[] $valoresCaracteristicasActivoInventariable
+ * @property ValorCaracteristicaModeloComponenteHardware[] $valoresCaracteristicasModeloComponenteHardware
+ * @property ModeloComponenteHardware[] $modelosComponenteHardware
  */
 class Caracteristica extends \yii\db\ActiveRecord
 {
@@ -43,7 +43,7 @@ class Caracteristica extends \yii\db\ActiveRecord
             [['nombre', 'tipo_activo'], 'required'],
             [['tipo_activo'], 'string'],
             [['nombre'], 'string', 'max' => 64],
-            [['unidades'], 'string', 'max' => 16]
+            [['unidades'], 'string', 'max' => 16],
         ];
     }
 
@@ -63,7 +63,7 @@ class Caracteristica extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getValorCaracteristicaActivosInventariables()
+    public function getValoresCaracteristicasActivoInventariable()
     {
         return $this->hasMany(ValorCaracteristicaActivoInventariable::className(), ['caracteristica_id' => 'id']);
     }
@@ -71,16 +71,16 @@ class Caracteristica extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getValorCaracteristicaElementosHardware()
+    public function getValoresCaracteristicasModeloComponenteHardware()
     {
-        return $this->hasMany(ValorCaracteristicaElementoHardware::className(), ['caracteristica_id' => 'id']);
+        return $this->hasMany(ValorCaracteristicaModeloComponenteHardware::className(), ['caracteristica_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getElementosHardware()
+    public function getModelosComponenteHardware()
     {
-        return $this->hasMany(ElementoHardware::className(), ['id' => 'elemento_hardware_id'])->viaTable('valor_caracteristica_elemento_hardware', ['caracteristica_id' => 'id']);
+        return $this->hasMany(ModeloComponenteHardware::className(), ['id' => 'modelo_componente_hardware_id'])->viaTable('valor_caracteristica_modelo_componente_hardware', ['caracteristica_id' => 'id']);
     }
 }

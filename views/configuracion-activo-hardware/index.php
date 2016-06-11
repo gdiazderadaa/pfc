@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ConfiguracionActivoHardwareSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', $searchModel->pluralObjectName());
+$this->title = $searchModel->pluralObjectName();
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="configuracion-activo-hardware-index">

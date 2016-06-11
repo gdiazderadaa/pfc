@@ -13,16 +13,7 @@ use app\models\ActivoInfraestructura;
 class ActivoInfraestructuraSearch extends ActivoInfraestructura
 {
         
-    public function attributes()
-    {
-        // add related fields to searchable attributes
-      return array_merge(parent::attributes(), [/*'activo_inventariable.codigo',
-                                                'activo_inventariable.nombre',
-                                                'activo_inventariable.fecha_compra',
-                                                'activo_inventariable.precio_compra',*/
-                                                /*'espacio.nombre',*/
-                                                'subcategoriaActivoInfraestructura.nombre']);
-    }
+
     
     /**
      * @inheritdoc
@@ -30,7 +21,7 @@ class ActivoInfraestructuraSearch extends ActivoInfraestructura
     public function rules()
     {
         return [
-            [['activo_inventariable_id', 'subcategoria_activo_infraestructura_id','espacio_id'], 'safe'],
+            [['categoria_id'], 'safe'],
         ];
     }
 
@@ -52,32 +43,56 @@ class ActivoInfraestructuraSearch extends ActivoInfraestructura
      */
     public function search($params)
     {
-        $query = ActivoInfraestructura::find();
-
-        // $query->joinWith(['subcategoriaActivoInfraestructura']);
+        $query = ActivoInfraestructura::find()->joinWith('parent')->leftJoin('espacio', '`espacio`.`id` = `activo_inventariable`.`espacio_id`')->joinWith('categoria');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        // $dataProvider->sort->attributes['espacio_id'] = [
-        //     'asc' => ['espacio.nombre' => SORT_ASC],
-        //     'desc' => ['espacio.nombre' => SORT_DESC],
-        // ];
+        $dataProvider->sort->attributes['codigo'] = [
+        		'asc' => ['activo_inventariable.codigo' => SORT_ASC],
+        		'desc' => ['activo_inventariable.codigo' => SORT_DESC],
+        ];
         
-        // $dataProvider->sort->attributes['subcategoria_activo_infraestructura_id'] = [
-        //     'asc' => ['subcategoria_activo_infraestructura.nombre' => SORT_ASC],
-        //     'desc' => ['subcategoria_activo_infraestructura.nombre' => SORT_DESC],
-        // ];
+        $dataProvider->sort->attributes['nombre'] = [
+        		'asc' => ['activo_inventariable.nombre' => SORT_ASC],
+        		'desc' => ['activo_inventariable.nombre' => SORT_DESC],
+        ];
+        
+        $dataProvider->sort->attributes['fecha_compra'] = [
+        		'asc' => ['activo_inventariable.fecha_compra' => SORT_ASC],
+        		'desc' => ['activo_inventariable.fecha_compra' => SORT_DESC],
+        ];
+        
+        $dataProvider->sort->attributes['precio_compra'] = [
+        		'asc' => ['activo_inventariable.precio_compra' => SORT_ASC],
+        		'desc' => ['activo_inventariable.precio_compra' => SORT_DESC],
+        ];
+        
+        $dataProvider->sort->attributes['espacio_id'] = [
+        		'asc' => ['espacio.nombre' => SORT_ASC],
+        		'desc' => ['espacio.nombre' => SORT_DESC],
+        ];
+        
+        $dataProvider->sort->attributes['categoria_id'] = [
+        		'asc' => ['categoria.nombre' => SORT_ASC],
+        		'desc' => ['categoria.nombre' => SORT_DESC],
+        ];
 
+        
+	    if (!($this->load($params) && $this->validate())) {
+	        return $dataProvider;
+	    }
 
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
-        // $query->andFilterWhere(['activo_inventariable_id' => $this->activo_inventariable_id])
-             $query->andFilterWhere(['like', 'subcategoria_activo_infraestructura.nombre' => $this->subcategoria_activo_infraestructura_id])
-             ->andFilterWhere(['like', 'espacio_id', $this->espacio_id]);
+        $query->andFilterWhere([
+            'activo_inventariable_id' => $this->activo_inventariable_id,
+            'categoria_id' => $this->categoria_id,
+        ])
+        ->andFilterWhere(['like', 'activo_inventariable.codigo', $this->codigo])
+        ->andFilterWhere(['like', 'activo_inventariable.nombre', $this->nombre])
+        ->andFilterWhere(['like', 'activo_inventariable.fecha_compra', $this->parent->fecha_compra])
+        ->andFilterWhere(['like', 'activo_inventariable.precio_compra', $this->precio_compra])
+        ->andFilterWhere(['like', 'activo_inventariable.espacio_id', $this->espacio_id]);
 
         return $dataProvider;
     }

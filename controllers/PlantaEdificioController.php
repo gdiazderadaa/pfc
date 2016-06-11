@@ -159,13 +159,13 @@ class PlantaEdificioController extends Controller
         return $this->redirect(['index']);
     }
     
-    public function actionPlanta() {
+    public function actionPlantasByEdificio() {
         $out = [];
         if (isset($_POST['depdrop_parents'])) {
             $parents = $_POST['depdrop_parents'];
             if ($parents != null) {
                 $edificio_id = $parents[0];
-                $out = PlantaEdificio::getPlantaList($edificio_id); 
+                $out = PlantaEdificio::getPlantasByEdificioId($edificio_id); 
                 // the getSubCatList function will query the database based on the
                 // cat_id and return an array like below:
                 // [

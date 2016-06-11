@@ -13,7 +13,7 @@ use Yii\helpers\ArrayHelper;
  * @property string $fecha_compra
  * @property string $precio_compra
  * @property string $espacio_id
- * @property string $fecha_fin_garantia 
+ * @property string $meses_garantia 
  * @property string $estado
  *
  * @property ActivoHardware $activoHardware
@@ -64,13 +64,13 @@ class ActivoInventariable extends \yii\db\ActiveRecord
     {
         return [
             [['codigo', 'nombre', 'fecha_compra', 'precio_compra','estado'], 'required'],
-            [['fecha_compra', 'fecha_fin_garantia'], 'safe'],
+            [['fecha_compra'], 'safe'],
             [['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/'],
-            [['espacio_id'], 'integer'],
+            [['espacio_id','meses_garantia'], 'integer'],
             [['codigo', 'estado'], 'string', 'max' => 128],
             [['nombre'], 'string', 'max' => 64],
             [['codigo'], 'unique'],
-            [['precio_compra'], 'compare', 'compareValue' => 0, 'operator' => '>'],
+            [['precio_compra'], 'compare', 'compareValue' => 0, 'operator' => '>','type' => 'number'],
             [['espacio_id'], 'exist', 'skipOnError' => true, 'targetClass' => Espacio::className(), 'targetAttribute' => ['espacio_id' => 'id']],
         ];
     }
@@ -86,8 +86,8 @@ class ActivoInventariable extends \yii\db\ActiveRecord
             'nombre' => Yii::t('app', 'Name'),
             'fecha_compra' => Yii::t('app', 'Purchase Date'),
             'precio_compra' => Yii::t('app', 'Purchase Price'),
-            'espacio_id' => Yii::t('app', 'Space'),
-            'fecha_fin_garantia' => Yii::t('app', 'Warranty Expiration Date'),
+            'espacio_id' => Yii::t('app', 'Room'),
+            'meses_garantia' => Yii::t('app', 'Warranty'),
             'estado' => Yii::t('app', 'Status'),
         ];
     }
@@ -119,6 +119,12 @@ class ActivoInventariable extends \yii\db\ActiveRecord
     public function getActivoInfraestructura()
     {
         return $this->hasOne(ActivoInfraestructura::className(), ['activo_inventariable_id' => 'id']);
+    }
+    
+    public function getEdificioList()
+	{	 
+        $models = Edificio::find()->asArray()->all();
+        return ArrayHelper::map($models,'id', 'nombre');
     }
 
     /**
@@ -231,7 +237,7 @@ class ActivoInventariable extends \yii\db\ActiveRecord
             self::RMA                => Yii::t('app','RMA'),
             self::LOST               => Yii::t('app','Lost'),
             self::LEND               => Yii::t('app','Lend'),
-            self::DISPOSED           => Yii::t('app','Disposed'),           
+            self::DISPOSED           => Yii::t('app','Disposed')
         ];
     }
 }

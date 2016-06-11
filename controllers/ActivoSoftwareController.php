@@ -10,6 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use synatree\dynamicrelations\DynamicRelations;
 use app\models\ValorCaracteristicaActivoInventariable;
+use yii\data\ActiveDataProvider;
+use app\models\ActivoHardwareSearch;
+
 
 /**
  * ActivoSoftwareController implements the CRUD actions for ActivoSoftware model.
@@ -50,8 +53,23 @@ class ActivoSoftwareController extends Controller
      */
     public function actionView($id)
     {
+    	$model = $this->findModel($id);
+    	 
+    	// Set dataProvider for the related ValorCaracteristicaActivoInventariable array
+    	$caracteristicas = new ActiveDataProvider([
+    			'query' => $model->parent->getValoresCaracteristicasActivoInventariable(),
+    	]);
+    	
+    	// Set dataProvider for the related ConfiguracionesActivoHardware array
+    	$hardware = new ActiveDataProvider([
+    			'query' => $model->getActivosHardware(),
+    	]);
+    	
+    	
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+        	'caracteristicas' => $caracteristicas,
+        	'hardware' => $hardware,
         ]);
     }
 
@@ -63,7 +81,9 @@ class ActivoSoftwareController extends Controller
     public function actionCreate()
     {
         $model = new ActivoSoftware();
-
+		
+        $model->estado = "NA";
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             DynamicRelations::relate($model->parent, 'valoresCaracteristicasActivoInventariable', Yii::$app->request->post(), 'ValorCaracteristicaActivoInventariable', ValorCaracteristicaActivoInventariable::className());
             return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
@@ -74,6 +94,33 @@ class ActivoSoftwareController extends Controller
         }
     }
 
+    /**
+     * Clones an existing ActivoSoftware model.
+     * If clone is successful, the browser will be redirected to the 'view' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionClone($id)
+    {
+    	$model = new ActivoSoftware();
+    	
+    	$model->estado = "NA";
+    
+    	if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    		return $this->redirect(['view', 'id' => $model->id]);
+    	} else {
+    		$sourceModel = $this->findModel($id);
+    		$model->attributes = $sourceModel->attributes;
+    
+    		//Clean unique properties or linked models
+    		$model->codigo = null;
+    
+    		return $this->render('clone', [
+    				'model' => $model,
+    		]);
+    	}
+    }
+    
     /**
      * Updates an existing ActivoSoftware model.
      * If update is successful, the browser will be redirected to the 'view' page.

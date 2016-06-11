@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PlantaEdificioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', $searchModel->pluralObjectName());
+$this->title = $searchModel->pluralObjectName();
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="planta-edificio-index">

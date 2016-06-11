@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use synatree\dynamicrelations\DynamicRelations;
 use app\models\ValorCaracteristicaActivoInventariable;
+use yii\data\ActiveDataProvider;
 
 /**
  * ActivoInfraestructuraController implements the CRUD actions for ActivoInfraestructura model.
@@ -50,8 +51,15 @@ class ActivoInfraestructuraController extends Controller
      */
     public function actionView($id)
     {
+    	$model = $this->findModel($id);
+    	 
+    	// Set dataProvider for the related ValorCaracteristicaModeloComponenteHardware array
+    	$caracteristicasDataProvider = new ActiveDataProvider([
+    			'query' => $model->getValoresCaracteristicasActivoInfraestructura(),
+    	]);
         return $this->render('view', [
             'model' => $this->findModel($id),
+        	'dataProvider' => $caracteristicasDataProvider,
         ]);
     }
 
@@ -72,6 +80,34 @@ class ActivoInfraestructuraController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Clones an existing ActivoInfraestructura model.
+     * If clone is successful, the browser will be redirected to the 'view' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionClone($id)
+    {
+    	$model = new ActivoInfraestructura();
+    
+    	if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    		return $this->redirect(['view', 'id' => $model->id]);
+    	} else {
+    		$sourceModel = $this->findModel($id);
+    		$model->attributes = $sourceModel->attributes;
+    
+    		//Clean unique properties
+    		$model->codigo = null;
+    		
+    		//Enable select2 to be initialized
+			$model->isNewRecord = false;
+    
+    		return $this->render('clone', [
+    				'model' => $model,
+    		]);
+    	}
     }
 
     /**

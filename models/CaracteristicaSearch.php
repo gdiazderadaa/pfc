@@ -43,6 +43,8 @@ class CaracteristicaSearch extends Caracteristica
     {
         $query = Caracteristica::find();
 
+        // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -55,13 +57,14 @@ class CaracteristicaSearch extends Caracteristica
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-                ->andFilterWhere(['like', 'unidades', $this->unidades])
-                ->andFilterWhere(['like', 'tipo_activo', $this->tipo_activo]);
+            ->andFilterWhere(['like', 'unidades', $this->unidades])
+            ->andFilterWhere(['like', 'tipo_activo', $this->tipo_activo]);
 
         return $dataProvider;
     }

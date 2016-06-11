@@ -5,12 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ConfiguracionActivoHardware */
 
-$this->title = Yii::t('app', 'Update {modelClass}:', [
-		               'modelClass' => $model->singularObjectName(),
-		               ]) . ' ' . $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', $model->pluralObjectName()), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->codigo, 'url' => ['view', 'id' => $model->activo_inventariable_id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->title = Yii::t('app', 'Update {modelClass}', ['modelClass' => $model->nombre]);
+$this->params['breadcrumbs'][] = ['label' =>  $model->pluralObjectName(), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="configuracion-activo-hardware-update">
 

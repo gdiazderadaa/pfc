@@ -9,6 +9,8 @@ use app\models\EspacioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
+use yii\data\ActiveDataProvider;
 
 /**
  * EspacioController implements the CRUD actions for Espacio model.
@@ -49,8 +51,22 @@ class EspacioController extends Controller
      */
     public function actionView($id)
     {
+    	$model = $this->findModel($id);
+    	
+    	// Set dataProvider for the related ActivoInfraestructura array
+    	$activosInfraestructura = new ActiveDataProvider([
+    			'query' => $model->getActivosInfraestructura(),
+    	]);
+    	
+    	// Set dataProvider for the related ActivoHardware array
+    	$activosHardware = new ActiveDataProvider([
+    			'query' => $model->getActivosHardware(),
+    	]);
+    	
         return $this->render('view', [
             'model' => $this->findModel($id),
+        	'activosInfraestructura' => $activosInfraestructura,
+        	'activosHardware' => $activosHardware
         ]);
     }
 
@@ -101,6 +117,9 @@ class EspacioController extends Controller
     {
         try {
             $this->findModel($id)->delete();
+            Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
+            		'modelClass' => 'space',
+            ]));
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
                 Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
@@ -110,9 +129,7 @@ class EspacioController extends Controller
             }
         }
 
-        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
-            'modelClass' => 'space',
-        ]));
+        
         return $this->redirect(['index']);
     }
 
@@ -130,5 +147,58 @@ class EspacioController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    public function actionEspaciosByPlantaEdificio() 
+    {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $planta_edificio_id = $parents[0];
+                $out = Espacio::getEspaciosByPlantaEdificioId($planta_edificio_id); 
+                // the getSubCatList function will query the database based on the
+                // cat_id and return an array like below:
+                // [
+                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+                // ]
+                echo Json::encode(['output'=>$out, 'selected'=>'']);
+                return;
+            }
+        }
+        echo Json::encode(['output'=>'', 'selected'=>'']);
+    }
+    
+    public function actionNombres($q = null) {
+    	$query = new yii\db\Query;
+    
+    	$query->select('nombre')
+    	->from('espacio')
+    	->where('nombre LIKE "%' . $q .'%"')
+    	->orderBy('nombre');
+    	$command = $query->createCommand();
+    	$data = $command->queryAll();
+    	$out = [];
+    	foreach ($data as $d) {
+    		$out[] = ['value' => $d['nombre']];
+    	}
+    	echo Json::encode($out);
+    }
+    
+    public function actionNumeraciones($q = null) {
+    	$query = new yii\db\Query;
+    
+    	$query->select('numeracion')
+    	->from('espacio')
+    	->where('numeracion LIKE "%' . $q .'%"')
+    	->orderBy('numeracion');
+    	$command = $query->createCommand();
+    	$data = $command->queryAll();
+    	$out = [];
+    	foreach ($data as $d) {
+    		$out[] = ['value' => $d['numeracion']];
+    	}
+    	echo Json::encode($out);
     }
 }

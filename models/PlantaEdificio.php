@@ -230,9 +230,9 @@ class PlantaEdificio extends \yii\db\ActiveRecord
     }
     
     
-    public static function getPlantaList($edificio_id) 
+    public static function getPlantasByEdificioId($edificioId) 
 	{	 
-        $models = PlantaEdificio::find()->where(['edificio_id' => $edificio_id])->all();
+        $models = PlantaEdificio::find()->where(['edificio_id' => $edificioId])->all();
         return ArrayHelper::toArray($models, [
             PlantaEdificio::classname() => [
                 'id',

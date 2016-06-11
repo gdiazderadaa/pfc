@@ -16,7 +16,7 @@ class EspacioSearch extends Espacio
     public function attributes()
     {
         // add related fields to searchable attributes
-      return array_merge(parent::attributes(), ['plantaEdificio.nombre']);
+      return array_merge(parent::attributes(), ['plantaEdificio.nombre', 'edificio.nombre']);
     }
     
     /**
@@ -26,7 +26,7 @@ class EspacioSearch extends Espacio
     {
         return [
             [['id'], 'integer'],
-            [['nombre', 'numeracion','planta_edificio_id'], 'safe'],
+            [['nombre', 'numeracion','planta_edificio_id', 'edificio_id'], 'safe'],
         ];
     }
 
@@ -50,15 +50,20 @@ class EspacioSearch extends Espacio
     {
         $query = Espacio::find();
         
-        $query->joinWith('plantaEdificio');
+        $query->with(['plantaEdificio','plantaEdificio.edificio']);
+                
         
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
         $dataProvider->sort->attributes['planta_edificio_id'] = [
-            'asc' => ['plantaEdificio.nombre' => SORT_ASC],
-            'desc' => ['plantaEdificio.nombre' => SORT_DESC],
+            'asc' => ['planta_edificio.nombre' => SORT_ASC],
+            'desc' => ['planta_edificio.nombre' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['edificio_id'] = [
+            'asc' => ['edificio.nombre' => SORT_ASC],
+            'desc' => ['edificio.nombre' => SORT_DESC],
         ];
 
         if (!($this->load($params) && $this->validate())) {
@@ -67,7 +72,8 @@ class EspacioSearch extends Espacio
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
             ->andFilterWhere(['like', 'numeracion', $this->numeracion])
-            ->andFilterWhere(['like', 'plantaEdificio.nombre', $this->edificio_id]);
+            ->andFilterWhere(['like', 'planta_edificio.nombre', $this->plantaEdificio->nombre])
+            ->andFilterWhere(['like', 'edificio.nombre', $this->edificio->nombre]);
 
         return $dataProvider;
     }

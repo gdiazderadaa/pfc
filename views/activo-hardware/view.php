@@ -121,6 +121,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
+                    	'emptyText' => Yii::t('app','This {modelClass} has no {features} yet',[
+                    		'modelClass' => $model->singularObjectName(),
+                    		'features' => app\models\ActivoSoftware::pluralObjectName()
+                    	]),
                         'dataProvider' => $configuraciones,
                         'label' => function($model){ 
                         				return  $model->activoSoftware->categoria->nombre; } ,
@@ -132,7 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         
         <div class="col-md-4">
-        	<div class="box box-epi-blue">
+        	<div class="box box-epi-gold">
                 <div class="box-header">
                     <h3 class="box-title"><?= app\models\ComponenteHardware::pluralObjectName() ?></h3>
                 </div>
@@ -141,6 +145,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
+                    	'emptyText' => Yii::t('app','This {modelClass} has no {features} yet',[
+                   			'modelClass' => $model->singularObjectName(),
+                    		'features' => app\models\ComponenteHardware::pluralObjectName()
+                    	]),
                         'dataProvider' => $configuraciones,
                         'label' => function($model){ 
                         				return  $model->modelo->categoria->nombre; } ,

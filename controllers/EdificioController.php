@@ -99,9 +99,14 @@ class EdificioController extends Controller
             
             // process uploaded image file instance
             $image = $model->uploadImage();
-
+			
             if ($model->save()) {
                 DynamicRelations::relate($model, 'plantasEdificio', Yii::$app->request->post(), 'PlantaEdificio', PlantaEdificio::className());
+                $plantas = $model->getPlantasEdificio()->all();
+                
+                foreach ($plantas as $planta) {
+                	$planta->uploadImageFromDynamicRelations();
+                }
                 // upload only if valid uploaded file instance found
                 if ($image !== false) {
                     $path = $model->getImageFile();
@@ -186,6 +191,9 @@ class EdificioController extends Controller
                  if (!$model->deleteImage()) {
                     Yii::$app->session->setFlash('error', Yii::t('app','Error deleting image'));
                 }
+                Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
+                		'modelClass' => $model->singularObjectName(),
+                ]));
             }       
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
@@ -193,22 +201,11 @@ class EdificioController extends Controller
                 'modelClass' => $model->singularObjectName(),
                 'modelClass2' => $model->attributeLabels['planta_edificio_id'],
                 ]));
-                
-                return $this->redirect(['index']);
             }
         }
 
-        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
-            'modelClass' => $model->singularObjectName(),
-        ]));
-        
-        if(! Yii::$app->request->isAjax){
-                return $this->redirect(['index']);
-        }
-        else
-        {
-                return "OK";
-        }
+        return $this->redirect(['index']);
+
     }
 
     /**

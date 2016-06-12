@@ -79,7 +79,9 @@ class PlantaEdificioController extends Controller
                 }
                 return $this->redirect(['view', 'id'=>$model->id]);
             } else {
-                // error in saving model
+                return $this->render('create', [
+	            	'model'=>$model,
+	        	]);
             }
         }
         return $this->render('create', [

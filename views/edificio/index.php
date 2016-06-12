@@ -27,8 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-info"></i><?= Yii::t('app','About')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','Buildings are intended to represent actual buildings within a University.') ?></li>
+	    	<li><?= Yii::t('app','{modelClass} are intended to represent actual buildings within a University.',['modelClass' => $searchModel->pluralObjectName(),]) ?></li>
 	    	<li><?= Yii::t('app','Every Building has a unique name, an address and an optional image.') ?></li>
+	    	<li><?= Yii::t('app','Every {modelClass} has a unique {name}, an {address} and an optional {image}.',[
+				    			'modelClass' => $searchModel->singularObjectName(),
+				    			'name' => $searchModel->getAttributeLabel('nombre'),
+	    						'address' => $searchModel->getAttributeLabel('direccion'),
+	    						'image' => $searchModel->getAttributeLabel('image'),
+	    	]) ?></li>
 	    </ul>    
 	</div>
 
@@ -36,8 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','To add a new Building click on the "Create" button on the top right of the list.') ?></li>
-	    	<li><?= Yii::t('app','To view the floors, the full details, update or delete an existing Building click on one of the icons located at the end of each row') ?></li>
+	    	<li><?= Yii::t('app','To add a new {modelClass} click on the "Create" button on the top right of the list.',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','To view the full details, update or delete an existing {modelClass} click on one of the icons located at the end of each row',['modelClass' => $searchModel->singularObjectName()]) ?></li>
 	    </ul>    
 	</div>
 

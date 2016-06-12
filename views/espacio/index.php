@@ -19,8 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-info"></i><?= Yii::t('app','About')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','Rooms are every single space within a building floor, suitable to contain assets.') ?></li>
-	    	<li><?= Yii::t('app','Every Room has a unique number, a descriptive name and the building floor where is located.') ?></li>
+	    	<li><?= Yii::t('app','{modelClass} are every single space within a building floor, suitable to contain assets.',['modelClass' => $searchModel->pluralObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','Every {modelClass} has a unique {number}, a {name} and the {floor} where is located.',[
+	    						'modelClass' => $searchModel->singularObjectName(),
+	    						'name' => $searchModel->getAttributeLabel('numeracion'),
+	    						'number' => $searchModel->getAttributeLabel('nombre'),	
+	    						'floor' => $searchModel->getAttributeLabel('planta_edificio_id'),
+	    	]) ?></li>
 	    </ul>    
 	</div>
 
@@ -28,9 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','To add a new Room click on the "Create" button on the top right of the list.') ?></li>
-	    	<li><?= Yii::t('app','To view, update or delete an existing Room click on one of the icons located at the end of each row') ?></li>
-	    </ul>    
+	    	<li><?= Yii::t('app','To add a new {modelClass} click on the "Create" button on the top right of the list.',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','To view the full details, update or delete an existing {modelClass} click on one of the icons located at the end of each row',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    </ul>   
 	</div>
 
     <div class="row">

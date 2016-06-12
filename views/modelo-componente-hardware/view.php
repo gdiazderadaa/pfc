@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['label' => Yii::t('app', 'Update'), 'url' => ['update', 'id' => $model->id]],
                             ['label' => Yii::t('app', 'Delete'), 'url' => ['delete', 'id' => $model->id]],
                         	['label' => Yii::t('app', 'Create New'), 'url' => ['create']],
-                            ['label' => Yii::t('app', 'Create Hardware Component(s)'), 'url' => ['componente-hardware/create', 'modelo_componente_hardware_id' => $model->id]],
+                            ['label' => Yii::t('app', 'Create {modelClass}', ['modelClass' => app\models\ComponenteHardware::singularObjectName()]), 'url' => ['componente-hardware/create', 'modelo_componente_hardware_id' => $model->id]],
                         ],
                     ]);
                 ?>
@@ -96,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'value'=>function ($model, $key, $index, $widget) { 
                                     return Html::a($model->numero_serie,  
                                         ['componente-hardware/view', 'id' => $model->id], 
-                                        ['title'=>Yii::t('app','View Hardware Component details')]);
+                                        ['title'=>Yii::t('app','View {modelClass} details',['modelClass' => app\models\ComponenteHardware::singularObjectName()])]);
                                 },
                                 'format'=>'raw',
                                 'width' => '22%'  
@@ -119,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     if ($model->activoHardware != null) {
                                         return Html::a($model->activoHardware->nombre,  
                                             ['activo-hardware/view', 'id' => $model->activo_hardware_id], 
-                                            ['title'=>Yii::t('app','View Hardware Asset details')]);
+                                              ['title'=>Yii::t('app','View {modelClass} details',['modelClass' => app\models\ActivoHardware::singularObjectName()])]);
                                     } else {
                                         return null;
                                     }    
@@ -198,7 +198,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
-                    	'emptyText' => Yii::t('app','This model has no features yet'),
+                    	'emptyText' => Yii::t('app','This {modelClass} has no {features} yet',[
+                    						'modelClass' => $model->singularObjectName(),
+                    						'features' => app\models\Caracteristica::pluralObjectName()
+                    					]),
                         'dataProvider' => $dataProvider,
                         'label' => function($model){ 
                         				return  $model->caracteristica->unidades != null ? 

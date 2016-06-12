@@ -81,7 +81,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
-                    	'emptyText' => Yii::t('app','This asset has no features yet'),
+                    	'emptyText' => Yii::t('app','This {modelClass} has no {features} yet',[
+                    						'modelClass' => $model->singularObjectName(),
+                    						'features' => app\models\Caracteristica::pluralObjectName()
+                    					]),
                         'dataProvider' => $dataProvider,
                         'label' => function($model){ 
                         				return  $model->caracteristica->unidades != null ? 

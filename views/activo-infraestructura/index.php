@@ -1,8 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-use kartik\widgets\Select2;
 use kartik\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -18,8 +17,18 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-info"></i><?= Yii::t('app','About')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','Infrastructure Assets stand for every single object being part of any building infrastructure.') ?></li>
-	    	<li><?= Yii::t('app','Every Infrastructure Asset has a unique Asset Tag, Name, Category, Status, Purchase Date, Purchase Price is located within a Room.') ?></li>
+	    	<li><?= Yii::t('app','{modelClass} stand for every single object being part of any building infrastructure.',['modelClass' => $searchModel->pluralObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','Every {modelClass} has a unique {codigo}, {nombre}, {categoria}, {fecha_compra}, {precio_compra} and {espacio}.',
+	    						[
+	    							'modelClass' => $searchModel->singularObjectName(),
+	    							'codigo' => $searchModel->getAttributeLabel('codigo'),
+    								'nombre' => $searchModel->getAttributeLabel('nombre'),
+    								'categoria' => $searchModel->getAttributeLabel('categoria_id'),
+    								'estado' => $searchModel->getAttributeLabel('estado'),
+    								'fecha_compra' => $searchModel->getAttributeLabel('fecha_compra'),
+    								'precio_compra' => $searchModel->getAttributeLabel('precio_compra'),
+    								'espacio' => $searchModel->getAttributeLabel('espacio_id'),
+	    	]) ?></li>
 	    </ul>    
 	</div>
 
@@ -27,8 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','To add a new Infrastructure Asset click on the "Create" button on the top right of the list.') ?></li>
-	    	<li><?= Yii::t('app','To clone, view the full details, update or delete an existing Infrastructure Asset click on one of the icons located at the end of each row') ?></li>
+	    	<li><?= Yii::t('app','To add a new {modelClass} click on the "Create" button on the top right of the list.',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','To clone, view the full details, update or delete an existing {modelClass} click on one of the icons located at the end of each row',['modelClass' => $searchModel->singularObjectName()]) ?></li>
 	    </ul>    
 	</div>
 

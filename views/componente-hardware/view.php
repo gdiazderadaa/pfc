@@ -135,7 +135,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
-                    	'emptyText' => Yii::t('app','This component has no child components yet'),
+                    	'emptyText' => Yii::t('app','This {modelClass} has no {features} yet',[
+                    						'modelClass' => $model->singularObjectName(),
+                    						'features' => $model->pluralObjectName()
+                    					]),
                         'dataProvider' => $dataProvider,
                         'label' => function($model){ 
                         				return  $model->parteComponenteHardware->modeloComponenteHardware->categoria->nombre; },

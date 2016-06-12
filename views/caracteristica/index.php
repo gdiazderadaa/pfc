@@ -20,9 +20,18 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-info"></i><?= Yii::t('app','About')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','Features are any attribute an asset or component may have.') ?></li>
-	    	<li><?= Yii::t('app','Every Feature has a unique name, an optional unit of measurement and applies to a type of Asset / Hardware Component Model.') ?></li>
-	    	<li><?= Yii::t('app','The value of a Feature is entered at edit/creation time of the Asset / Hardware Component Model') ?></li>
+	    	<li><?= Yii::t('app','{modelClass} are any attribute an asset or component may have.',['modelClass' => $searchModel->pluralObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','Every {modelClass} has a unique {name} and applies to a type of {asset} / {component model}.',[
+				    			'modelClass' => $searchModel->singularObjectName(),
+				    			'name' => $searchModel->getAttributeLabel('nombre'),
+	    						'asset' => app\models\ActivoInventariable::singularObjectName(),
+	    						'component model' => app\models\ComponenteHardware::singularObjectName()
+	    	]) ?></li>
+	    	<li><?= Yii::t('app','The value of a {modelClass} his entered at edit/creation time of the {asset} / {component model}.',[
+				    			'modelClass' => $searchModel->singularObjectName(),
+	    						'asset' => app\models\ActivoInventariable::singularObjectName(),
+	    						'component model' => app\models\ComponenteHardware::singularObjectName()
+	    	]) ?></li>
 	    </ul>    
 	</div>
 

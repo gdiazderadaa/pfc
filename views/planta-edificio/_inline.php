@@ -28,19 +28,22 @@ else
     $attr = "[new][$uniq]";
 }
 
+
+
+$js = <<<JS
+$(function() {
+	console.log("Input #{$uniq}");
+    $("#{$uniq}").fileinput({
+    	"fileTypeSettings" :"image",
+        "allowedFileExtensions": ["jpg","gif","png"],
+        "showRemove": "true",
+        "showUpload":"false",
+        "language":"es",                               
+ 	});
+});
+JS;
 if( $model->isNewRecord ){
-    $this->registerJs('$(document).ready(function(){
-                        console.log("Input #'.$uniq.'");
-                        $("#'.$uniq.'").fileinput({
-                            "fileTypeSettings" :"image",
-                            "allowedFileExtensions": ["jpg","gif","png"],
-                            "showRemove: "true",
-                            "showUpload":"false",
-                            "language":"es",                               
-                        });
-                                          
-                });
-                    ', \yii\web\VIEW::POS_END,'"'.$uniq.'"');
+	$this->registerJs($js);
 }
 
 
@@ -48,7 +51,7 @@ if( $model->isNewRecord ){
 
 <div class="PlantaEdificio-form form" <?= $removeAttr; ?>>
     
-    <input type="text" class="form-control" placeholder="Nombre" name="<?php echo $frag.'[nombre]' ?>" value="<?php echo $model->nombre ?>" />
+    <input type="text" class="form-control" placeholder="Nombre" id="<?php echo $frag.'[nombre]' ?>"  name="<?php echo $frag.'[nombre]' ?>" value="<?php echo $model->nombre ?>" />
     
     <?php
     if($model->isNewRecord || !isset($model->imagen) || !isset($model->imagen_servidor)){

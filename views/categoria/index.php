@@ -19,8 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-info"></i><?= Yii::t('app','About')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','Categories are intended to classify hardware, software and infrastructure assets into smaller groups.') ?></li>
-	    	<li><?= Yii::t('app','Every Category has a unique name and applies to a type of Asset / Hardware Component Model.') ?></li>
+	    	<li><?= Yii::t('app','{modelClass} are intended to classify hardware, software and infrastructure assets into smaller groups.',['modelClass' => $searchModel->pluralObjectName()]) ?> ?></li>
+	    	<li><?= Yii::t('app','Every {modelClass} has a unique {name} and applies to a type of {asset} / {component model}.',[
+				    			'modelClass' => $searchModel->singularObjectName(),
+				    			'name' => $searchModel->getAttributeLabel('nombre'),
+	    						'asset' => app\models\ActivoInventariable::singularObjectName(),
+	    						'component model' => app\models\ComponenteHardware::singularObjectName()
+	    	]) ?></li>
 	    </ul>    
 	</div>
 
@@ -28,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','To add a new Category click on the "Create" button on the top right of the list.') ?></li>
-	    	<li><?= Yii::t('app','To view, update or delete an existing Category click on one of the icons located at the end of each row') ?></li>
+	    	<li><?= Yii::t('app','To add a new {modelClass} click on the "Create" button on the top right of the list.',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','To view the full details, update or delete an existing {modelClass} click on one of the icons located at the end of each row',['modelClass' => $searchModel->singularObjectName()]) ?></li>
 	    </ul>    
 	</div>
 

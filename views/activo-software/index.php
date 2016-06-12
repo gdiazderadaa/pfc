@@ -19,8 +19,16 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-info"></i><?= Yii::t('app','About')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','Software Assets stand for every single software suitable to be installed in a computer.') ?></li>
-	    	<li><?= Yii::t('app','Every Software Asset has a unique Asset Tag, Name, Category, Purchase Date and a Purchase Price.') ?></li>
+	    	<li><?= Yii::t('app','{modelClass} stand for every single software suitable to be installed in a computer.',['modelClass' => $searchModel->pluralObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','Every {modelClass} has a unique {codigo}, {nombre}, {categoria}, {fecha_compra}, {precio_compra} and {espacio}.',
+	    						[
+	    							'modelClass' => $searchModel->singularObjectName(),
+	    							'codigo' => $searchModel->getAttributeLabel('codigo'),
+    								'nombre' => $searchModel->getAttributeLabel('nombre'),
+    								'categoria' => $searchModel->getAttributeLabel('categoria_id'),
+    								'fecha_compra' => $searchModel->getAttributeLabel('fecha_compra'),
+    								'precio_compra' => $searchModel->getAttributeLabel('precio_compra'),
+	    	]) ?></li>
 	    </ul>    
 	</div>
 

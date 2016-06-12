@@ -122,7 +122,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'table table-hover details'
                         ],
                         'dataProvider' => $caracteristicas,
-                    	'emptyText' => Yii::t('app','This asset has no features yet'),
+                    	'emptyText' => Yii::t('app','This {modelClass} has no {features} yet',[
+                    						'modelClass' => $model->singularObjectName(),
+                    						'features' => app\models\Caracteristica::pluralObjectName()
+                    					]),
                         'label' => function($model){ 
                         				return  $model->caracteristica->unidades != null ? 
                         						$model->caracteristica->nombre.'('.$model->caracteristica->unidades.')' 
@@ -143,7 +146,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
-                    	'emptyText' => Yii::t('app','This asset has not being used yet'),
+                    	'emptyText' => Yii::t('app','This {modelClass} has not been installed in any {features} yet',[
+                    						'modelClass' => $model->singularObjectName(),
+                    						'features' => app\models\ActivoHardware::singularObjectName()
+                    					]),
                         'dataProvider' => $hardware,
                         'label' => 'codigo',
                         'value' => function($model){ 

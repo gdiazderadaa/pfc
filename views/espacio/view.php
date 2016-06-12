@@ -49,14 +49,14 @@ $this->params['breadcrumbs'][] = $this->title;
 				            'nombre',
 				            'numeracion',
 				            [
-				                'label' => $model->plantaEdificio->attributeLabels()['edificio_id'],
+				                'label' => $model->plantaEdificio->getAttributeLabel('edificio_id'),
 				                'value' => Html::a($model->plantaEdificio->edificio->nombre,  
 				                                        ['edificio/view', 'id' => $model->plantaEdificio->edificio_id], 
-				                                        ['title'=>Yii::t('app','View Building')]),
+				                                        ['title'=>Yii::t('app','View {modelClass}',['modelClass' => $model->plantaEdificio->edificio->singularObjectName()])]),
 			            		'format' => 'raw'
 				            ],
 				            [
-				                'label' => $model->attributeLabels()['planta_edificio_id'],
+				                'label' => $model->getAttributeLabel('planta_edificio_id'),
 				                'value' => $model->plantaEdificio->nombre,
 				            ],
 				        ],
@@ -68,14 +68,18 @@ $this->params['breadcrumbs'][] = $this->title;
          <div class="col-lg-4">
         	<div class="box box-epi-blue">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('app','{modelClass} in this Room',['modelClass' => app\models\ActivoInfraestructura::pluralObjectName()]) ?></h3>
+                    <h3 class="box-title"><?= Yii::t('app','{modelClass} in this {room}',[
+                    						'modelClass' => app\models\ActivoInfraestructura::pluralObjectName(),
+                    						'room' => $model->singularObjectName()]) ?></h3>
                 </div>
                 <div class="box-body table-responsive no-padding">
                     <?= KeyValueListView::widget([
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
-                    	'emptyText' => Yii::t('app','There are no assets in this room'),
+                    	'emptyText' => Yii::t('app','There are no {modelClass} in this {room}',[
+                    						'modelClass' => app\models\ActivoInfraestructura::pluralObjectName(),
+                    						'room' => $model->singularObjectName()]),
                         'dataProvider' => $activosInfraestructura,
                         'label' => function($model){ 
                         				return  $model->codigo; } ,
@@ -92,14 +96,18 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-4">
         	<div class="box box-epi-gold">
                 <div class="box-header">
-                    <h3 class="box-title"><?= Yii::t('app','{modelClass} in this Room',['modelClass' => ActivoHardware::pluralObjectName()]) ?></h3>
+                    <h3 class="box-title"><?= Yii::t('app','{modelClass} in this {room}',[
+                    						'modelClass' => app\models\ActivoHardware::pluralObjectName(),
+                    						'room' => $model->singularObjectName()]) ?></h3>
                 </div>
                 <div class="box-body table-responsive no-padding">
                     <?= KeyValueListView::widget([
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
-                    	'emptyText' => Yii::t('app','There are no assets in this room'),
+                    	'emptyText' => Yii::t('app','There are no {modelClass} in this {room}',[
+                    						'modelClass' => app\models\ActivoHardware::pluralObjectName(),
+                    						'room' => $model->singularObjectName()]),
                         'dataProvider' => $activosHardware,
                         'label' => function($model){ 
                         				return  $model->codigo; } ,

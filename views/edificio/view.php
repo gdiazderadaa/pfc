@@ -104,6 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
+                    	'emptyText' => Yii::t('app','This building has no floors yet'),
                         'dataProvider' => $dataProvider,
                         'label' => function($model){ return $model->nombre ; }   ,
 						'format' => 'raw',

@@ -24,7 +24,7 @@ use kartik\widgets\Typeahead;
     </ul> 
 </div>
 
-<div class="alert alert-warning-white alert-dismissible <?= $model->componentesHardware == null ? 'hidden' : ''; ?>" >
+<div class="alert alert-warning alert-dismissible <?= $model->componentesHardware == null ? 'hidden' : ''; ?>" >
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <p><i class="icon fa fa-warning"></i><?= Yii::t('app','The inventory cannot be enabled because there are {modelClass} linked to the model', [
                                 'modelClass' => \app\models\ComponenteHardware::pluralObjectName()

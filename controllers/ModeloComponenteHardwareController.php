@@ -126,7 +126,10 @@ class ModeloComponenteHardwareController extends Controller
         // when it's in disabled mode
 		$inventario = $model->inventario;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        	$model->inventario = $inventario;
+        	if ($model->inventario == null){
+        		$model->inventario = $inventario;
+        	}
+        	
         	$model->save();
             DynamicRelations::relate($model, 'valoresCaracteristicasModeloComponenteHardware', Yii::$app->request->post(), 'ValorCaracteristicaModeloComponenteHardware', ValorCaracteristicaModeloComponenteHardware::className());
             return $this->redirect(['view', 'id' => $model->id]);

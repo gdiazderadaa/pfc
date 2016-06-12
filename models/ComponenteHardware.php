@@ -41,6 +41,7 @@ class ComponenteHardware extends \yii\db\ActiveRecord
     const DISPOSED = 'Retirado';
     const INVENTORY_OFF = 'Inventario desactivado';
     
+    public $cantidad;
     
     /**
      * @inheritdoc
@@ -82,8 +83,12 @@ class ComponenteHardware extends \yii\db\ActiveRecord
             [['numero_serie'], 'required','when' => $inventario, 'whenClient' => "function (attribute, value) {
                 return $('#componentehardware-estado').val() != '".self::INVENTORY_OFF."';
             }"],
+        	[['cantidad'], 'required','when' => $inventario],
+        	[['cantidad'],'integer'],
+        	[['cantidad'],'compare', 'compareValue' => 0, 'operator' => '>'],
         ];
     }
+    
     
      /**
      * @return array
@@ -91,7 +96,7 @@ class ComponenteHardware extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['Create'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','activo_hardware_id'];
+        $scenarios['Create'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','activo_hardware_id','cantidad'];
         $scenarios['Update'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','activo_hardware_id','numero_serie'];
         $scenarios['Clone'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','activo_hardware_id','numero_serie'];
         return $scenarios;
@@ -323,17 +328,28 @@ class ComponenteHardware extends \yii\db\ActiveRecord
     */ 
     public static function getComponentesByModelo($modeloId) 
 	{	
-        $models = ComponenteHardware::findAll(['modelo_componente_hardware_id'=>$modeloId])
-        			->where(['not in', 'id', Parte]);
-        return ArrayHelper::toArray($models, [
-            ComponenteHardware::classname() => [
-                'id',
-                'name' => function($model){
-                			return $model->numero_serie != null ? 
-                						$model->numero_serie : 
-                						Yii::t('app', 'Unique part (inventory off)');
-                }
-            ],
-        ]);
+
+        $models = ComponenteHardware::find()
+         			->where(['modelo_componente_hardware_id'=>$modeloId])->all();
+//         			->joinWith('modeloComponenteHardware')
+//          			->where(['modelo_componente_hardware.inventario' => 0])
+//          			->orWhere(['not in','componente_hardware.id',ParteComponenteHardware::find()->select('parte_componente_hardware_id')->distinct()])->all();
+        	
+         if (sizeof($models) > 0) {
+        	return ArrayHelper::toArray($models, [
+        			ComponenteHardware::classname() => [
+        				'id',
+        				'name' => function($model){
+	        				return $model->numero_serie != null ?
+	        				$model->numero_serie :
+	        				Yii::t('app', 'Unique part (inventory off)');
+        				}
+        			],
+        	]);
+        }
+        else{
+        	return [];
+        }			
+        
     }
 }

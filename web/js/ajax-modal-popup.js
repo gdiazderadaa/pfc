@@ -20,8 +20,31 @@
         
         //prepend submit button
         if ($(this).attr('data-submit')){
+        	var dataReloadContainerId = $(this).attr('data-reload-container') ? "#" + $(this).attr('data-reload-container') : false;
         	$('.modal-footer').find("button[type='submit']").html($(this).attr('data-submit'))
         	$('.modal-footer').find("button[type='submit']").show();
+        	
+        	//Handle submission
+        	$('.modal-footer').find("button[type='submit']").on("click", function(e){
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                var form = $(this).closest(".modal-content").find("form");
+    			
+    			if(form.find('div.has-error').length) {
+                            return false;
+                }	
+    		
+    			 $.ajax({
+                        url: form.attr('action')+"&submit=true",
+                        type: 'post',
+                        data: form.serialize(),
+                        success: function(data) {
+                        	if (dataReloadContainerId)
+                                $.pjax.reload({container:dataReloadContainerId});
+                        }
+                    });		
+                return false;
+            });
         }
         else{
         	$('.modal-footer').find("button[type='submit']").hide();

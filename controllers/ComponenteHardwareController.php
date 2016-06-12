@@ -93,11 +93,12 @@ class ComponenteHardwareController extends Controller
             $transaction = $connection->beginTransaction();
             
             $cantidad = Yii::$app->request->post('cantidad');
+            
             if ($cantidad != null) {
                 for ($i=0; $i < $cantidad - 1  ; $i++) {
                     $componente = new ComponenteHardware();
                     $componente->attributes = $model->attributes;
-                    //TODO : Handle null inputs
+
                     $componente->numero_serie =  Yii::$app->request->post('ComponenteHardware')['serial-'.$i]; 
                     
                     if (!$componente->save()){
@@ -229,7 +230,7 @@ class ComponenteHardwareController extends Controller
                 return;
             }
         }
-        echo Json::encode(['output'=>'', 'selected'=>'']);
+        echo Json::encode(['output'=>[], 'selected'=>'']);
     }
     
     public function actionComponentesByModelo() {
@@ -243,11 +244,11 @@ class ComponenteHardwareController extends Controller
                     $selected = $out[0]['id'];  
                     echo Json::encode(['output'=>$out, 'selected'=>$selected]);
                 } else {
-                    echo Json::encode(['output'=>'', 'selected'=>'']);
+                    echo Json::encode(['output'=>[], 'selected'=>'']);
                 }
                 return;
             }
         }
-        echo Json::encode(['output'=>'', 'selected'=>'']);
+        echo Json::encode(['output'=>[], 'selected'=>'']);
     }
 }

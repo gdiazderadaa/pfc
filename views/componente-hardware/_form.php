@@ -22,8 +22,8 @@ $js = <<<JS
 $("#componentes").hide();
 
 function addValidation(){
-    console.log($("#seriales").children().length);
-    $("#seriales").children().each(function (index, value){
+    console.log($("#seriales .box-body").children().length);
+    $("#seriales .box-body").children().each(function (index, value){
         console.log("Added validation for serial " + index)
         $('#componente-hardware-form').yiiActiveForm("add", {
             "id":        "serial-" + index,
@@ -39,12 +39,12 @@ function addValidation(){
 }
 
 
-$('#cantidad').change(function() {
+$('#componentehardware-cantidad').change(function() {
     console.log("change cantidad");
     $.ajax({
         url: '{$url}' ,
         type:"POST",
-        data:{'number' : $("#cantidad").val()},
+        data:{'number' : $("#componentehardware-cantidad").val()},
         dataType:"html",
     })
     .done(function(html) {
@@ -162,18 +162,13 @@ $this->registerJs($js);
 			        </div>
 				</div>
 
-		
-		        <div class="form-group field-componentehardware-cantidad" style="display:<?php echo !$model->isNewRecord || $model->modeloComponenteHardware === null || $model->modeloComponenteHardware->inventario != 1 ? 'none' : 'inherit'?>" >
-		            <label class="control-label" for="cantidad"><?= Yii::t('app','Cantidad') ?></label>
-			        <?= MaskedInput::widget([
-			            'id' => 'cantidad',
-			            'name' => 'cantidad',
+
+		        
+		        <?= $form->field($model, 'cantidad')->widget(MaskedInput::className(),[
 			            'clientOptions' => [
 			                'alias' =>  'integer',
 			            ],
 			        ]); ?>
-		        </div>
-		        
 		
 		        <?= $form->field($model, 'estado')->widget(DepDrop::classname(), [
 		            'type' => DepDrop::TYPE_SELECT2,

@@ -14,8 +14,6 @@ use app\models\ModeloComponenteHardware;
 
 ?>
 
-
-
 <div class="attach-child-componente-hardware-form">
 
     <?php $form = ActiveForm::begin([
@@ -23,7 +21,7 @@ use app\models\ModeloComponenteHardware;
             'options' => ['role' => 'form'],
             'enableAjaxValidation' => true,
             'enableClientScript' => true,
-            'enableClientValidation' => true,
+            //'enableClientValidation' => true,
         ]); ?>	
 
     <?= Html::csrfMetaTags() ?>
@@ -58,9 +56,9 @@ use app\models\ModeloComponenteHardware;
         ]); ?>
     </div> 
 
-    <?= $form->field($model, 'parte_componente_hardware_id')->hiddenInput()->label(false); ?>
+    <?= $form->field($model, 'componente_hardware_id')->hiddenInput()->label(false); ?>
 
-    <?= $form->field($model, 'componente_hardware_id')->widget(DepDrop::classname(), [
+    <?= $form->field($model, 'parte_componente_hardware_id')->widget(DepDrop::classname(), [
             'type' => DepDrop::TYPE_SELECT2,
     		'select2Options' => ['theme' => Select2::THEME_DEFAULT],
             'options' =>[
@@ -76,4 +74,3 @@ use app\models\ModeloComponenteHardware;
     
     <?php ActiveForm::end(); ?>
 </div>
-

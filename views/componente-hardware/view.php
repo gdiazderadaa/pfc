@@ -4,38 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use kartik\dropdown\DropdownX;
 use app\common\widgets\KeyValueListView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ComponenteHardware */
 
 
-$js = <<<JS
-
-        // obtener la id del formulario y establecer el manejador de eventos
-        $("form#attach-form, form#attach-child-form").on("submit", function(e){
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            var form = $(this);
-            $.post(
-                form.attr("action")+"&submit=true",
-                form.serialize()
-            )
-            .done(function(result) {
-                // alert(result.message);
-                // $('#modal').modal('hide')
-                //     .find('#modalContent').html('');
-                // $.pjax.reload({container:"#componente-hardware-view"});
-            });
-            return false;
-        });
-JS;
-$this->registerJs($js);
-
 $this->title = Yii::t('app', 'View {modelClass}', ['modelClass' => $model->nombre]);
 $this->params['breadcrumbs'][] = ['label' =>  $model->pluralObjectName(), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?>  
 <div id="componente-hardware-view" class="componente-hardware-view">
 
     <div class="row">
@@ -51,15 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	                		'<li class="divider"></li>',
 		                    ['label' => Yii::t('app', 'Clone'), 'url' => ['clone', 'id' => $model->id]],
 	                		'<li class="divider"></li>',
-		                    ['label' => Yii::t('app', 'Assign to an asset'), 
-		                        'url'=> ['assign', 'id' => $model->id],
-		                        'linkOptions' => ['id' => 'assign', 'class' => 'show-modal', 'title' => Yii::t('app','Select the asset you want to assign this part to')]],
-		                    ['label' => Yii::t('app', 'Attach to another part'), 
-		                        'url'=> ['parte-componente-hardware/attach', 'id' => $model->id],
-		                        'linkOptions' => ['id' => 'attach','data-submit' => Yii::t('app','Attach') , 'class' => 'show-modal', 'title' => Yii::t('app','Select the part you want to attach this part to')]],
 		                    ['label' => Yii::t('app', 'Attach child part'), 
 		                        'url'=> ['parte-componente-hardware/attach-child', 'id' => $model->id],
-		                        'linkOptions' => ['id' => 'attach-child','data-submit' => Yii::t('app','Attach'), 'class' => 'show-modal', 'title' => Yii::t('app','Select the part you want to attach to this part')]],
+		                        'linkOptions' => ['id' => 'attach-child','data-submit' => Yii::t('app','Attach'), 'data-reload-container' => 'componente-hardware-view', 'class' => 'show-modal', 'title' => Yii::t('app','Select the part you want to attach to this part')]],
 		                ],
 		            ]);
 		        ?>
@@ -157,11 +130,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="box-header">
                     <h3 class="box-title"><?= \app\models\ParteComponenteHardware::pluralObjectName() ?></h3>
                 </div>
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body table-responsive no-padding" id="child-components">
                     <?= KeyValueListView::widget([
                         'options' =>[
                             'class' => 'table table-hover details'
                         ],
+                    	'emptyText' => Yii::t('app','This component has no child components yet'),
                         'dataProvider' => $dataProvider,
                         'label' => function($model){ 
                         				return  $model->parteComponenteHardware->modeloComponenteHardware->categoria->nombre; },
@@ -180,4 +154,5 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
+<?php Pjax::end(); ?>  
 

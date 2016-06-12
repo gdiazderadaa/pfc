@@ -177,25 +177,21 @@ class ParteComponenteHardwareController extends Controller
                 $model->refresh();
                 Yii::$app->session->setFlash('success',Yii::t('app', 'The part has been attached successfully'));
                 
-                $parent = ComponenteHardware::findOne($id);
-                return $this->redirect(['/componente-hardware/view','id'=>$id]);
-                // Yii::$app->response->format = Response::FORMAT_JSON;
-                // return [
-                //     'message' => Yii::t('app','The part has been attached successfully'),
-                // ];
             } else {
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return ActiveForm::validate($model);
             }
         }
+        else{
+        	$parent = ComponenteHardware::findOne($id);
+        	$model->componente_hardware_id = $parent->id;
+        	
+        	return $this->renderAjax('attach-child', [
+        			'model' => $model,
+        			'inventario' => $parent->modeloComponenteHardware->inventario
+        	]);
+        }     
         
-        $parent = ComponenteHardware::findOne($id);
-        $model->parte_componente_hardware_id = $parent->id;
-    
-        return $this->renderAjax('attach-child', [
-            'model' => $model,
-        	'inventario' => $parent->modeloComponenteHardware->inventario
-        ]);
     }
 
     /**

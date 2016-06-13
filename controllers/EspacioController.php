@@ -118,13 +118,13 @@ class EspacioController extends Controller
         try {
             $this->findModel($id)->delete();
             Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
-            		'modelClass' => 'space',
+            		'modelClass' => \app\models\Espacio::singularObjectName(),
             ]));
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
                 Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
-                'modelClass' => 'space',
-                'modelClass2' => 'asset',
+                'modelClass' =>  \app\models\Espacio::singularObjectName(),
+                'modelClass2' => \app\models\ActivoInventariable::singularObjectName(),
                 ]));
             }
         }

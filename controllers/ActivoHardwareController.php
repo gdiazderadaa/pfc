@@ -79,12 +79,7 @@ class ActivoHardwareController extends Controller
     public function actionCreate()
     {
         $model = new ActivoHardware();
-        
-        if (Yii::$app->request->post('garantia') != "") {
-            $model->parent->setFechaFinGarantia(Yii::$app->request->post('garantia'),
-                                                Yii::$app->request->post('unidad-garantia'));
-        }
-        
+               
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             DynamicRelations::relate($model, 'configuracionesActivoHardware', Yii::$app->request->post(), 'ConfiguracionActivoHardware', ConfiguracionActivoHardware::className());
             return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
@@ -96,6 +91,35 @@ class ActivoHardwareController extends Controller
     }
 
     /**
+     * Clones an existing ActivoHardware model.
+     * If clone is successful, the browser will be redirected to the 'view' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionClone($id)
+    {
+    	$model = new ActivoHardware();
+    	
+    	if ($model->load(Yii::$app->request->post()) && $model->save()) {
+    		DynamicRelations::relate($model, 'configuracionesActivoHardware', Yii::$app->request->post(), 'ConfiguracionActivoHardware', ConfiguracionActivoHardware::className());
+    		return $this->redirect(['view', 'id' => $model->id]);
+    	} else {
+    		$sourceModel = $this->findModel($id);
+    		$model->attributes = $sourceModel->attributes;
+    
+    		//Clean unique properties
+    		$model->codigo = null;
+    
+    		//Enable select2 to be initialized
+    		$model->isNewRecord = false;
+    
+    		return $this->render('clone', [
+    				'model' => $model,
+    		]);
+    	}
+    }
+    
+    /**
      * Updates an existing ActivoHardware model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
@@ -104,12 +128,7 @@ class ActivoHardwareController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-        if (Yii::$app->request->post('garantia') != "") {
-            $model->parent->setFechaFinGarantia(Yii::$app->request->post('garantia'),
-                                                Yii::$app->request->post('unidad-garantia'));
-        }
-        
+               
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             DynamicRelations::relate($model, 'configuracionesActivoHardware', Yii::$app->request->post(), 'ConfiguracionActivoHardware', ConfiguracionActivoHardware::className());
             return $this->redirect(['view', 'id' => $model->activo_inventariable_id]);
@@ -129,7 +148,9 @@ class ActivoHardwareController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
+        		'modelClass' => \app\models\ActivoHardware::singularObjectName(),
+        ]));
         return $this->redirect(['index']);
     }
 

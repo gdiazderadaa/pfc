@@ -139,7 +139,9 @@ class ActivoInfraestructuraController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
+        		'modelClass' => \app\models\ActivoInfraestructura::singularObjectName(),
+        ]));
         return $this->redirect(['index']);
     }
 

@@ -28,8 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         	'<li class="divider"></li>',
                         	['label' => Yii::t('app', 'Clone'), 'url' => ['clone', 'id' => $model->id]],
                         	'<li class="divider"></li>',
-                        	['label' => Yii::t('app', 'Create Hardware Component(s)'), 'url' => ['componente-hardware/create', 'modelo_componente_hardware_id' => $model->id]],
-                        	'<li class="divider"></li>',
                         	['label' => Yii::t('app', 'Attach Hardware Component'),
                         		'url'=> ['parte-componente-hardware/attach-child', 'id' => $model->id],
                         		'linkOptions' => ['id' => 'attach-child','data-submit' => Yii::t('app','Attach'), 'data-reload-container' => 'componente-hardware-view', 'class' => 'show-modal', 'title' => Yii::t('app','Select the part you want to attach to this part')]],
@@ -121,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
                    			'modelClass' => $model->singularObjectName(),
                     		'features' => app\models\ComponenteHardware::pluralObjectName()
                     	]),
-                        'dataProvider' => $configuraciones,
+                        'dataProvider' => $componentes,
                         'label' => function($model){ 
                         				return  $model->modelo->categoria->nombre; } ,
                         'value' => function($model){ 

@@ -1,19 +1,18 @@
 <?php
 
-use yii\helpers\Html;
-use yii\helpers\Url;
-use app\models\ActivoInventariable;
-use synatree\dynamicrelations\DynamicRelations;
-use kartik\datecontrol\Module;
 use kartik\datecontrol\DateControl;
 use kartik\form\ActiveForm;
 use kartik\widgets\DepDrop;
 use kartik\widgets\Select2;
+use synatree\dynamicrelations\DynamicRelations;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\MaskedInput;
-use kartik\widgets\DatePicker;
+use app\assets\ValidationAsset;
+ValidationAsset::register($this);
 
-use app\models\Espacio;
 use app\models\Edificio;
+use app\models\Espacio;
 use app\models\PlantaEdificio;
 
 
@@ -123,7 +122,7 @@ $this->registerJs('function hideSoftware(){
                                         'name' => 'edificio',
                                         'data' => Edificio::getEdificios(),
 			                			'theme' => Select2::THEME_DEFAULT,
-                                        'value' => $model->isNewRecord ? '' : $model->espacio->plantaEdificio->edificio_id
+                                        'value' => $model->isNewRecord || !$model->espacio ? '' : $model->espacio->plantaEdificio->edificio_id
                                     ]); ?>
 			            </div>
 			
@@ -134,7 +133,7 @@ $this->registerJs('function hideSoftware(){
                                         'name' => 'planta-edificio',
                                         'type' => DepDrop::TYPE_SELECT2,
 			                			'select2Options' => ['theme' => Select2::THEME_DEFAULT,],
-                                        'data' => $model->isNewRecord ? [] : [$model->espacio->planta_edificio_id => $model->espacio->plantaEdificio->nombre],
+                                        'data' => $model->isNewRecord || !$model->espacio ? [] : [$model->espacio->planta_edificio_id => $model->espacio->plantaEdificio->nombre],
                                         'pluginOptions'=>[
                                             'initialize' => $model->isNewRecord ? false : true,
                                             'depends'=>['edificio-id'],
@@ -149,7 +148,7 @@ $this->registerJs('function hideSoftware(){
 			            <div class="col-md-4">
 			                <?= $form->field($model, 'espacio_id')->widget(DepDrop::classname(), [
 			                    'type' => DepDrop::TYPE_SELECT2,
-			                    'data' => $model->isNewRecord ? [] : [$model->espacio_id => $model->espacio->nombre],
+			                    'data' => $model->isNewRecord  || !$model->espacio ? [] : [$model->espacio_id => $model->espacio->nombre],
 		                		'select2Options' => ['theme' => Select2::THEME_DEFAULT,],
 		                		'pluginOptions'=>[
 		                        'initialize' => $model->isNewRecord ? false : true,

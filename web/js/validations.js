@@ -146,7 +146,7 @@
 	                 }
 	                 else{
 	                    var optionText = $("#"+selectID).text();
-	                    var optionValue = $("#"+selectID).next("input[type=\"hidden\"]").val();
+	                    var optionValue = $("#"+selectID).next("input[type='hidden']").val();
 	                 }
 	                 
 	                 console.log("Removing #" + selectID + ". Value=" + optionValue + " Text=" +optionText + " Option group=" + optionGroup);
@@ -178,10 +178,13 @@
 	    }
 	    
 	    function removeCurrentSelectedOptionFromOthers(selectID){
+	    	console.log("Begin removeCurrentSelectedOptionFromOthers");
 	        getOtherSelects(selectID).each(function(){
-	            console.log("Removing "+$("#"+selectID).find("option:selected").text()+ " from " + $(this)[0].id);
-	            $("#"+$(this)[0].id +" option[value="+$("#"+selectID).find("option:selected").val()+"]").remove();
+        		console.log("Removing "+$("#"+selectID).find("option:selected").text()+ " from " + $(this)[0].id);
+	            $("#"+$(this)[0].id +" option[value='"+$("#"+selectID).find("option:selected").val()+"']").remove();
+	            
 	        });
+	        console.log("End removeCurrentSelectedOptionFromOthers");
 	    }
 	    
 	    function removeUnusedView(selectID){
@@ -194,9 +197,10 @@
 	    }
 	    
 	    function removeAlreadySelectedOptions(selectID){
+	    	console.log("Begin removeAlreadySelectedOptions");
 	        getOtherSelects(selectID).each(function(){
 	            console.log("Removing "+$(this).find("option:selected").text()+ " from " + selectID);
-	            $("#"+selectID +" option[value="+$(this).find("option:selected").val()+"]").remove();
+	            $("#"+selectID +" option[value='"+$(this).find("option:selected").val()+"']").remove();
 	        });
 	        getOtherSpans(selectID).each(function(){
 	            var optionText = $(this).text();
@@ -208,6 +212,7 @@
 	                }
 	            });
 	        });
+	        console.log("End removeAlreadySelectedOptions");
 	    }
 	});
 })(jQuery);

@@ -30,7 +30,7 @@ else
     ?>
     		<div class="input-group">
                 <span class="input-group-addon bg-gray-light"></span>
-	            <select id="<?= $uniq ?>" name="<?php echo $frag.'[parte_componente_hardware_id]' ?>" class="form-control  dynamic-relation-property" >
+	            <select id="<?= $uniq ?>" name="<?php echo $frag.'[parte_componente_hardware_id]' ?>" class="form-control dynamic-relation-property" >
 	                    <?php
 	                        foreach ($model->getFreePartesComponenteHardware($params['parent_id']) as $category=>$components) {?>
 	                        	<optgroup label="<?= $category ?>">

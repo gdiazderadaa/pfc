@@ -74,6 +74,14 @@ class ConfiguracionActivoHardware extends \yii\db\ActiveRecord
     
     public function getActivosSoftware()  
     {     
-        return ActivoSoftware::find()->all();
+        return ArrayHelper::map(ActivoSoftware::find()->joinWith(['parent','categoria'])->asArray()->all(),
+        						'activo_inventariable_id',
+        						function($model, $defaultValue) {
+                                    return $model['parent']['nombre'];
+                                },
+        						function($model, $defaultValue) {
+                                	$categoria = Categoria::findOne($model['categoria_id']);
+                                    return $categoria->nombre;
+                                }); 
     }
 }

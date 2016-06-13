@@ -103,7 +103,13 @@ class ConfiguracionActivoHardwareController extends Controller
     {
         $this->findModel($activo_hardware_id, $activo_software_id)->delete();
 
-        return $this->redirect(['index']);
+    	if(! Yii::$app->request->isAjax){
+            return $this->redirect(['index']);
+        }
+        else
+        {
+            return "OK";
+        }
     }
 
     /**

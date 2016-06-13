@@ -103,7 +103,22 @@ class CategoriaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        try {
+            $model=$this->findModel($id);
+            if ($model->delete()){
+                Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
+                		'modelClass' => $model->singularObjectName(),
+                ]));
+            }       
+        } catch (yii\db\IntegrityException $e) {
+            if($e->getCode() == 23000){
+                Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2} or {modelClass3}', [
+                'modelClass' => $model->singularObjectName(),
+                'modelClass2' => \app\models\ActivoInventariable::singularObjectName(),
+                'modelClass3' => \app\models\ModeloComponenteHardware::singularObjectName(),
+                ]));
+            }
+        }
 
         return $this->redirect(['index']);
     }

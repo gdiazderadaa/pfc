@@ -25,7 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		            echo DropdownX::widget([
 		                'items' => [
 		                    ['label' => Yii::t('app', 'Update'), 'url' => ['update', 'id' => $model->id]],
-		                    ['label' => Yii::t('app', 'Delete'), 'url' => ['delete', 'id' => $model->id]],
+		                    ['label' => Yii::t('app', 'Delete'), 'url' => ['delete', 'id' => $model->id],
+		                		'linkOptions' => ['data-method' => 'post', 'data-confirm' => Yii::t('app','Are you sure you want to delete this item?')]],
                         	['label' => Yii::t('app', 'Create New'), 'url' => ['create']],
 	                		'<li class="divider"></li>',
 		                    ['label' => Yii::t('app', 'Clone'), 'url' => ['clone', 'id' => $model->id]],

@@ -102,9 +102,14 @@ class ValorCaracteristicaModeloComponenteHardwareController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+    	$this->findModel($id)->delete();
+        if(! Yii::$app->request->isAjax){
+            return $this->redirect(['index']);
+        }
+        else
+        {
+            return "OK";
+        }
     }
 
     /**

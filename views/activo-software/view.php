@@ -1,11 +1,9 @@
 <?php
 
+use app\common\widgets\KeyValueListView;
+use kartik\dropdown\DropdownX;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use kartik\dropdown\DropdownX;
-use app\common\widgets\KeyValueListView;
-use kartik\grid\GridView;
-use app\models\ActivoHardwareSearch;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ActivoSoftware */
@@ -24,7 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     echo DropdownX::widget([
                         'items' => [
                             ['label' => Yii::t('app', 'Update'), 'url' => ['update', 'id' => $model->id]],
-                            ['label' => Yii::t('app', 'Delete'), 'url' => ['delete', 'id' => $model->id]],
+                            ['label' => Yii::t('app', 'Delete'), 'url' => ['delete', 'id' => $model->id],
+		                		'linkOptions' => ['data-method' => 'post', 'data-confirm' => Yii::t('app','Are you sure you want to delete this item?')]],
                         	['label' => Yii::t('app', 'Create New'), 'url' => ['create']],
                             ['label' => Yii::t('app', 'Clone'), 'url' => ['clone', 'id' => $model->id]],
                         ],

@@ -2,16 +2,15 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\ActivoSoftware;
 use app\models\ActivoSoftwareSearch;
+use app\models\ValorCaracteristicaActivoInventariable;
+use synatree\dynamicrelations\DynamicRelations;
+use Yii;
+use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use synatree\dynamicrelations\DynamicRelations;
-use app\models\ValorCaracteristicaActivoInventariable;
-use yii\data\ActiveDataProvider;
-use app\models\ActivoHardwareSearch;
 
 
 /**
@@ -149,23 +148,21 @@ class ActivoSoftwareController extends Controller
      */
     public function actionDelete($id)
     {
-        try {
-            $this->findModel($id)->delete();
+    	try {
+	    	$model=$this->findModel($id);
+	        if ($model->delete()){
+	        	Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
+	             		'modelClass' => $model->singularObjectName(),
+	            ]));
+            }  
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
-                Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in either some {modelClass2} or {modelClass3}', [
-                                                            'modelClass' => ActivoSoftware::getSingularObjectName(),
-                                                            'modelClass2' => 'hardware asset configuration',
-                                                            'modelClass3' => 'feature',
+                Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
+                                                            'modelClass' => $model->singularObjectName(),
+                                                            'modelClass2' => \app\models\ActivoHardware::singularObjectName()
                 ]));
-                
-                return $this->redirect(['index']);
             }
         }
-
-        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
-                                                        'modelClass' => 'software asset',
-        ]));
         return $this->redirect(['index']);
     }
 

@@ -140,25 +140,18 @@ class PlantaEdificioController extends Controller
             $model=$this->findModel($id);
             if ($model->delete()){
                  if (!$model->deleteImage()) {
-                    Yii::$app->session->setFlash('error', Yii::t('app','Error deleting image'));
+                    //Yii::$app->session->setFlash('error', Yii::t('app','Error deleting image'));
                 }
+                return "OK";
             }
         } catch (yii\db\IntegrityException $e) {
             if($e->getCode() == 23000){
-                Yii::$app->session->setFlash('danger',Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
+                return Yii::t('app', 'Unable to delete the {modelClass} since it is being used in some {modelClass2}', [
                 'modelClass' => $model->singularObjectName(),
-                'modelClass2' => $model->attributeLabels['espacio_id'],
-                ]));
-                
-                return $this->redirect(['index']);
+                'modelClass2' => $model->getAttributeLabel('espacio_id'),
+                ]);
             }
         }
-
-        
-        Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
-            'modelClass' => $model->singularObjectName(),
-        ]));
-        return $this->redirect(['index']);
     }
     
     public function actionPlantasByEdificio() {

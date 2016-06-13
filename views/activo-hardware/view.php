@@ -22,9 +22,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     echo DropdownX::widget([
                         'items' => [
                             ['label' => Yii::t('app', 'Update'), 'url' => ['update', 'id' => $model->id]],
-                            ['label' => Yii::t('app', 'Delete'), 'url' => ['delete', 'id' => $model->id]],
+                            ['label' => Yii::t('app', 'Delete'), 'url' => ['delete', 'id' => $model->id],
+		                		'linkOptions' => ['data-method' => 'post', 'data-confirm' => Yii::t('app','Are you sure you want to delete this item?')]],
                         	['label' => Yii::t('app', 'Create New'), 'url' => ['create']],
-                            ['label' => Yii::t('app', 'Create Hardware Component(s)'), 'url' => ['componente-hardware/create', 'modelo_componente_hardware_id' => $model->id]],
+                        	'<li class="divider"></li>',
+                        	['label' => Yii::t('app', 'Clone'), 'url' => ['clone', 'id' => $model->id]],
+                        	'<li class="divider"></li>',
+                        	['label' => Yii::t('app', 'Create Hardware Component(s)'), 'url' => ['componente-hardware/create', 'modelo_componente_hardware_id' => $model->id]],
+                        	'<li class="divider"></li>',
+                        	['label' => Yii::t('app', 'Attach Hardware Component'),
+                        		'url'=> ['parte-componente-hardware/attach-child', 'id' => $model->id],
+                        		'linkOptions' => ['id' => 'attach-child','data-submit' => Yii::t('app','Attach'), 'data-reload-container' => 'componente-hardware-view', 'class' => 'show-modal', 'title' => Yii::t('app','Select the part you want to attach to this part')]],
                         ],
                     ]);
                 ?>
@@ -32,47 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     
-    <div class="row">
-       <div class="col-sm-2 pull-right">
-            <div class=" info-box-sm">
-                <span class="info-box-icon bg-epi-orange">
-                    <i class="fa fa-cubes"></i>
-                </span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"></span>
-                    <span class="info-box-number info-box-number-sm"></span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-sm-2 pull-right">
-            <div class="info-box-sm">
-                <span class="info-box-icon bg-epi-red">
-                    <i class="fa fa-money"></i>
-                </span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"></span>
-                    <span class="info-box-number"></span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-sm-2 pull-right">
-            <div class="info-box-sm">
-                <span class="info-box-icon bg-epi-brown">
-                    <i class="fa fa-calendar"></i>
-                </span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"></span>
-                    <span class="info-box-number"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row">
         
         <div class="col-md-4">         
@@ -103,7 +70,12 @@ $this->params['breadcrumbs'][] = $this->title;
 				            ],
 				            [
 				                'label' => $model->parent->getAttributeLabel('espacio_id'),
-				                'value' => $model->espacio ? $model->espacio->nombre : ""
+			            		'value' => $model->espacio ? 
+				            					Html::a($model->espacio->nombre,
+					            				['espacio/view', 'id' => $model->espacio_id],
+					            				['title'=>Yii::t('app','View {modelClass}',['modelClass' => $model->espacio->singularObjectName()])])
+				            				:'',
+	            				'format' => 'raw'
 				            ],
 				        ],
 				    ]) ?>

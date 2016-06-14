@@ -186,9 +186,23 @@ use app\models\PlantaEdificio;
     	</div>
     </div>
        
-
+	<div class="col-md-6 <?= $model->tipo != 'Hardware' ? 'hidden' : '' ?>">
+	    <?= DynamicRelations::widget([
+	    	'boxClass' => 'epi-blue',
+	    	'header' => 'h3',
+	        'title' => Yii::t('app','Installed Software'),
+	        'collection' => $model->configuracionesActivoHardware,
+	        'viewPath' => '@app/views/configuracion-activo-hardware/_inline.php',
+	        'params' => ['tipo_activo' => 'Hardware'],
+	        'panelId' => 'configuracion-activo-hardware',
+	
+	        // this next line is only needed if there is a chance that the collection above will be empty.  This gives the script a prototype to work with.
+	        'collectionType' => new app\models\ConfiguracionActivoHardware,
+	
+	    ]); ?>
+    </div>
     
-        <div class="col-md-6 <?= $model->IsNewRecord ? 'hidden' : '' ?>">
+    <!-- <div class="col-md-6 <?= $model->IsNewRecord ? 'hidden' : '' ?>">
         <?= DynamicRelations::widget([
         	'boxClass' => 'epi-blue',
         	'header' => 'h3',
@@ -202,7 +216,7 @@ use app\models\PlantaEdificio;
             'collectionType' => new app\models\ActivoHardwareComponenteHardware,
 
         ]); ?>
-    </div>
+    </div> -->
        
 </div>
 

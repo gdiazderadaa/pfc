@@ -127,7 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => function($model){ 
                         				return  $model->componenteHardware->modeloComponenteHardware->categoria->nombre; } ,
                         'value' => function($model){ 
-                        				return Html::a($model->componenteHardware->modeloComponenteHardware->nombre,
+                        				return Html::a($model->componenteHardware->modeloComponenteHardware->inventario ? $model->componenteHardware->modeloComponenteHardware->nombre." (".$model->componenteHardware->numero_serie.")" :$model->componenteHardware->modeloComponenteHardware->nombre ,
                         						['componente-hardware/view', 'id' => $model->id],
                         						['title'=>Yii::t('app','View {modelClass}',['modelClass' => app\models\ComponenteHardware::singularObjectName()])]);
                         			},

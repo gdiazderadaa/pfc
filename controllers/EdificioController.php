@@ -188,9 +188,9 @@ class EdificioController extends Controller
         try {
             $model=$this->findModel($id);
             if ($model->delete()){
-                 if (!$model->deleteImage()) {
-                    Yii::$app->session->setFlash('error', Yii::t('app','Error deleting image'));
-                }
+	            if ($oldImagen != null && $model->imagen == "") {
+	                $model->deleteImage();
+	            }
                 Yii::$app->session->setFlash('success',Yii::t('app', 'The {modelClass} has been successfully deleted', [
                 		'modelClass' => $model->singularObjectName(),
                 ]));

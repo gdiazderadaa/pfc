@@ -141,7 +141,7 @@ class ModeloComponenteHardware extends \yii\db\ActiveRecord
     /**
      * @return array
      */
-    public static function getModelosByCategoria2()
+    public static function getModelosByCategoria2($categoriaId)
     {
     	$models = ModeloComponenteHardware::find()->where(['categoria_id'=>$categoriaId])->all();
     	return ArrayHelper::toArray($models, [

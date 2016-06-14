@@ -40,6 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <ul>
 	    	<li><?= Yii::t('app','To add a new {modelClass} click on the "Create" button on the top right of the list.',['modelClass' => $searchModel->singularObjectName()]) ?></li>
 	    	<li><?= Yii::t('app','To clone, view the full details, update or delete an existing {modelClass} click on one of the icons located at the end of each row',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','To attach a {modelClass} click on the view icon located at the end of each row and select Attach Hardware Component from the actions dropdown',[
+	    					'modelClass' => \app\models\ComponenteHardware::singularObjectName()
+	    	]) ?></li>
 	    </ul>    
 	</div>
 

@@ -134,14 +134,10 @@ class ParteComponenteHardwareController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 $model->refresh();
-                Yii::$app->session->setFlash('success',Yii::t('app', 'The part has been attached successfully'));
+                Yii::$app->session->setFlash('success',Yii::t('app', 'The component has been attached successfully'));
                 
                 $parent = ComponenteHardware::findOne($id);
                 return $this->redirect(['/componente-hardware/view','id'=>$id]);
-                // Yii::$app->response->format = Response::FORMAT_JSON;
-                // return [
-                //     'message' => Yii::t('app','The part has been attached successfully'),
-                // ];
             } else {
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return ActiveForm::validate($model);
@@ -175,7 +171,7 @@ class ParteComponenteHardwareController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 $model->refresh();
-                Yii::$app->session->setFlash('success',Yii::t('app', 'The part has been attached successfully'));
+                Yii::$app->session->setFlash('success',Yii::t('app', 'The component has been attached successfully'));
                 
             } else {
                 Yii::$app->response->format = Response::FORMAT_JSON;

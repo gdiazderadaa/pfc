@@ -36,9 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','To add a new Software Asset click on the "Create" button on the top right of the list.') ?></li>
-	    	<li><?= Yii::t('app','To clone, view the full details, update or delete an existing Software Asset click on one of the icons located at the end of each row') ?></li>
-	    </ul>    
+	    	<li><?= Yii::t('app','To add a new {modelClass} click on the "Create" button on the top right of the list.',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','To clone, view the full details, update or delete an existing {modelClass} click on one of the icons located at the end of each row',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    </ul>  
 	</div>
 
    <div class="row">

@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	    						'asset' => app\models\ActivoInventariable::singularObjectName(),
 	    						'component model' => app\models\ComponenteHardware::singularObjectName()
 	    	]) ?></li>
-	    	<li><?= Yii::t('app','The value of a {modelClass} his entered at edit/creation time of the {asset} / {component model}.',[
+	    	<li><?= Yii::t('app','The value of a {modelClass} is entered at edit/creation time of the {asset} / {component model}.',[
 				    			'modelClass' => $searchModel->singularObjectName(),
 	    						'asset' => app\models\ActivoInventariable::singularObjectName(),
 	    						'component model' => app\models\ComponenteHardware::singularObjectName()
@@ -41,9 +41,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','To add a new Feature click on the "Create" button on the top right of the list.') ?></li>
-	    	<li><?= Yii::t('app','To view, update or delete an existing Feature click on one of the icons located at the end of each row') ?></li>
-	    </ul>    
+	    	<li><?= Yii::t('app','To add a new {modelClass} click on the "Create" button on the top right of the list.',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    	<li><?= Yii::t('app','To view the full details, update or delete an existing {modelClass} click on one of the icons located at the end of each row',['modelClass' => $searchModel->singularObjectName()]) ?></li>
+	    </ul>   
 	</div>
 		
     <div class="row">

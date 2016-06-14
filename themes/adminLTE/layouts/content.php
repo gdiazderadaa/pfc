@@ -1,6 +1,7 @@
 <?php
 use yii\widgets\Breadcrumbs;
 use dmstr\widgets\Alert;
+use yii\helpers\Html;
 
 ?>
 <div class="content-wrapper">
@@ -11,7 +12,7 @@ use dmstr\widgets\Alert;
             <h1>
                 <?php
                 if ($this->title !== null) {
-                    echo $this->title;
+                    echo Html::encode($this->title);
                 } else {
                     echo \yii\helpers\Inflector::camel2words(
                         \yii\helpers\Inflector::id2camel($this->context->module->id)
@@ -25,7 +26,6 @@ use dmstr\widgets\Alert;
         Breadcrumbs::widget(
             [
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            	'encodeLabels' => false
             ]
         ) ?>
     </section>

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         	['label' => Yii::t('app', 'Clone'), 'url' => ['clone', 'id' => $model->id]],
                         	'<li class="divider"></li>',
                         	['label' => Yii::t('app', 'Attach Hardware Component'),
-                        		'url'=> ['parte-componente-hardware/attach-child', 'id' => $model->id],
+                        		'url'=> ['componente-hardware/attach-child', 'id' => $model->id],
                         		'linkOptions' => ['id' => 'attach-child','data-submit' => Yii::t('app','Attach'), 'data-reload-container' => 'componente-hardware-view', 'class' => 'show-modal', 'title' => Yii::t('app','Select the component you want to attach to this asset')]],
                         ],
                     ]);

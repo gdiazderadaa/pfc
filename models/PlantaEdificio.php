@@ -30,7 +30,7 @@ class PlantaEdificio extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()Name
+    public static function tableName()
     {
         return 'planta_edificio';
     }

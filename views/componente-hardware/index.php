@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="info-box-content">
                     <span class="info-box-text"><?= Yii::t('app','Used in {modelClass}',['modelClass'=> app\models\ActivoHardware::pluralObjectName()]) ?></span>
-                    <span class="info-box-number"><?= ComponenteHardware::find()->where(['not',['activo_hardware_id' => null]])->count() ?></span>
+                    <span class="info-box-number"><?= \app\models\ActivoHardwareComponenteHardware::find()->select('componente_hardware_id')->distinct()->count() ?></span>
                 </div>
             </div>
         </div>
@@ -151,20 +151,6 @@ $this->params['breadcrumbs'][] = $this->title;
 					            	'hAlign' => 'right'
 					            ],
 					            
-					            [
-					                 'attribute' => 'activo_hardware_id',
-					                 'value' => 'activoHardware.nombre',
-					                 'value'=>function ($model, $key, $index, $widget) { 
-					                     if ($model->activoHardware != null) {
-					                         return Html::a($model->activoHardware->nombre,  
-					                            ['activo-hardware/view', 'id' => $model->activo_hardware_id], 
-					                            ['title'=>Yii::t('app','View {modelClass} details',['modelClass' => \app\models\ActivoHardware::singularObjectName()])]);
-					                     } else {
-					                         return null;
-					                     }    
-					                },
-					                'format'=>'raw'
-					            ],
 					
 					            [
 					                'class' => '\kartik\grid\ActionColumn',

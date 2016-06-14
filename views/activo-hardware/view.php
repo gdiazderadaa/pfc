@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         	['label' => Yii::t('app', 'Clone'), 'url' => ['clone', 'id' => $model->id]],
                         	'<li class="divider"></li>',
                         	['label' => Yii::t('app', 'Attach Hardware Component'),
-                        		'url'=> ['parte-componente-hardware/attach-child', 'id' => $model->id],
+                        		'url'=> ['activo-hardware-componente-hardware/attach', 'id' => $model->id],
                         		'linkOptions' => ['id' => 'attach-child','data-submit' => Yii::t('app','Attach'), 'data-reload-container' => 'componente-hardware-view', 'class' => 'show-modal', 'title' => Yii::t('app','Select the component you want to attach to this asset')]],
                         ],
                     ]);
@@ -99,7 +99,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => function($model){ 
                         				return  $model->activoSoftware->categoria->nombre; } ,
                         'value' => function($model){ 
-                        				return  $model->activoSoftware->nombre; } ,    
+                        				return Html::a($model->activoSoftware->nombre,
+                        						['activo-software/view', 'id' => $model->activo_software_id],
+                        						['title'=>Yii::t('app','View {modelClass}',['modelClass' => $model->activoSoftware->singularObjectName()])]);
+                        			},
+                        'format' => 'raw'
                     ]) ?>
                 </div>
             </div>            
@@ -121,9 +125,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     	]),
                         'dataProvider' => $componentes,
                         'label' => function($model){ 
-                        				return  $model->modelo->categoria->nombre; } ,
+                        				return  $model->componenteHardware->modeloComponenteHardware->categoria->nombre; } ,
                         'value' => function($model){ 
-                        				return  $model->modelo->nombre; } ,    
+                        				return Html::a($model->componenteHardware->modeloComponenteHardware->nombre,
+                        						['componente-hardware/view', 'id' => $model->id],
+                        						['title'=>Yii::t('app','View {modelClass}',['modelClass' => app\models\ComponenteHardware::singularObjectName()])]);
+                        			},
+                        'format' => 'raw'    
                     ]) ?>
                 </div>
             </div> 

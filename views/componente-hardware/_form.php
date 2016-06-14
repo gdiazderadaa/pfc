@@ -174,11 +174,11 @@ $this->registerJs($js);
 
 
 		        
-		        <?= $form->field($model, 'cantidad')->widget(MaskedInput::className(),[
+		        <?= ($model->isNewRecord) ? $form->field($model, 'cantidad')->widget(MaskedInput::className(),[
 			            'clientOptions' => [
 			                'alias' =>  'integer',
 			            ],
-			        ]); ?>
+			        ]) : '' ?>
 		
 		        <?= $form->field($model, 'estado')->widget(DepDrop::classname(), [
 		            'type' => DepDrop::TYPE_SELECT2,
@@ -204,13 +204,6 @@ $this->registerJs($js);
 		            ]
 		        ]) ?>
 		
-		        <?= $form->field($model, 'activo_hardware_id',[
-		            'options' => [
-		                'style' => [
-		                        'display' => $model->modeloComponenteHardware === null || $model->estado !=  $model::IN_USE ? 'none' : 'inherit'
-		                ]
-		            ]
-		        ])->textInput(['maxlength' => true]) ?>
 		        
 		        <?= $model->isNewRecord ? '' : $form->field($model, 'modelo_componente_hardware_id')->hiddenInput()->label(''); ?>
             </div>

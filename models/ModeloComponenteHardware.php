@@ -138,6 +138,20 @@ class ModeloComponenteHardware extends \yii\db\ActiveRecord
         ]);
     }
     
+    /**
+     * @return array
+     */
+    public static function getModelosByCategoria2()
+    {
+    	$models = ModeloComponenteHardware::find()->where(['categoria_id'=>$categoriaId])->all();
+    	return ArrayHelper::toArray($models, [
+    			ModeloComponenteHardware::classname() => [
+    					'id',
+    					'name' => 'nombre'
+    			],
+    	]);
+    }
+    
     public function getComponentesHardwareDataProvider($id)
     {
     	$query = ComponenteHardware::find()

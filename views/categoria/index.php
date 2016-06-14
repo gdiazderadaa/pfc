@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 	    <h4><i class="icon fa fa-info"></i><?= Yii::t('app','About')?></h4>
 	    <ul>
-	    	<li><?= Yii::t('app','{modelClass} are intended to classify hardware, software and infrastructure assets into smaller groups.',['modelClass' => $searchModel->pluralObjectName()]) ?> ?></li>
+	    	<li><?= Yii::t('app','{modelClass} are intended to classify hardware, software and infrastructure assets into smaller groups.',['modelClass' => $searchModel->pluralObjectName()]) ?></li>
 	    	<li><?= Yii::t('app','Every {modelClass} has a unique {name} and applies to a type of {asset} / {component model}.',[
 				    			'modelClass' => $searchModel->singularObjectName(),
 				    			'name' => $searchModel->getAttributeLabel('nombre'),

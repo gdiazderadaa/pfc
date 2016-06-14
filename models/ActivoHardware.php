@@ -125,11 +125,12 @@ class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInherit
      */
     public function getComponentesHardware()
     {
-        return $this->hasMany(ComponenteHardware::className(), ['activo_hardware_id' => 'activo_inventariable_id']);
+        return $this->hasMany(ActivoHardwareComponenteHardware::className(), ['activo_hardware_id' => 'activo_inventariable_id']);
     }
     
     public function getTipo()
     {
         return "Hardware";
     }
+
 }

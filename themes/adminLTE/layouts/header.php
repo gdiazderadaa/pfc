@@ -240,33 +240,38 @@ use yii\helpers\Html;
 
                             <p>
                                 Germ&aacute;n D&iacute;az de Rada
-                                <small>Student</small>
+                                <small>Admin</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                        </li>
+<!--                         <li class="user-body"> -->
+<!--                             <div class="col-xs-4 text-center"> -->
+<!--                                 <a href="#">Followers</a> -->
+<!--                             </div> -->
+<!--                             <div class="col-xs-4 text-center"> -->
+<!--                                 <a href="#">Sales</a> -->
+<!--                             </div> -->
+<!--                             <div class="col-xs-4 text-center"> -->
+<!--                                 <a href="#">Friends</a> -->
+<!--                             </div> -->
+<!--                         </li> -->
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                                <?= Html::a(
+                        <?= Html::a(
                                     'Sign out',
                                     ['/site/logout'],
                                     ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
                                 ) ?>
-                            </div>
+<!--                             <div class="pull-left"> -->
+<!--                                 <a href="#" class="btn btn-default btn-flat">Profile</a> -->
+<!--                             </div> -->
+<!--                             <div class="pull-right"> -->
+                                <!--<?= Html::a(
+                                    'Sign out',
+                                    ['/site/logout'],
+                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+                                ) ?>-->
+<!--                             </div> -->
                         </li>
                     </ul>
                 </li>

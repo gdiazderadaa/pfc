@@ -60,14 +60,14 @@ class ActivoHardwareController extends Controller
         ]);
         
         // Set dataProvider for the related ConfiguracionActivoHardware array
-        $componentessDataProvider = new ActiveDataProvider([
+        $componentesDataProvider = new ActiveDataProvider([
         		'query' => $model->getComponentesHardware(),
         ]);
         
         return $this->render('view', [
             'model' => $model,
             'configuraciones' => $configuracionesDataProvider,
-        	'componentes' => $componentessDataProvider,
+        	'componentes' => $componentesDataProvider,
         ]);
     }
 

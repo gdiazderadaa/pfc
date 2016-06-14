@@ -20,7 +20,7 @@ class ComponenteHardwareSearch extends ComponenteHardware
     public function rules()
     {
         return [
-            [['id', 'modelo_componente_hardware_id', 'meses_garantia', 'activo_hardware_id'], 'integer'],
+            [['id', 'modelo_componente_hardware_id', 'meses_garantia'], 'integer'],
             [['numero_serie', 'estado', 'fecha_compra','marcaModeloComponenteHardware','modeloModeloComponenteHardware'], 'safe'],
             [['precio_compra'], 'number'],
         ];
@@ -77,8 +77,7 @@ class ComponenteHardwareSearch extends ComponenteHardware
             'modelo_componente_hardware_id' => $this->modelo_componente_hardware_id,
             'fecha_compra' => $this->fecha_compra,
             'meses_garantia' => $this->meses_garantia,
-            'precio_compra' => $this->precio_compra,
-            'activo_hardware_id' => $this->activo_hardware_id,
+            'precio_compra' => $this->precio_compra
         ]);
 
         $query->andFilterWhere(['like', 'numero_serie', $this->numero_serie])

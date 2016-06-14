@@ -94,7 +94,7 @@ class ComponenteHardwareController extends Controller
             
             $cantidad = Yii::$app->request->post('cantidad');
             
-            if ($cantidad != null) {
+            if ($cantidad > 1) {
                 for ($i=0; $i < $cantidad - 1  ; $i++) {
                     $componente = new ComponenteHardware();
                     $componente->attributes = $model->attributes;
@@ -109,11 +109,14 @@ class ComponenteHardwareController extends Controller
                     }
                     
                 }
-                $model->numero_serie =  Yii::$app->request->post('ComponenteHardware')['serial-'.$i]; 
-                $model->modeloComponenteHardware->cantidad += $cantidad;
-                $model->modeloComponenteHardware->save();
+
+            }
+            else{
+            	$model->numero_serie =  Yii::$app->request->post('ComponenteHardware')['serial-0'];
             }
             
+            $model->modeloComponenteHardware->cantidad += $cantidad;
+            $model->modeloComponenteHardware->save();
 
             if ($model->save()){              
                 DynamicRelations::relate($model, 'partesComponenteHardware', Yii::$app->request->post(), 'ParteComponenteHardware', ParteComponenteHardware::className());
@@ -158,7 +161,6 @@ class ComponenteHardwareController extends Controller
         
             //Clean unique properties or linked models
             $model->numero_serie = null;
-            $model->activo_hardware_id = null;
             $model->isNewRecord = false;
 
             return $this->render('clone', [

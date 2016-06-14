@@ -200,7 +200,13 @@ class ModeloComponenteHardwareController extends Controller
             $parents = $_POST['depdrop_parents'];            
             if ($parents != null) {
                 $categoria_id = $parents[0];
-                $out = ModeloComponenteHardware::getModelosByCategoria($categoria_id,$inventario); 
+                if ($inventario!= -1){
+                	$out = ModeloComponenteHardware::getModelosByCategoria($categoria_id,$inventario);
+                }
+                else{
+                	$out = ModeloComponenteHardware::getModelosByCategoria2($categoria_id);
+                }
+                 
                 // the getSubCatList function will query the database based on the
                 // cat_id and return an array like below:
                 // [

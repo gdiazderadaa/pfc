@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="info-box-content">
                     <span class="info-box-text"><?= Yii::t('app','Warranty') ?></span>
-                    <span class="info-box-text"><?= $model->textoGarantia ?></span>
+                    <span class="info-box-number"><?= $model->textoGarantia ?></span>
                 </div>
             </div>
         </div>
@@ -110,16 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				            'fecha_compra:date',
 				            'meses_garantia',
 				            'fechaFinGarantia:date',
-				            'precio_compra:currency',
-				            [
-				                'attribute' => 'activo_hardware_id',
-				                'value' => $model->activoHardware != null ?
-				                                Html::a($model->activoHardware->nombre,  
-				                                        ['activo-hardware/view', 'id' => $model->activo_hardware_id], 
-				                                        ['title'=>Yii::t('app','View Details')]):
-				                                null,
-				                'format' => 'raw'
-				            ],  
+				            'precio_compra:currency', 
 				        ],
 				    ]) ?>
                 </div>

@@ -14,11 +14,10 @@ use app\models\Categoria;
  * @property string $estado
  * @property string $modelo_componente_hardware_id
  * @property string $fecha_compra
-  * @property string $meses_garantia 
+ * @property string $meses_garantia 
  * @property string $precio_compra
  * @property string $activo_hardware_id
  *
- * @property ActivoHardware $activoHardware
  * @property ModeloComponenteHardware $modeloComponenteHardware
  * @property ParteComponenteHardware[] $componentesHardware
  * @property ParteComponenteHardware[] $partesComponenteHardware
@@ -78,7 +77,6 @@ class ComponenteHardware extends \yii\db\ActiveRecord
             [['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/'],
             [['numero_serie', 'estado'], 'string', 'max' => 128],
             [['numero_serie'], 'unique'],
-            [['activo_hardware_id'], 'exist', 'skipOnError' => true, 'targetClass' => ActivoHardware::className(), 'targetAttribute' => ['activo_hardware_id' => 'activo_inventariable_id']],
             [['modelo_componente_hardware_id'], 'exist', 'skipOnError' => true, 'targetClass' => ModeloComponenteHardware::className(), 'targetAttribute' => ['modelo_componente_hardware_id' => 'id']],
             [['numero_serie'], 'required','when' => $inventario, 'whenClient' => "function (attribute, value) {
                 return $('#componentehardware-estado').val() != '".self::INVENTORY_OFF."';
@@ -96,21 +94,12 @@ class ComponenteHardware extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['Create'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','activo_hardware_id','cantidad'];
-        $scenarios['Update'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','activo_hardware_id','numero_serie'];
-        $scenarios['Clone'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','activo_hardware_id','numero_serie'];
+        $scenarios['Create'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','cantidad'];
+        $scenarios['Update'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','numero_serie'];
+        $scenarios['Clone'] = ['estado','password', 'modelo_componente_hardware_id', 'fecha_compra','meses_garantia','precio_compra','numero_serie'];
         return $scenarios;
     }
     
-    /**
-     * @inheritdoc
-     */
-    public function attributeHints()
-    {
-        return [
-            'estado' => Yii::t('app', 'Turn on the inventory on the model to keep track of the status'),
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -125,7 +114,6 @@ class ComponenteHardware extends \yii\db\ActiveRecord
             'fecha_compra' => Yii::t('app', 'Purchase Date'),
             'meses_garantia' => Yii::t('app','Warranty (Months)'),
             'precio_compra' => Yii::t('app', 'Purchase Price'),
-            'activo_hardware_id' => Yii::t('app', 'Hardware Asset'),
             'marcaModeloComponenteHardware' => Yii::t('app','Manufacturer'),
             'modeloModeloComponenteHardware' => Yii::t('app','Model'),
         	'cantidad' => Yii::t('app', 'Quantity'),

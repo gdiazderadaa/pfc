@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					            				'pluginOptions'=>['allowClear'=>true],
 					            				'theme' => Select2::THEME_DEFAULT,
 									            		],
-					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any Manufacturer')], 
+					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any {modelClass}',['modelClass' => $searchModel->getAttributeLabel('marca')])], 
 					                //'group'=>true,   
 					            ],
 					            [
@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					                'value'=>function ($model, $key, $index, $widget) { 
 					                    return Html::a($model->modeloModeloComponenteHardware,  
 					                        ['modelo-componente-hardware/view', 'id' => $model->modelo_componente_hardware_id], 
-					                        ['title'=>Yii::t('app','View Model details')]);
+					                        ['title'=>Yii::t('app','View {modelClass} details',['modelClass' => \app\models\ModeloComponenteHardware::singularObjectName()])]);
 					                },
 					                'filterType' => GridView::FILTER_SELECT2,
 					                'filter'=>ArrayHelper::map(ModeloComponenteHardware::find()->orderBy('modelo')->asArray()->all(), 'modelo', 'modelo'),
@@ -116,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					            				'pluginOptions'=>['allowClear'=>true],
 					            				'theme' => Select2::THEME_DEFAULT,
 									            		],
-					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any Model')], 
+					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any {modelClass}',['modelClass' => $searchModel->getAttributeLabel('modelo')])], 
 					                //'group'=>true,
 					                'format'=>'raw'   
 					            ],
@@ -131,7 +131,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					            				'pluginOptions'=>['allowClear'=>true],
 					            				'theme' => Select2::THEME_DEFAULT,
 									            		],
-					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any Status')],
+					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any {modelClass}',['modelClass' => $searchModel->getAttributeLabel('estado')])],
 					            ],
 					                      
 					            [
@@ -142,7 +142,6 @@ $this->params['breadcrumbs'][] = $this->title;
 					            
 					            [
 					                'attribute' => 'meses_garantia',
-					                'label' => Yii::t('app','Warrany (Months)'),
 					            	'hAlign' => 'right'
 					            ],
 					                      
@@ -159,7 +158,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					                     if ($model->activoHardware != null) {
 					                         return Html::a($model->activoHardware->nombre,  
 					                            ['activo-hardware/view', 'id' => $model->activo_hardware_id], 
-					                            ['title'=>Yii::t('app','View Hardware Asset details')]);
+					                            ['title'=>Yii::t('app','View {modelClass} details',['modelClass' => \app\models\ActivoHardware::singularObjectName()])]);
 					                     } else {
 					                         return null;
 					                     }    

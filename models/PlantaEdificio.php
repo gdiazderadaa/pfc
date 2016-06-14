@@ -30,7 +30,7 @@ class PlantaEdificio extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName()Name
     {
         return 'planta_edificio';
     }
@@ -65,7 +65,7 @@ class PlantaEdificio extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'nombre' => Yii::t('app', 'Nombre'),
+            'nombre' => Yii::t('app', 'Name'),
             'imagen' => Yii::t('app', 'Image'),
             'imagen_servidor' => Yii::t('app', 'Image'),
             'edificio_id' => Yii::t('app', 'Building'),

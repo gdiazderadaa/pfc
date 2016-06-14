@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><?= Yii::t('app','Out of warranty') ?></span>
+                    <span class="info-box-text"><?= Yii::t('app','Out of Warranty') ?></span>
                     <span class="info-box-number"><?= $model->totalGarantiaExpirada ?></span>
                 </div>
             </div>
@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'filterWidgetOptions'=>[
                                     'pluginOptions'=>['allowClear'=>true],
                                 ],
-                                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any Status')],
+                                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any {modelClass}',['modelClass' => \app\models\ComponenteHardware::attributeLabels()['estado']])],
                                 'width' => '20%'
                             ],
                             
@@ -138,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             
                             [
                                 'attribute' => 'meses_garantia',
-                                'label' => Yii::t('app','Warrany (Months)'),
+                                'label' => Yii::t('app','Any {modelClass}',['modelClass' => \app\models\ComponenteHardware::attributeLabels()['meses_garantia']]),
                                 'hAlign' => 'right',
                                 'width' => '12%'
                             ],

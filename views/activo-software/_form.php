@@ -18,10 +18,16 @@ ValidationAsset::register($this);
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
     <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
     <ul>
-    	<li><?= Yii::t('app','Enter the Asset Tag, Name, Category, Purchase Date, and Purchase Price.') ?></li>
-    	<li><?= Yii::t('app','Add as many features as you want.') ?></li>
+    	<li><?= Yii::t('app','Enter the {codigo}, {nombre}, {categoria}, {fecha_compra} and {precio_compra}.',[
+    			'codigo' => $model->getAttributeLabel('codigo'),
+    			'nombre' => $model->getAttributeLabel('nombre'),
+    			'categoria' => $model->getAttributeLabel('categoria'),
+    			'fecha_compra' => $model->getAttributeLabel('fecha_compra'),
+    			'precio_compra' => $model->getAttributeLabel('precio_compra'),
+    	]) ?></li>
+    	<li><?= Yii::t('app','Add as many {modelClass} as you want.',['modelClass' => \app\models\Caracteristica::pluralObjectName()]) ?></li>
     	<li><?= Yii::t('app','Click on the "Create" button to finsh') ?></li>
-    </ul> 
+    </ul>
 </div>
 
 <?php $form = ActiveForm::begin(['id' => 'activo-software-form']); ?>

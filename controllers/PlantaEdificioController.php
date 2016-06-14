@@ -34,60 +34,60 @@ class PlantaEdificioController extends Controller
      * Lists all PlantaEdificio models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $searchModel = new PlantaEdificioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//     public function actionIndex()
+//     {
+//         $searchModel = new PlantaEdificioSearch();
+//         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+//         return $this->render('index', [
+//             'searchModel' => $searchModel,
+//             'dataProvider' => $dataProvider,
+//         ]);
+//     }
 
     /**
      * Displays a single PlantaEdificio model.
      * @param string $id
      * @return mixed
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+//     public function actionView($id)
+//     {
+//         return $this->render('view', [
+//             'model' => $this->findModel($id),
+//         ]);
+//     }
 
     /**
      * Creates a new PlantaEdificio model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new PlantaEdificio();
+//     public function actionCreate()
+//     {
+//         $model = new PlantaEdificio();
         
-        if ($model->load(Yii::$app->request->post())) {
+//         if ($model->load(Yii::$app->request->post())) {
             
-            // process uploaded image file instance
-            $image = $model->uploadImage();
+//             // process uploaded image file instance
+//             $image = $model->uploadImage();
 
-            if ($model->save()) {
-                // upload only if valid uploaded file instance found
-                if ($image !== false) {
-                    $path = $model->getImageFile();
-                    $image->saveAs($path);
-                }
-                return $this->redirect(['view', 'id'=>$model->id]);
-            } else {
-                return $this->render('create', [
-	            	'model'=>$model,
-	        	]);
-            }
-        }
-        return $this->render('create', [
-            'model'=>$model,
-        ]);
-    }
+//             if ($model->save()) {
+//                 // upload only if valid uploaded file instance found
+//                 if ($image !== false) {
+//                     $path = $model->getImageFile();
+//                     $image->saveAs($path);
+//                 }
+//                 return $this->redirect(['view', 'id'=>$model->id]);
+//             } else {
+//                 return $this->render('create', [
+// 	            	'model'=>$model,
+// 	        	]);
+//             }
+//         }
+//         return $this->render('create', [
+//             'model'=>$model,
+//         ]);
+//     }
 
     /**
      * Updates an existing PlantaEdificio model.
@@ -95,38 +95,38 @@ class PlantaEdificioController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-        $oldFile = $model->getImageFile();
-        $oldImagenServidor = $model->imagen_servidor;
-        $oldImagen = $model->imagen;
+//     public function actionUpdate($id)
+//     {
+//         $model = $this->findModel($id);
+//         $oldFile = $model->getImageFile();
+//         $oldImagenServidor = $model->imagen_servidor;
+//         $oldImagen = $model->imagen;
 
-        if ($model->load(Yii::$app->request->post())) {
-            // process uploaded image file instance
-            $image = $model->uploadImage();
+//         if ($model->load(Yii::$app->request->post())) {
+//             // process uploaded image file instance
+//             $image = $model->uploadImage();
 
-            // revert back if no valid file instance uploaded
-            if ($image === false) {
-                $model->imagen_servidor = $oldImagenServidor;
-                $model->imagen = $oldImagen;
-            }
+//             // revert back if no valid file instance uploaded
+//             if ($image === false) {
+//                 $model->imagen_servidor = $oldImagenServidor;
+//                 $model->imagen = $oldImagen;
+//             }
 
-            if ($model->save()) {
-                // upload only if valid uploaded file instance found
-                if ($image !== false && ($oldFile==null || $oldFile != null && unlink($oldFile)) ) { // delete old and overwrite
-                    $path = $model->getImageFile();
-                    $image->saveAs($path);
-                }
-                return $this->redirect(['view', 'id'=>$model->id]);
-            } else {
-                // error in saving model
-            }
-        }
-        return $this->render('update', [
-            'model'=>$model,
-        ]);
-    }
+//             if ($model->save()) {
+//                 // upload only if valid uploaded file instance found
+//                 if ($image !== false && ($oldFile==null || $oldFile != null && unlink($oldFile)) ) { // delete old and overwrite
+//                     $path = $model->getImageFile();
+//                     $image->saveAs($path);
+//                 }
+//                 return $this->redirect(['view', 'id'=>$model->id]);
+//             } else {
+//                 // error in saving model
+//             }
+//         }
+//         return $this->render('update', [
+//             'model'=>$model,
+//         ]);
+//     }
 
     /**
      * Deletes an existing PlantaEdificio model.

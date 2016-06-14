@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <h4><i class="icon fa fa-info"></i><?= Yii::t('app','About')?></h4>
 	    <ul>
 	    	<li><?= Yii::t('app','{modelClass} are intended to represent actual buildings within a University.',['modelClass' => $searchModel->pluralObjectName(),]) ?></li>
-	    	<li><?= Yii::t('app','Every Building has a unique name, an address and an optional image.') ?></li>
 	    	<li><?= Yii::t('app','Every {modelClass} has a unique {name}, an {address} and an optional {image}.',[
 				    			'modelClass' => $searchModel->singularObjectName(),
 				    			'name' => $searchModel->getAttributeLabel('nombre'),

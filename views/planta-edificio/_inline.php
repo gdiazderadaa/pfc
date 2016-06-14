@@ -51,7 +51,7 @@ if( $model->isNewRecord ){
 
 <div class="PlantaEdificio-form form" <?= $removeAttr; ?>>
     
-    <input type="text" class="form-control" placeholder="Nombre" id="<?php echo $frag.'[nombre]' ?>"  name="<?php echo $frag.'[nombre]' ?>" value="<?php echo $model->nombre ?>" />
+    <input type="text" class="form-control" placeholder="<?= Yii::t('app','Name')  ?>" id="<?php echo $frag.'[nombre]' ?>"  name="<?php echo $frag.'[nombre]' ?>" value="<?php echo $model->nombre ?>" />
     
     <?php
     if($model->isNewRecord || !isset($model->imagen) || !isset($model->imagen_servidor)){

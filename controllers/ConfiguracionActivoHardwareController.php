@@ -30,16 +30,16 @@ class ConfiguracionActivoHardwareController extends Controller
      * Lists all ConfiguracionActivoHardware models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $searchModel = new ConfiguracionActivoHardwareSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//     public function actionIndex()
+//     {
+//         $searchModel = new ConfiguracionActivoHardwareSearch();
+//         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+//         return $this->render('index', [
+//             'searchModel' => $searchModel,
+//             'dataProvider' => $dataProvider,
+//         ]);
+//     }
 
     /**
      * Displays a single ConfiguracionActivoHardware model.
@@ -47,30 +47,30 @@ class ConfiguracionActivoHardwareController extends Controller
      * @param string $activo_software_id
      * @return mixed
      */
-    public function actionView($activo_hardware_id, $activo_software_id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($activo_hardware_id, $activo_software_id),
-        ]);
-    }
+//     public function actionView($activo_hardware_id, $activo_software_id)
+//     {
+//         return $this->render('view', [
+//             'model' => $this->findModel($activo_hardware_id, $activo_software_id),
+//         ]);
+//     }
 
     /**
      * Creates a new ConfiguracionActivoHardware model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new ConfiguracionActivoHardware();
+//     public function actionCreate()
+//     {
+//         $model = new ConfiguracionActivoHardware();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'activo_hardware_id' => $model->activo_hardware_id, 'activo_software_id' => $model->activo_software_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
+//         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//             return $this->redirect(['view', 'activo_hardware_id' => $model->activo_hardware_id, 'activo_software_id' => $model->activo_software_id]);
+//         } else {
+//             return $this->render('create', [
+//                 'model' => $model,
+//             ]);
+//         }
+//     }
 
     /**
      * Updates an existing ConfiguracionActivoHardware model.
@@ -79,18 +79,18 @@ class ConfiguracionActivoHardwareController extends Controller
      * @param string $activo_software_id
      * @return mixed
      */
-    public function actionUpdate($activo_hardware_id, $activo_software_id)
-    {
-        $model = $this->findModel($activo_hardware_id, $activo_software_id);
+//     public function actionUpdate($activo_hardware_id, $activo_software_id)
+//     {
+//         $model = $this->findModel($activo_hardware_id, $activo_software_id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'activo_hardware_id' => $model->activo_hardware_id, 'activo_software_id' => $model->activo_software_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
+//         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//             return $this->redirect(['view', 'activo_hardware_id' => $model->activo_hardware_id, 'activo_software_id' => $model->activo_software_id]);
+//         } else {
+//             return $this->render('update', [
+//                 'model' => $model,
+//             ]);
+//         }
+//     }
 
     /**
      * Deletes an existing ConfiguracionActivoHardware model.

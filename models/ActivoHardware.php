@@ -51,10 +51,16 @@ class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInherit
     public function rules()
     {
         return [
-            [['activo_inventariable_id', 'categoria_id'], 'required'],
+            [['activo_inventariable_id', 'categoria_id','codigo','nombre','fecha_compra','precio_compra'], 'required'],
             [['activo_inventariable_id', 'categoria_id'], 'integer'],
             [['activo_inventariable_id'], 'unique'],
-            [['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/']
+        	[['fecha_compra'], 'safe'],
+            [['precio_compra'], 'number','numberPattern' => '/^[0-9]*[.,]?[0-9]*$/'],
+        	[['codigo', 'estado'], 'string', 'max' => 128],
+        	[['nombre'], 'string', 'max' => 64],
+        	[['codigo'], 'unique'],
+        	[['precio_compra'], 'compare', 'compareValue' => 0, 'operator' => '>','type' => 'number'],
+        	[['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['categoria_id' => 'id']],	
         ];
     }
 
@@ -66,7 +72,13 @@ class ActivoHardware extends \yii\db\ActiveRecord implements ActiveRecordInherit
         return [
             'activo_inventariable_id' => Yii::t('app', 'Asset'),
             'categoria_id' => Yii::t('app', 'Category'),
-            'espacio_id' => Yii::t('app', 'Space'),
+        	'codigo' => Yii::t('app', 'Asset Tag'),
+        	'nombre' => Yii::t('app', 'Name'),
+        	'fecha_compra' => Yii::t('app', 'Purchase Date'),
+        	'precio_compra' => Yii::t('app', 'Purchase Price'),
+        	'edificio' => Yii::t('app', 'Building'),
+        	'planta' => Yii::t('app', 'Floor'),
+            'espacio_id' => Yii::t('app', 'Room'),
         ];
     }
 

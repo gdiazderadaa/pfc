@@ -123,12 +123,13 @@ class ComponenteHardware extends \yii\db\ActiveRecord
             'estado' => Yii::t('app', 'Status'),
             'modelo_componente_hardware_id' => Yii::t('app', 'Hardware Component Model'),
             'fecha_compra' => Yii::t('app', 'Purchase Date'),
-            'meses_garantia' => Yii::t('app','Warranty'),
-            'fechaFinGarantia' => Yii::t('app','Warranty End Date'),
+            'meses_garantia' => Yii::t('app','Warranty (Months)'),
             'precio_compra' => Yii::t('app', 'Purchase Price'),
             'activo_hardware_id' => Yii::t('app', 'Hardware Asset'),
             'marcaModeloComponenteHardware' => Yii::t('app','Manufacturer'),
-            'modeloModeloComponenteHardware' => Yii::t('app','Model')
+            'modeloModeloComponenteHardware' => Yii::t('app','Model'),
+        	'cantidad' => Yii::t('app', 'Quantity'),
+        	'inventario' => Yii::t('app', 'Inventory'),
         ];
     }
     
@@ -259,7 +260,7 @@ class ComponenteHardware extends \yii\db\ActiveRecord
         }
         else{
             return ArrayHelper::toArray( [[ 'id' => self::INVENTORY_OFF,
-                        'name'  => Yii::t('app','Inventario desactivado')]]);
+                        'name'  => Yii::t('app','Inventory off')]]);
         }
     }
     
@@ -293,10 +294,10 @@ class ComponenteHardware extends \yii\db\ActiveRecord
     {
     	switch ($this->meses_garantia) {
     		case null:
-    			return Yii::t('app','No warranty');
+    			return Yii::t('app','No Warranty');
     		break;
     		case !null:
-    			return $this->enGarantia ? Yii::t('app','Under warranty') : Yii::t('app','Out of warranty');
+    			return $this->enGarantia ? Yii::t('app','Under Warranty') : Yii::t('app','Out of Warranty');
     		default:
     			;
     		break;

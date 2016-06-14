@@ -16,29 +16,41 @@ use app\models\Espacio;
 use app\models\PlantaEdificio;
 
 
-$this->registerJs('function hideSoftware(){
-                        console.log("Checking category...");
-                        if ($("#activohardware-categoria_id option:selected" ).text() != "CPUs"){
-                            console.log("Hiding panel...");
-                            $("#configuracion-activo-hardware").hide();
-                        }
-                        else{
-                            console.log("Showing panel...");
-                            $("#configuracion-activo-hardware").show();
-                        }
-                    }
-                    $("#activohardware-categoria_id").change(hideSoftware);'
-                    , \yii\web\VIEW::POS_READY);
-?>
+// $this->registerJs('function hideSoftware(){
+//                         console.log("Checking category...");
+//                         if ($("#activohardware-categoria_id option:selected" ).text() != "CPUs"){
+//                             console.log("Hiding panel...");
+//                             $("#configuracion-activo-hardware").hide();
+//                         }
+//                         else{
+//                             console.log("Showing panel...");
+//                             $("#configuracion-activo-hardware").show();
+//                         }
+//                     }
+//                     $("#activohardware-categoria_id").change(hideSoftware);'
+//                     , \yii\web\VIEW::POS_READY);
+// ?>
 
 <div class="alert alert-info-white alert-dismissible <?= !$model->isNewRecord ? 'hidden' : ''; ?>" >
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
     <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
     <ul>
-    	<li><?= Yii::t('app','XXXXXXXXXX.') ?></li>
-    	<li><?= Yii::t('app','XXXXXXXXXX.') ?></li>
-    	<li><?= Yii::t('app','XXXXXXXXXX.') ?></li>
-    	<li><?= Yii::t('app','To finish, click on the "Create" button') ?></li>
+    	<li><?= Yii::t('app','Enter the {codigo}, {nombre}, {categoria}, {fecha_compra} and {precio_compra}.',[
+    			'codigo' => $model->getAttributeLabel('codigo'),
+    			'nombre' => $model->getAttributeLabel('nombre'),
+    			'categoria' => $model->getAttributeLabel('categoria'),
+    			'fecha_compra' => $model->getAttributeLabel('fecha_compra'),
+    			'precio_compra' => $model->getAttributeLabel('precio_compra'),
+    	]) ?></li>
+    	<li><?= Yii::t('app','Enter the {estado} and the {edificio}, {planta} and {espacio} if applicable.',[
+    			'estado' => $model->getAttributeLabel('estado'),
+    			'edificio' => $model->getAttributeLabel('edificio'),
+    			'planta' => $model->getAttributeLabel('planta'),
+    			'espacio' => $model->getAttributeLabel('espacio_id'),
+    	]) ?></li>
+    	<li><?= Yii::t('app','Add as many {modelClass} as you want.',['modelClass' => \app\models\Caracteristica::pluralObjectName()]) ?></li>
+    	<li><?= Yii::t('app','Add as many {modelClass} as you want.',['modelClass' => \app\models\ActivoSoftware::pluralObjectName()]) ?></li>
+    	<li><?= Yii::t('app','Click on the "Create" button to finsh') ?></li>
     </ul> 
 </div>
 

@@ -26,11 +26,11 @@ class ParteComponenteHardware extends \yii\db\ActiveRecord
     }
     
     public static function singularObjectName(){
-        return Yii::t('app', 'Hardware Part Component');
+        return Yii::t('app', 'Hardware Component Part');
     }
     
     public static function pluralObjectName(){
-        return Yii::t('app', 'Hardware Part Components');
+        return Yii::t('app', 'Hardware Component Parts');
     }
 
     /**
@@ -55,8 +55,8 @@ class ParteComponenteHardware extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'componente_hardware_id' => Yii::t('app', 'Hardware Part'),
-            'parte_componente_hardware_id' => Yii::t('app', 'Hardware Part Component'),
+            'componente_hardware_id' => Yii::t('app', 'Hardware Component'),
+            'parte_componente_hardware_id' => Yii::t('app', 'Hardware Component Part'),
         ];
     }
 

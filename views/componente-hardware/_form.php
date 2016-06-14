@@ -63,9 +63,19 @@ $this->registerJs($js);
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
     <ul>
-    	<li><?= Yii::t('app','Select the Hardware Component Model yo want to use.') ?></li>
-    	<li><?= Yii::t('app','Enter Purchas Date, Months of Warranty and Purchase Price.') ?></li>
-    	<li><?= Yii::t('app','If the selected Hardware Component Model has the inventory on, you need to provide the Quantity of Hardware Components to be created, as well as the Serial Number for each one.') ?></li>
+    	<li><?= Yii::t('app','Select the {modelClass} yo want to use.',['modelClass' => \app\models\ModeloComponenteHardware::singularObjectName()]) ?></li>
+    	<li><?= Yii::t('app','Enter the {fecha_compra}, {meses_garantia} and {precio_compra}.',[
+    			'fecha_compra' => $model->getAttributeLabel('fecha_compra'),
+    			'meses_garantia' => $model->getAttributeLabel('meses_garantia'),
+    			'precio_compra' => $model->getAttributeLabel('precio_compra'),
+    	]) ?></li>
+    	<li><?= Yii::t('app','If the selected {modelClass} has the {inventario} on, you need to provide the {cantidad} of {modelClass2} to be created, as well as the {numero_serie} for each one.',[
+    			'modelClass' => \app\models\ModeloComponenteHardware::singularObjectName(),
+    			'modelClass2' => \app\models\ComponenteHardware::pluralObjectName(),
+    			'inventario' => $model->getAttributeLabel('inventario'),
+    			'cantidad' => $model->getAttributeLabel('cantidad'),
+    			'numero_serie' => $model->getAttributeLabel('numero_serie'),
+    	]) ?></li>
     	<li><?= Yii::t('app','Click on the "Create" button to finsh') ?></li>
     </ul> 
 </div>

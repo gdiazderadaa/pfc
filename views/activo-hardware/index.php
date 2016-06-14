@@ -138,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		        						'pluginOptions'=>['allowClear'=>true],
 		        						'theme' => Select2::THEME_DEFAULT,
 			        				],
-			        				'filterInputOptions'=>['placeholder'=>Yii::t('app','Any Asset Name')],
+			        				'filterInputOptions'=>['placeholder'=>Yii::t('app','Any {modelClass}',['modelClass' => $searchModel->nombre])],
 					    		],
 					            [
 					                'attribute' => 'categoria_id',
@@ -149,7 +149,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					            				'pluginOptions'=>['allowClear'=>true],
 					            				'theme' => Select2::THEME_DEFAULT,
 									            		],
-					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any Category')],
+					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any {modelClass}',['modelClass' => $searchModel->categoria_id])],
 					            ],
 					            [
 					                'attribute' => 'fecha_compra',
@@ -172,7 +172,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					            				'pluginOptions'=>['allowClear'=>true],
 					            				'theme' => Select2::THEME_DEFAULT,
 									            		],
-					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any Room')],
+					                'filterInputOptions'=>['placeholder'=>Yii::t('app','Any {modelClass}',['modelClass' => $searchModel->espacio_id])],
 					            ],   
 					
 					            [

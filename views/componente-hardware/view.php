@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	                		'<li class="divider"></li>',
 		                    ['label' => Yii::t('app', 'Attach child part'), 
 		                        'url'=> ['parte-componente-hardware/attach-child', 'id' => $model->id],
-		                        'linkOptions' => ['id' => 'attach-child','data-submit' => Yii::t('app','Attach'), 'data-reload-container' => 'componente-hardware-view', 'class' => 'show-modal', 'title' => Yii::t('app','Select the part you want to attach to this part')]],
+		                        'linkOptions' => ['id' => 'attach-child','data-submit' => Yii::t('app','Attach'), 'data-reload-container' => 'componente-hardware-view', 'class' => 'show-modal', 'title' => Yii::t('app','Select the part you want to attach to this component')]],
 		                ],
 		            ]);
 		        ?>
@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><?= Yii::t('app','Purchase price') ?></span>
+                    <span class="info-box-text"><?= $model->getAttributeLabel('precio_compra') ?></span>
                     <span class="info-box-number"><?= Yii::$app->formatter->asCurrency($model->precio_compra) ?></span>
                 </div>
             </div>

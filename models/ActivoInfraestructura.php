@@ -72,6 +72,8 @@ class ActivoInfraestructura extends \yii\db\ActiveRecord implements ActiveRecord
             'nombre' => Yii::t('app', 'Name'),
             'fecha_compra' => Yii::t('app', 'Purchase Date'),
             'precio_compra' => Yii::t('app', 'Purchase Price'),
+        	'edificio' => Yii::t('app', 'Building'),
+        	'planta' => Yii::t('app', 'Floor'),
             'espacio_id' => Yii::t('app', 'Room'),
         ];
     }

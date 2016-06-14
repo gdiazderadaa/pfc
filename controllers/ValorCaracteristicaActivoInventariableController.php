@@ -30,46 +30,46 @@ class ValorCaracteristicaActivoInventariableController extends Controller
      * Lists all ValorCaracteristicaActivoInventariable models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $searchModel = new ValorCaracteristicaActivoInventariableSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//     public function actionIndex()
+//     {
+//         $searchModel = new ValorCaracteristicaActivoInventariableSearch();
+//         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+//         return $this->render('index', [
+//             'searchModel' => $searchModel,
+//             'dataProvider' => $dataProvider,
+//         ]);
+//     }
 
     /**
      * Displays a single ValorCaracteristicaActivoInventariable model.
      * @param string $id
      * @return mixed
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+//     public function actionView($id)
+//     {
+//         return $this->render('view', [
+//             'model' => $this->findModel($id),
+//         ]);
+//     }
 
     /**
      * Creates a new ValorCaracteristicaActivoInventariable model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new ValorCaracteristicaActivoInventariable();
+//     public function actionCreate()
+//     {
+//         $model = new ValorCaracteristicaActivoInventariable();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
+//         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//             return $this->redirect(['view', 'id' => $model->id]);
+//         } else {
+//             return $this->render('create', [
+//                 'model' => $model,
+//             ]);
+//         }
+//     }
 
     /**
      * Updates an existing ValorCaracteristicaActivoInventariable model.
@@ -77,18 +77,18 @@ class ValorCaracteristicaActivoInventariableController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+//     public function actionUpdate($id)
+//     {
+//         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
+//         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//             return $this->redirect(['view', 'id' => $model->id]);
+//         } else {
+//             return $this->render('update', [
+//                 'model' => $model,
+//             ]);
+//         }
+//     }
 
     /**
      * Deletes an existing ValorCaracteristicaActivoInventariable model.

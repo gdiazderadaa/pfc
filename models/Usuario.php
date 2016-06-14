@@ -36,11 +36,11 @@ class Usuario extends \yii\db\ActiveRecord implements IdentityInterface
     }
     
     public static function singularObjectName(){
-        return Yii::t('app', 'Usuario');
+        return Yii::t('app', 'User');
     }
     
     public static function pluralObjectName(){
-        return Yii::t('app', 'Usuarios');
+        return Yii::t('app', 'Users');
     }
 
     /**
@@ -62,8 +62,8 @@ class Usuario extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'login' => 'Login',
-            'rol_id' => 'Rol',
+            'login' => Yii::t('app', 'Login'),
+            'rol_id' => Yii::t('app', 'Role'),
         ];
     }
 

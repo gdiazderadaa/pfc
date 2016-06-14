@@ -27,11 +27,11 @@ class Espacio extends \yii\db\ActiveRecord
     }
     
     public static function singularObjectName(){
-        return Yii::t('app', 'Space');
+        return Yii::t('app', 'Room');
     }
     
     public static function pluralObjectName(){
-        return Yii::t('app', 'Spaces');
+        return Yii::t('app', 'Rooms');
     }
 
     /**
@@ -55,7 +55,7 @@ class Espacio extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Name'),
-            'numeracion' => Yii::t('app', 'Space Number'),
+            'numeracion' => Yii::t('app', 'Room Number'),
             'planta_edificio_id' => Yii::t('app', 'Floor'),
             'edificio_id' => Yii::t('app', 'Building')
         ];

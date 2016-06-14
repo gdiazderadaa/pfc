@@ -17,10 +17,18 @@ use kartik\widgets\Typeahead;
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <h4><i class="icon fa fa-question"></i><?= Yii::t('app','How to')?></h4>
     <ul>
-    	<li><?= Yii::t('app','Enter the Manufacturer, Model and Category of the Hardware Component Model.') ?></li>
-    	<li><?= Yii::t('app','Turn on the inventory if you plan to keep track of every single Hardware Component created from this Hardware Component Model. With this feature on, the serial numbers of the Hardware Components will be used to identify them. ') ?></li>
-    	<li><?= Yii::t('app','Add as much features as you want on the Features panel') ?></li>
-    	<li><?= Yii::t('app','To finish, click on the "Create" button') ?></li>
+    	<li><?= Yii::t('app','Enter the {marca}, {modelo} and {category}.',[
+    			'fecha_compra' => $model->getAttributeLabel('fecha_compra'),
+    			'meses_garantia' => $model->getAttributeLabel('meses_garantia'),
+    			'precio_compra' => $model->getAttributeLabel('precio_compra'),
+    	]) ?></li>
+    	<li><?= Yii::t('app','Turn on the {inventario} if you plan to keep track of every single {modelClass} created from this {modelClass2}. With this feature on, the serial numbers of the {modelClass3} will be used to identify them.',[
+    			'modelClass' => \app\models\ComponenteHardware::singularObjectName(),
+    			'modelClass2' => \app\models\ModeloComponenteHardware::singularObjectName(),
+    			'modelClass3' => \app\models\ComponenteHardware::pluralObjectName(),
+    	]) ?></li>
+    	<li><?= Yii::t('app','Add as many {modelClass} as you want.',['modelClass' => \app\models\Caracteristica::pluralObjectName()]) ?></li>
+    	<li><?= Yii::t('app','Click on the "Create" button to finsh') ?></li>
     </ul> 
 </div>
 

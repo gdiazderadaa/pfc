@@ -37,46 +37,46 @@ class ParteComponenteHardwareController extends Controller
      * Lists all ParteComponenteHardware models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $searchModel = new ParteComponenteHardwareSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//     public function actionIndex()
+//     {
+//         $searchModel = new ParteComponenteHardwareSearch();
+//         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+//         return $this->render('index', [
+//             'searchModel' => $searchModel,
+//             'dataProvider' => $dataProvider,
+//         ]);
+//     }
 
     /**
      * Displays a single ParteComponenteHardware model.
      * @param string $id
      * @return mixed
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+//     public function actionView($id)
+//     {
+//         return $this->render('view', [
+//             'model' => $this->findModel($id),
+//         ]);
+//     }
 
     /**
      * Creates a new ParteComponenteHardware model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new ParteComponenteHardware();
+//     public function actionCreate()
+//     {
+//         $model = new ParteComponenteHardware();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
+//         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//             return $this->redirect(['view', 'id' => $model->id]);
+//         } else {
+//             return $this->render('create', [
+//                 'model' => $model,
+//             ]);
+//         }
+//     }
 
     /**
      * Updates an existing ParteComponenteHardware model.
@@ -84,18 +84,18 @@ class ParteComponenteHardwareController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+//     public function actionUpdate($id)
+//     {
+//         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
+//         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//             return $this->redirect(['view', 'id' => $model->id]);
+//         } else {
+//             return $this->render('update', [
+//                 'model' => $model,
+//             ]);
+//         }
+//     }
 
     /**
      * Deletes an existing ParteComponenteHardware model.

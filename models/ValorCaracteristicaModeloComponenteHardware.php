@@ -27,11 +27,11 @@ class ValorCaracteristicaModeloComponenteHardware extends \yii\db\ActiveRecord
     }
     
     public static function singularObjectName(){
-        return Yii::t('app', 'Hardware Part Feature');
+        return Yii::t('app', 'Hardware Component Model Feature');
     }
     
     public static function pluralObjectName(){
-        return Yii::t('app', 'Hardware Part Features');
+        return Yii::t('app', 'Hardware Component Model Features');
     }
 
     /**
@@ -57,7 +57,7 @@ class ValorCaracteristicaModeloComponenteHardware extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'caracteristica_id' => Yii::t('app', 'Feature'),
-            'modelo_componente_hardware_id' => Yii::t('app', 'Hardware Part Model'),
+            'modelo_componente_hardware_id' => Yii::t('app', 'Hardware Component Model'),
             'valor' => Yii::t('app', 'Value'),
         ];
     }
